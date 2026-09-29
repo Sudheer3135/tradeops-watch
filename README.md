@@ -160,6 +160,79 @@ gh repo create tradeops-watch --public --source=. --remote=origin --push
 This creates a **public** portfolio repository. Use `--private` if preferred.
 The repository is committed locally; creation/push is left to you.
 
+## Verified Phase 1 results
+
+All six drills passed on 2026-09-29 in the actual Ubuntu VM. Each record shows
+fault detection, diagnosis, repair, and a final healthy result.
+
+| Verified behavior | Proof |
+|---|---|
+| Installer runs twice; both services enabled and active | [install](docs/evidence/install.txt), [rerun](docs/evidence/install-rerun.txt) |
+| Five changing prices, increasing orders, health and 404 routes | [HTTP checks](docs/evidence/http-api.txt) |
+| SIGKILL detected; automatic restart observed | [kill-feed](docs/evidence/kill-feed.txt) |
+| Intentional service stop detected and repaired | [stop-feed](docs/evidence/stop-feed.txt) |
+| Disk 88% triggers warning; cleanup returns it to 24% | [fill-disk](docs/evidence/fill-disk.txt) |
+| CPU 100% triggers warning; worker cleanup restores health | [cpu-spike](docs/evidence/cpu-spike.txt) |
+| Firewall rejection detected despite open listener | [block-port](docs/evidence/block-port.txt) |
+| Real 500 ms netem delay detected; qdisc removed | [net-delay](docs/evidence/net-delay.txt) |
+| Cron runs, memory threshold override works, repeat alert suppressed | [monitor checks](docs/evidence/monitor-checks.txt), [cron](docs/evidence/cron.txt) |
+| Handover distinguishes active issues from recovery | [open issue](docs/evidence/handover-open-issue.txt), [recovered report](docs/evidence/handover.txt) |
+| CPU workers stop automatically at 120s; repeated cleanup leaves no changes | [automatic expiry](docs/evidence/cpu-auto-timeout.txt) |
+| Final state: services healthy, no active alerts, no chaos artifacts | [final state](docs/evidence/final-state.txt), [final handover](docs/evidence/final-handover.txt) |
+| macOS chaos invocation refuses to run | [safety guard](docs/evidence/macos-safety-guard.txt) |
+
+[Testing methods and limitations](docs/TESTING.md) · [Six incident reports](incidents/README.md)
+
+## Sample alerts copied from the actual run
+
+```text
+2026-09-29T11:17:24Z | P1 | service-feed | service inactive | runbooks/service-down.md
+2026-09-29T11:18:10Z | P2 | disk | Disk 88% >= 85% | runbooks/disk-full.md
+2026-09-29T11:18:21Z | P2 | cpu | CPU 100% >= 85% | runbooks/high-cpu.md
+```
+
+## Sample shift handover copied from the actual run
+
+```markdown
+# TradeOps shift handover
+
+Window (UTC): 2026-09-29T03:23:34.074921+00:00 to 2026-09-29T11:23:34.074921+00:00
+
+## Services now
+- tradeops-feed: active
+- tradeops-orders: active
+
+## Alerts by severity
+- P1: 4 notifications; service-feed (1), port-9001 (1), http-9001 (1), http-9002 (1)
+- P2: 4 notifications; restart-feed (1), disk (1), cpu (1), error-rate (1)
+- P3: 0 notifications; none
+
+## Open issues (latest health check)
+- None in latest snapshot.
+
+## Resolved issues
+- cpu: absent from latest check
+- disk: absent from latest check
+- error-rate: absent from latest check
+- http-9001: absent from latest check
+- http-9002: absent from latest check
+- port-9001: absent from latest check
+- restart-feed: absent from latest check
+- service-feed: absent from latest check
+
+## Top errors
+- 8 × feed unreachable: <urlopen error [Errno 111] Connection refused>
+- 1 × feed unreachable: feed slow: 2174.66 ms
+- 1 × feed unreachable: feed slow: 2060.29 ms
+- 1 × feed unreachable: feed slow: 2090.21 ms
+- 1 × feed unreachable: feed slow: 2088.12 ms
+
+## Notes for next shift
+- Confirm both HTTP health endpoints and review active alerts.
+- An error-rate alert may persist for 5 minutes after recovery.
+- Read incidents/ and record owner, next action, and escalation for any unresolved issue.
+```
+
 ## Phase 2 roadmap — not implemented
 
 Only after explicit approval to start Phase 2: Docker Compose with Prometheus,

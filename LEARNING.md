@@ -19,6 +19,8 @@
 - `runbooks/high-cpu.md`: how to identify CPU/memory pressure and stop the lab workers.
 - `runbooks/port-blocked.md`: how to distinguish missing listeners, firewall failures, and delay.
 - `incidents/*.md`: reports based on actual timestamped drill output, not invented production incidents.
+- `docs/TESTING.md`: explains what was actually tested, preserved setup failures, and limits of the evidence.
+- `incidents/README.md`: links the six real drill reports.
 - `docs/architecture.md`: the VM, service, monitoring, and log relationships.
 - `docs/evidence/*.txt`: raw command output proving what was run and observed.
 - `README.md`: setup, demo, evidence, and planned future work.
@@ -68,6 +70,7 @@ administrator rights. Paths beginning `/` start at the filesystem root.
 | du | Size used by directories/files | `sudo du -sh /var/log/tradeops` |
 | free | Memory usage | `free -m` |
 | top | Live or batch process overview | `top -b -n 1` |
+| pgrep | Find a process by name | `pgrep -x yes` |
 | ps | Process list and states | `ps -eo pid,user,stat,pcpu,pmem,args --sort=-pcpu` |
 | kill | Send a signal to a specific PID | `kill -TERM 1234` (only after checking PID) |
 | timeout | Limit a command's runtime | `timeout 120 sleep 300` |

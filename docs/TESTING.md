@@ -50,3 +50,12 @@ P1/P2 policy and escalation roles are lab conventions. Service log rotation
 uses the Python standard library; this run validates configuration rather than
 claiming a long-duration retention or performance test. Systemd's journal may
 show IST while application logs and test markers use UTC (IST = UTC + 05:30).
+
+## Automatic timeout and final state
+
+`cpu-auto-timeout.txt` records an additional complete 120-second CPU drill
+without manual recovery. The journal shows timeout exit 124 at exactly 120
+seconds; that expected exit causes the temporary unit to be marked failed.
+The assertion confirmed no remaining workers, healthcheck exit 0, and repeated
+cleanup with no tagged firewall rule, netem qdisc, or disk filler left behind.
+`final-state.txt` and `final-handover.txt` record the final running VM state.

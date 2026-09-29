@@ -4,3 +4,13 @@ CPU workers run for 120s, systemd also enforces 125s limit. Undo: fix-cpu
 active
 2026-09-29T11:24:16Z | healthcheck exit=1 CPU=100% memory=14% disk=24% errors=4
 During CPU load healthcheck exit=1
+PASS automatic expiry, no yes workers 2026-09-29T11:26:18Z
+Sep 29 16:54:10 tradeops systemd[1]: Started tradeops-chaos-cpu.service - /usr/bin/timeout 120 /bin/bash -c "for ((i=0;i<\$(nproc);i++)); do yes > /dev/null & done; wait".
+Sep 29 16:56:10 tradeops systemd[1]: tradeops-chaos-cpu.service: Main process exited, code=exited, status=124/n/a
+Sep 29 16:56:10 tradeops systemd[1]: tradeops-chaos-cpu.service: Failed with result 'exit-code'.
+Sep 29 16:56:10 tradeops systemd[1]: tradeops-chaos-cpu.service: Consumed 3min 59.360s CPU time.
+2026-09-29T11:26:19Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=4
+All TradeOps chaos changes removed
+All TradeOps chaos changes removed
+PASS cleanup is repeatable; firewall rule, qdisc and disk filler absent
+All TradeOps chaos changes removed
