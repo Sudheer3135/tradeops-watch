@@ -17,11 +17,18 @@ employment, production availability, actual exchange trading, or latency gains.
 - Added a GitHub Actions workflow for ShellCheck, Ruff, 39 pytest cases, Compose
   validation and Prometheus/Alertmanager config checks; ran the same pipeline
   successfully inside Ubuntu, including eleven Prometheus rule test cases.
-  Evidence: `docs/evidence/phase2/step8-ci.txt`. Describe hosted CI as pending
+  Evidence: `docs/evidence/phase2/step9-ci.txt`. Describe hosted CI as pending
   until you push and observe a successful Actions run.
+- Ran seven controlled fault drills (process kill, service stop, disk, CPU,
+  firewall block, network delay, slow dependency); each alert was seen firing in
+  both Prometheus and Alertmanager, fixed from a runbook and verified cleared,
+  with UTC timelines and a live inhibition check where ServiceDown muted
+  same-service probe alerts.
+  Evidence: `docs/evidence/phase2/README.md`, `incidents/phase2-20260929-*.md`,
+  `docs/evidence/phase2/stop-feed/inhibition.json`.
 
-The final Phase 2 incident index records which real chaos scenarios completed;
-use only its passed runs when discussing incident response. Do not claim
+All seven Phase 2 drills passed; one earlier attempt aborted because of a
+verifier bug and is labelled in the evidence index. Do not claim
 Telegram delivery, screenshot review, zero-downtime deployment, production HFT
 experience, uptime percentages, or performance improvements: those were not
 established by these tests.

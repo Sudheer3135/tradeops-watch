@@ -4,21 +4,19 @@ An L1 DevOps / production support portfolio project: operate two synthetic
 trading services, detect failures, debug Linux, follow runbooks, record incidents,
 and hand over a shift. Built for an Apple Silicon Mac with Ubuntu in Multipass.
 No real trading or broker connections. Phase 1 used only the Python standard
-library and Bash; the current Phase 2 checkpoint adds Docker monitoring and
-a Python metrics dependency while preserving the Phase 1 operations tools.
+library and Bash; Phase 2 adds Docker monitoring, application metrics,
+versioned deployments with rollback, CI, and seven real chaos drills while
+keeping every Phase 1 operations tool.
 
 **Phase 2:** see [monitoring setup and URLs](monitoring/README.md),
 [progress and verification](docs/phase2-progress.md), and the
 [incident evidence index](docs/evidence/phase2/README.md).
 
-CI badge after publication (replace both `YOUR_USERNAME` and `YOUR_REPO`):
+[![CI](https://github.com/Sudheer3135/tradeops-watch/actions/workflows/ci.yml/badge.svg)](https://github.com/Sudheer3135/tradeops-watch/actions/workflows/ci.yml)
 
-```markdown
-[![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
-```
-
-No Git remote or hosted Actions run is configured yet. The matching local
-[CI output](docs/evidence/phase2/step8-ci.txt) passed; no green badge is claimed.
+The badge shows the hosted GitHub Actions result once the repository is pushed.
+The same checks passed locally inside Ubuntu:
+[step9-ci.txt](docs/evidence/phase2/step9-ci.txt).
 
 ```text
 MacBook M2 -> Multipass Ubuntu VM (2 CPUs, 4 GB RAM)
@@ -153,7 +151,8 @@ this file. Telegram delivery has not been tested without a configured recipient.
 - [Disk usage](runbooks/disk-full.md)
 - [CPU / memory](runbooks/high-cpu.md)
 - [Blocked port / network delay](runbooks/port-blocked.md)
-- [Incident reports](incidents/)
+- [Phase 1 incident reports](incidents/README.md) (Bash monitor, six drills)
+- [Phase 2 incident index](docs/evidence/phase2/README.md) (Prometheus/Alertmanager, seven drills)
 - [Raw evidence](docs/evidence/)
 
 Run the complete fault/recovery suite again (changes this disposable lab):
@@ -167,17 +166,6 @@ The script preserves raw output in `docs/evidence/<scenario>.txt`, stops on a
 failed check, and cleans up when it exits. Historical error windows can make a
 full run take several minutes. Rerunning replaces the raw evidence; refresh
 incident reports if you publish results from a new run.
-
-## Publish to GitHub (Mac terminal)
-
-```bash
-cd '/Users/sudheer/Desktop/TradeOps Watch'
-gh auth login
-gh repo create tradeops-watch --public --source=. --remote=origin --push
-```
-
-This creates a **public** portfolio repository. Use `--private` if preferred.
-The repository is committed locally; creation/push is left to you.
 
 ## Verified Phase 1 results
 
@@ -252,88 +240,45 @@ Window (UTC): 2026-09-29T03:23:34.074921+00:00 to 2026-09-29T11:23:34.074921+00:
 - Read incidents/ and record owner, next action, and escalation for any unresolved issue.
 ```
 
-## Phase 2 checkpoint and remaining work
+## Phase 2 status: Steps 0–10 complete
 
-Steps 0–7 are implemented and verified in the VM: the Docker stack, application
-metrics, ten alert rules, severity routing/inhibition, Alloy/Loki logs,
-provisioned Grafana dashboard, and code deployment with automatic/manual rollback.
-Telegram config validates, but real delivery is untested without credentials.
+Every step below was run in the actual Ubuntu VM. Details per step are in
+[phase2-progress.md](docs/phase2-progress.md).
+
+| Step | Result | Evidence |
+|---|---|---|
+| 0 Baseline | Phase 1 services and Bash check healthy | [step0-health.txt](docs/evidence/phase2/step0-health.txt) |
+| 1 Docker stack | Seven pinned containers ready, probes pass | [step1-readiness.txt](docs/evidence/phase2/step1-readiness.txt) |
+| 2 Metrics | `/metrics` on both services; nine scrape targets up | [step2-scrape-targets.txt](docs/evidence/phase2/step2-scrape-targets.txt) |
+| 3 Alert rules | Ten rules, eleven promtool cases, live evaluation | [step3-rule-validation.txt](docs/evidence/phase2/step3-rule-validation.txt) |
+| 4 Routing | Severity routes and inhibition validated | [step4-config-routing.txt](docs/evidence/phase2/step4-config-routing.txt) |
+| 5 Logs | Alloy → Loki, eight LogQL queries run | [step5-loki-queries.txt](docs/evidence/phase2/step5-loki-queries.txt) |
+| 6 Dashboard | Provisioned; all 19 panel queries succeed | [step6-dashboard-queries.txt](docs/evidence/phase2/step6-dashboard-queries.txt) |
+| 7 Deployments | Health gate, automatic and manual rollback | [step7-deploy-rollback.txt](docs/evidence/phase2/step7-deploy-rollback.txt) |
+| 8 CI | ShellCheck, Ruff, 39 tests, config checks (local run) | [step9-ci.txt](docs/evidence/phase2/step9-ci.txt) |
+| 9 Chaos | All seven faults fired and cleared in both alert APIs; real inhibition observed | [index](docs/evidence/phase2/README.md), [run log](docs/evidence/phase2/step9-chaos-run.txt) |
+| 10 Docs | Interview Q26–50, spoken demo, evidence-backed resume bullets | [LEARNING.md](LEARNING.md), [demo](docs/demo-script.md), [bullets](docs/resume-bullets.md) |
+
+The first Step 9 attempt aborted after injecting kill-feed because the
+verifier's terminal output closed (`BrokenPipeError`); its cleanup ran and its
+files are kept in `kill-feed-aborted-20260929/`. The fixed verifier reran
+kill-feed and the remaining drills. Telegram configuration validates, but real
+delivery is untested without credentials. Screenshots are still a manual task.
 
 - [Monitoring setup, credentials and URLs](monitoring/README.md)
 - [Optional Telegram setup](docs/telegram-setup.md)
 - [Deployment and rollback practice](docs/deployments.md)
-- [Per-step progress and evidence](docs/phase2-progress.md)
-- [Live Grafana dashboard](http://192.168.2.2:3000/d/tradeops-overview)
+- [Live Grafana dashboard](http://192.168.2.2:3000/d/tradeops-overview) (VM must be running)
 
-**Paused at the requested Step 7 review.** Remaining: Step 8 GitHub Actions,
-lint fixes and pytest tests; Step 9 slow-feed plus all seven full chaos runs,
-new incident reports and screenshot checklist; Step 10 the next 25 interview
-questions, spoken demo, tested resume bullets and final documentation.
+Original Phase 1 evidence remains in `docs/evidence/`. Phase 2 evidence is in
+`docs/evidence/phase2/`. Synthetic rule and Alertmanager tests are labelled as
+such and are not presented as incidents.
 
-Original Phase 1 evidence remains in `docs/evidence/`. New evidence is in
-`docs/evidence/phase2/`. Synthetic rule and inhibition tests are explicitly
-identified and are not represented as real incidents.
+## Log searches
 
-
-## Eight useful LogQL queries
-
-In Grafana Explore select **Loki** and set the time picker to **Last 15 minutes**.
-The time picker limits log searches; `[15m]` in a metric query is its counting
-window. Empty results can be correct when no matching event occurred.
-
-1. Errors in the last 15 minutes:
-
-```logql
-{job="tradeops",level="ERROR"}
-```
-
-2. Error count per service:
-
-```logql
-sum by (service) (count_over_time({job="tradeops",level="ERROR"}[15m]))
-```
-
-3. Feed dependency errors:
-
-```logql
-{job="tradeops"} |= "feed unreachable"
-```
-
-4. Five most common error messages:
-
-```logql
-topk(5, sum by (message) (count_over_time({job="tradeops",level="ERROR"} | pattern `<timestamp> | <_> | <message>` [15m])))
-```
-
-5. Orders taking more than 100 ms:
-
-```logql
-{job="tradeops",service="orders"} |= "latency_ms=" | regexp `latency_ms=(?P<latency_ms>[0-9.]+)` | latency_ms > 100 | __error__=""
-```
-
-6. Fake BUY orders:
-
-```logql
-{job="tradeops",service="orders"} |= "side=BUY"
-```
-
-7. Warnings and errors together:
-
-```logql
-{job="tradeops",level=~"ERROR|WARN"}
-```
-
-8. Log lines per second by service:
-
-```logql
-sum by (service) (rate({job="tradeops"}[1m]))
-```
-
-Only job, service and level are intentionally indexed here; message text is parsed
-at query time. Do not make every order ID or error message an ingestion label.
-Alloy also preserves the original file timestamp and maps P1/P2/P3 alert lines
-to ERROR/WARN/INFO; unfamiliar formats are labelled UNKNOWN.
-
+The eight tested LogQL queries (with how to read empty results) live in
+[LEARNING.md](LEARNING.md#eight-useful-logql-queries); their machine-readable
+copy is [monitoring/logql-examples.json](monitoring/logql-examples.json).
 
 ## Phase 2 practice: one incident at a time
 
@@ -414,18 +359,16 @@ raw saved evidence remains after live history expires.
 
 ## Publish to GitHub
 
-Create an empty repository in your GitHub account, then run on your Mac:
+Run on your Mac. This creates a **public** repository (use `--private` if you
+prefer) and pushes the current branch:
 
 ```bash
 cd '/Users/sudheer/Desktop/TradeOps Watch'
-git status --short
-git log --oneline -5
-# Replace YOUR_USERNAME with your account and the repository name if different.
-git remote add origin https://github.com/YOUR_USERNAME/tradeops-watch.git
-git push -u origin HEAD
+git status --short          # should print nothing
+gh repo create tradeops-watch --public --source=. --remote=origin --push
+gh run watch --exit-status  # waits for the first CI run and fails if it fails
 ```
 
-If `origin` already exists, inspect `git remote -v` instead of adding it again.
-Check the Actions tab and only describe hosted CI as passing after its run
-succeeds. Replace the badge placeholders with the actual owner/repository.
-Credentials live only in ignored files; do not add `.env`, tokens or chat IDs.
+If the repository already exists, check `git remote -v`, then `git push -u origin main`.
+Describe hosted CI as passing only after that run succeeds. Credentials live only
+in ignored files; never add `.env`, tokens or chat IDs.

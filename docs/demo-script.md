@@ -45,7 +45,7 @@ Show ServiceDown in Prometheus and Alertmanager after roughly 30–60 seconds.
 Open the service-down runbook and Grafana’s alerts/probes/logs. In Explore, use
 `{job="tradeops",service="orders"} |= "feed unreachable"` for the last 15 minutes.
 Explain that a suppressed Alertmanager notification can still be visible in
-Prometheus. Telegram delivery is optional and has not been tested with credentials.
+Prometheus; `docs/evidence/phase2/stop-feed/inhibition.json` shows this from a real run. Telegram delivery is optional and has not been tested with credentials.
 
 ## 2:30–3:15 — Recover and verify
 
@@ -83,7 +83,7 @@ incident report links real API snapshots and UTC timestamps. I separate fault
 injection, detection, the fix and verified recovery. My key learning is to
 correlate metrics, logs and Linux state instead of relying on one green panel.”
 
-Open one Phase 2 incident, its evidence folder and `step8-ci.txt`. Explain the
+Open one Phase 2 incident, its evidence folder and `step9-ci.txt`. Explain the
 histogram as an estimate from buckets, and mention that this is a small lab,
 not a claim of production HFT experience.
 

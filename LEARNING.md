@@ -23,7 +23,21 @@
 - `incidents/README.md`: links the six real drill reports.
 - `docs/architecture.md`: the VM, service, monitoring, and log relationships.
 - `docs/evidence/*.txt`: raw command output proving what was run and observed.
-- `README.md`: setup, demo, evidence, and planned future work.
+- `README.md`: setup, demo, evidence links and Phase 2 status.
+- `scripts/install_docker.sh`: installs Docker Engine and Compose from Docker's official apt repository.
+- `monitoring/docker-compose.yml`: the seven pinned monitoring containers, host networking, memory limits and named volumes.
+- `monitoring/prometheus/`: scrape targets, the ten alert rules and their promtool unit tests.
+- `monitoring/alertmanager/alertmanager.yml`: severity routes and the two ServiceDown inhibition rules.
+- `monitoring/alloy/config.alloy` and `monitoring/loki/`: log shipping, level parsing and 48-hour log storage.
+- `monitoring/grafana/`: provisioned data sources and the TradeOps Overview dashboard.
+- `scripts/configure_telegram.py`: builds and validates an optional Telegram receiver from ignored secret files.
+- `scripts/deploy.sh`, `scripts/rollback.sh`, `scripts/deploy_common.sh`: versioned releases, health gate, automatic/manual rollback and retention.
+- `scripts/verify_stack.py`, `verify_metrics.py`, `verify_dashboard.py`, `verify_deploy.sh`: live checks that save Phase 2 evidence.
+- `scripts/verify_chaos.py`: runs each fault, waits for the alert in Prometheus and Alertmanager, applies the fix and waits for recovery; stop-feed also records real inhibition.
+- `scripts/summarize_chaos.py`: turns the saved chaos timelines into incident reports, the evidence index and the screenshot checklist.
+- `scripts/ci_check.sh` and `.github/workflows/ci.yml`: the lint, test and configuration checks run locally and on GitHub.
+- `tests/`: 39 pytest cases for prices, order rule, alert formatting and handover parsing.
+- `docs/demo-script.md`, `docs/resume-bullets.md`: five-minute spoken demo and evidence-backed resume lines.
 - `LEARNING.md`: this interview guide.
 - `.gitignore`: keeps credentials, Python caches, and temporary files out of Git.
 
@@ -174,8 +188,7 @@ any capability as tested.
 - Named volumes retain data after restart. Host networking lets containers
   access the same VM loopback addresses as the original systemd services.
 
-The next 25 interview questions and full file guide will be added in Step 10,
-after the remaining components have actually been built and tested.
+The full file guide is at the top of this page; questions 26–50 follow below.
 
 
 ## Eight useful LogQL queries
@@ -337,7 +350,8 @@ sent together. Severity routes use different repeat intervals.
 **40. What does inhibition do?**  
 A ServiceDown P1 suppresses smaller notifications for the same service and
 environment. It does not stop Prometheus evaluating those rules or hide their
-metrics. Check `inhibitedBy` in Alertmanager evidence.
+metrics. Check `inhibitedBy` in Alertmanager evidence; the real stop-feed drill
+saved it in `docs/evidence/phase2/stop-feed/inhibition.json`.
 
 **41. Why keep the Telegram token in a file?**  
 It avoids embedding a secret in tracked configuration. The token, chat-ID file,

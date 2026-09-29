@@ -85,3 +85,33 @@ Compose validation, Prometheus config/rules plus eleven rule cases, and
 Alertmanager config validation. Python imports are safe for unit testing; alert
 formatting and handover parsing share tested validation. See `step8-ci.txt`.
 GitHub-hosted CI is pending publication; no Git remote is configured.
+After the Step 9 script changes, the same `ci_check.sh` passed again inside
+Ubuntu with the pinned tools (ruff 0.11.13, ShellCheck 0.9.0): `step9-ci.txt`.
+
+## Step 9: verified
+All seven faults ran against the live stack. For each one the verifier waited
+for a clean baseline, injected the fault, saw the expected alert firing in both
+Prometheus and Alertmanager, queried Grafana and Loki, applied the runbook fix,
+saw the alert disappear from both APIs, and waited for the Bash check to return
+0. fill-disk, cpu-spike and slow-feed passed in the first run.
+
+That first run then aborted during kill-feed. The baseline had zero alerts;
+the fault was injected at 17:03:26 UTC and the verifier then crashed with
+`BrokenPipeError` because its terminal output closed. Its `finally` block ran
+cleanup. The verifier now writes its own log, survives a closed terminal, puts
+timeouts with named blocking alerts on every wait, and requires a cleared alert
+to be absent in every state. kill-feed, stop-feed, block-port and net-delay then
+passed. The aborted files are kept in `evidence/phase2/kill-feed-aborted-20260929/`.
+
+During stop-feed Alertmanager marked both feed HealthProbeFailed alerts
+`suppressed` by the ServiceDown/feed fingerprint while FeedErrorsHigh/orders
+stayed active: `evidence/phase2/stop-feed/inhibition.json`. Cleanup and a final
+healthy check are in `step9-safety-baseline.txt` and `step9-final-health.txt`.
+Seven reports were generated as `incidents/phase2-20260929-*.md` and checked
+against every timeline timestamp, alert snapshot and link.
+
+## Step 10: documentation complete
+LEARNING.md has the full file guide and questions 26–50. The spoken demo and
+resume bullets were checked against evidence; README marks the current status
+and links every evidence file. Screenshots and hosted CI remain manual steps
+that must be done after publishing.
