@@ -150,9 +150,8 @@ It covers all ten rules, pending periods, disk severity boundaries, expiry of
 the recent-start window, and a short scrape failure that must not fire.
 The real live APIs are captured separately under `docs/evidence/phase2/`.
 
-The user approved the Step 3 review gate. Steps 4–7 below are now implemented.
-The next required review is after Step 7. Full chaos alert/resolution runs
-remain Step 9; existing unit fixtures are not substitutes for those runs.
+Both requested review gates were approved. Real chaos evidence is indexed in
+`../docs/evidence/phase2/README.md`; unit fixtures are not incident evidence.
 
 ## Step 4: optional Telegram and inhibition
 

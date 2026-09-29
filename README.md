@@ -7,22 +7,31 @@ No real trading or broker connections. Phase 1 used only the Python standard
 library and Bash; the current Phase 2 checkpoint adds Docker monitoring and
 a Python metrics dependency while preserving the Phase 1 operations tools.
 
-**Phase 2 checkpoint: Steps 0–7.** See [monitoring setup and URLs](monitoring/README.md)
-and [progress/evidence](docs/phase2-progress.md). Paused at the requested Step 7 review; Steps 8–10 remain.
+**Phase 2:** see [monitoring setup and URLs](monitoring/README.md),
+[progress and verification](docs/phase2-progress.md), and the
+[incident evidence index](docs/evidence/phase2/README.md).
+
+CI badge after publication (replace both `YOUR_USERNAME` and `YOUR_REPO`):
+
+```markdown
+[![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
+```
+
+No Git remote or hosted Actions run is configured yet. The matching local
+[CI output](docs/evidence/phase2/step8-ci.txt) passed; no green badge is claimed.
 
 ```text
-MacBook M2 -> Multipass Ubuntu (4 GB RAM)
+MacBook M2 -> Multipass Ubuntu VM (2 CPUs, 4 GB RAM)
   systemd -> current release -> feed :9001 <- orders :9002
-                                 | metrics       | logs
-  node_exporter + blackbox ------+               v
-                                 v             Alloy -> Loki
-                            Prometheus            |      |
-                                 |                +------v
-                            Alertmanager              Grafana
+                                 | /metrics       | /metrics
+  node_exporter + blackbox ------+----------------+
+                                 v
+                            Prometheus -> Alertmanager -> Telegram (optional)
                                  |
-                         optional Telegram
-  cron -> original healthcheck -> alerts / runbooks / handover
-  deploy -> health gate -> automatic rollback if unhealthy
+                                 v
+                              Grafana <------- Loki <------- Alloy <--- logs
+  cron -> healthcheck -> alerts / runbooks / handover             ^
+  deploy -> versioned code -> health gate -> rollback ---------- logs
 ```
 
 [Architecture details](docs/architecture.md) · [Interview guide](LEARNING.md)
@@ -57,7 +66,7 @@ without changing global privacy permissions:
 
 ```bash
 multipass umount tradeops:/home/ubuntu/tradeops-watch
-COPYFILE_DISABLE=1 tar --exclude=.git --exclude=__pycache__ -czf /tmp/tradeops-watch-source.tar.gz .
+COPYFILE_DISABLE=1 tar --exclude=.git --exclude=__pycache__ --exclude=.venv --exclude=.pytest_cache --exclude=.ruff_cache --exclude=.env --exclude=secrets --exclude=generated -czf /tmp/tradeops-watch-source.tar.gz .
 multipass transfer /tmp/tradeops-watch-source.tar.gz tradeops:/home/ubuntu/tradeops-watch-source.tar.gz
 multipass exec tradeops -- bash -lc 'mkdir -p /home/ubuntu/tradeops-watch && tar --no-same-owner -xzf /home/ubuntu/tradeops-watch-source.tar.gz -C /home/ubuntu/tradeops-watch'
 multipass exec tradeops -- sudo bash /home/ubuntu/tradeops-watch/scripts/install.sh
@@ -324,3 +333,99 @@ Only job, service and level are intentionally indexed here; message text is pars
 at query time. Do not make every order ID or error message an ingestion label.
 Alloy also preserves the original file timestamp and maps P1/P2/P3 alert lines
 to ERROR/WARN/INFO; unfamiliar formats are labelled UNKNOWN.
+
+
+## Phase 2 practice: one incident at a time
+
+Read the relevant runbook, save the time, inject one fault, wait for the expected
+alert in **both** Prometheus and Alertmanager, check Grafana and Loki, apply the
+matching fix, and confirm recovery. Do not start another drill while the first
+fault is still active. Use `multipass shell tradeops` for the commands below.
+
+| Drill | Inject with `sudo /opt/tradeops/scripts/chaos.sh …` | Undo argument | Main expected signal |
+|---|---|---|---|
+| Process crash | `kill-feed` | `fix-feed` | New process start / ServiceRestartedRecently P3 |
+| Service stopped | `stop-feed` | `fix-feed` | ServiceDown P1; probes and feed errors |
+| Disk pressure | `fill-disk` | `fix-disk` | DiskAlmostFull P2, root usage around 87% |
+| CPU pressure | `cpu-spike` | `fix-cpu` | HighCPU P2; expires after 120 seconds |
+| Firewall rejection | `block-port` | `fix-port` | HealthProbeFailed P1; listener still exists |
+| Loopback delay | `net-delay` | `fix-delay` | Failed probes / feed errors; monitoring can slow too |
+| Slow successful fetches | `slow-feed` | `fix-slow-feed` | HighOrderLatency P2 after two minutes above threshold |
+
+The crash's five-second interruption may not trigger a P1 because of `for:`.
+The P3 remains for ten minutes; start with a clear P3 baseline to demonstrate a
+new event. Slow-feed adds 350 ms only to `/prices`. Disk filling leaves a safety
+reserve; never fill to the 95% critical threshold just to demonstrate an alert.
+
+```bash
+# In the VM:
+sudo /opt/tradeops/scripts/healthcheck.sh
+sudo /opt/tradeops/scripts/chaos.sh slow-feed
+curl -fsS http://127.0.0.1:9090/api/v1/alerts
+curl -fsS http://127.0.0.1:9093/api/v2/alerts
+# Allow the two-minute alert condition to be sustained, then inspect the UIs.
+sudo /opt/tradeops/scripts/chaos.sh fix-slow-feed
+sudo /opt/tradeops/scripts/healthcheck.sh
+# Emergency cleanup of only lab-owned faults:
+sudo /opt/tradeops/scripts/chaos.sh cleanup
+```
+
+Recent errors can keep the Bash check nonzero for five minutes after the
+service recovers. A recent-start P3 is expected after intentional restarts.
+See the [five-minute spoken demo](docs/demo-script.md),
+[real Phase 2 incidents](docs/evidence/phase2/README.md),
+[manual screenshot checklist](docs/screenshots/README.md), and
+[evidence-backed resume bullets](docs/resume-bullets.md).
+
+## Run CI locally inside the VM
+
+```bash
+cd /home/ubuntu/tradeops-watch
+sudo apt-get install -y shellcheck
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt
+PATH="$PWD/.venv/bin:$PATH" bash scripts/ci_check.sh
+```
+
+The workflow runs on pushes and pull requests. It validates shell/Python code,
+39 Python test cases, Compose, ten alert rules, eleven Prometheus rule cases,
+and Alertmanager configuration. Real chaos tests stay outside ordinary CI
+because they require this disposable VM and deliberately disrupt services.
+
+## Screenshots to add manually
+
+No screenshots were generated or reviewed. Use the exact UTC windows and
+filenames in [the screenshot checklist](docs/screenshots/README.md), then replace
+these placeholders with your real images before sharing the portfolio:
+
+- `docs/screenshots/phase2-overview-healthy.png` — provisioned dashboard.
+- `docs/screenshots/phase2-slow-feed-trading.png` — sustained high p95 and recovery.
+- `docs/screenshots/phase2-stop-feed-alerts.png` — live alert in Prometheus.
+- `docs/screenshots/phase2-stop-feed-alertmanager.png` — Alertmanager grouping.
+- `docs/screenshots/phase2-stop-feed-logs.png` — real Loki dependency errors.
+- `docs/screenshots/phase2-deploy-rollback.png` — terminal rollback evidence.
+- `docs/screenshots/phase2-ci-success.png` — actual hosted Actions run after push.
+
+Historical alerts are visible using a Grafana time-series query for `ALERTS`;
+the Prometheus/Alertmanager active-alert pages are not historical archives.
+For an active-alert screenshot, rerun the controlled fault and capture it before
+fixing, then record that new window. Loki/Prometheus retain only about two days;
+raw saved evidence remains after live history expires.
+
+## Publish to GitHub
+
+Create an empty repository in your GitHub account, then run on your Mac:
+
+```bash
+cd '/Users/sudheer/Desktop/TradeOps Watch'
+git status --short
+git log --oneline -5
+# Replace YOUR_USERNAME with your account and the repository name if different.
+git remote add origin https://github.com/YOUR_USERNAME/tradeops-watch.git
+git push -u origin HEAD
+```
+
+If `origin` already exists, inspect `git remote -v` instead of adding it again.
+Check the Actions tab and only describe hosted CI as passing after its run
+succeeds. Replace the badge placeholders with the actual owner/repository.
+Credentials live only in ignored files; do not add `.env`, tokens or chat IDs.

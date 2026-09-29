@@ -8,6 +8,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Gauge, generate_latest
 
@@ -57,6 +58,9 @@ def update():
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        # Root-owned fault flag only delays prices; probes and metrics stay responsive.
+        if self.path == "/prices" and Path("/var/lib/tradeops/slow-feed").exists():
+            time.sleep(0.35)
         if self.path == "/metrics":
             payload = generate_latest()
             self.send_response(200)

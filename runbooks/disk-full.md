@@ -6,7 +6,16 @@ Run these commands inside `multipass shell tradeops`.
 Root filesystem exceeds 85%; writes may fail if it grows further.
 
 ## Alert that fires
-P2 disk
+DiskAlmostFull P2 at 85%–below 95%, P1 at 95% or more. This drill targets about 87% and reserves at least 600 MiB at allocation; do not test the critical threshold by exhausting disk.
+
+## What you see in Grafana
+System root-disk usage rises above 85%, then falls when the known filler file is removed. Alerts shows DiskAlmostFull P2. Application logs may remain normal because space is still available; the Bash disk warning appears under the alerts service.
+
+## LogQL query to use
+Set Explore’s time range to the incident UTC window.
+```logql
+{job="tradeops",service="alerts"} |= "disk"
+```
 
 ## Step-by-step checks
 Run in order; save output before changing anything.

@@ -6,7 +6,16 @@ Run these commands inside `multipass shell tradeops`.
 TCP health checks fail, or order service reports a degraded feed.
 
 ## Alert that fires
-P1 port-9001 / port-9002 or http-9001 / http-9002; P2 error-rate
+HealthProbeFailed P1 and possibly ServiceDown P1 for a blocked feed port. A 350 ms slow-feed drill keeps health responsive but triggers HighOrderLatency P2 after two minutes above 300 ms p95. Whole-loopback netem delay can also degrade monitoring requests.
+
+## What you see in Grafana
+Compare HTTP/TCP probes with application scrape status. Trading p95/p99 rises for slow fetches; successful feed responses can still be slow. Alerts shows HighOrderLatency after its waiting period. For network faults, look for feed errors in Logs; the controlled 350 ms delay normally stays below the application’s 400 ms rejection threshold, so an empty ERROR panel is expected.
+
+## LogQL query to use
+Set Explore’s time range to the incident UTC window.
+```logql
+{job="tradeops",service="orders"} | regexp `latency_ms=(?P<ms>[0-9.]+)` | ms > 300
+```
 
 ## Step-by-step checks
 Run in order; save output before changing anything.
@@ -23,6 +32,7 @@ sudo /opt/tradeops/scripts/log_search.sh errors 5
 ```bash
 sudo /opt/tradeops/scripts/chaos.sh fix-port
 sudo /opt/tradeops/scripts/chaos.sh fix-delay
+sudo /opt/tradeops/scripts/chaos.sh fix-slow-feed
 # Delete only the lab-owned rule/qdisc; do not flush the firewall.
 ```
 

@@ -33,7 +33,7 @@ Service files rotate at 2 MB with three backups each; logrotate manages the
 Bash alert/cron logs separately to avoid two rotators on one file.
 
 
-## Current Phase 2 additions through Step 7
+## Current Phase 2 architecture
 
 The VM now has 4 GB RAM. systemd starts the two services through the current
 release symlink with the shared pinned Python virtualenv. Their extra /metrics
@@ -50,3 +50,7 @@ memory ceilings keep the stack suitable for the 4 GB lab.
 Deployment transactions atomically switch /opt/tradeops/current, restart the
 services, and roll back automatically if the unchanged healthcheck cannot pass.
 Stable operational scripts remain outside the application release pointer.
+
+CI validates code and configurations on push and pull request. A separate VM-only
+chaos verifier saves live API snapshots and verifies alert recovery. The slow-feed
+fault uses a root-owned marker to delay only price responses by 350 ms.

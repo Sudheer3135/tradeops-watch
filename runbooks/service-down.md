@@ -6,7 +6,16 @@ Run these commands inside `multipass shell tradeops`.
 Feed unavailable, order errors, or restart counter increasing.
 
 ## Alert that fires
-P1 service-feed / service-orders; P2 restart-feed / restart-orders or error-rate
+ServiceDown P1, HealthProbeFailed P1, FeedErrorsHigh P2 and ServiceRestartedRecently P3. A five-second crash may recover before the P1 waiting period; use the recent-start P3 and systemd journal for that drill.
+
+## What you see in Grafana
+Service health shows scrape/probe status and process age. Trading shows interrupted price/order rates and feed errors. Alerts lists current firing rules; Logs contains order fetch failures. A stopped process cannot emit its own final log, so also inspect journald.
+
+## LogQL query to use
+Set Explore’s time range to the incident UTC window.
+```logql
+{job="tradeops",service="orders"} |= "feed unreachable"
+```
 
 ## Step-by-step checks
 Run in order; save output before changing anything.

@@ -6,7 +6,16 @@ Run these commands inside `multipass shell tradeops`.
 CPU or memory exceeds 85%; requests may become slow.
 
 ## Alert that fires
-P2 cpu or memory
+HighCPU P2 after CPU remains above 85% for 30 seconds (using a one-minute rate). HighMemory P2 uses a two-minute waiting period; the chaos suite does not deliberately exhaust memory.
+
+## What you see in Grafana
+System CPU and load rise during the bounded CPU drill, then fall after the worker service stops. Alerts shows HighCPU. Memory uses MemAvailable, so cached memory is not automatically treated as pressure. Logs may have no application errors for a short CPU event; compare with the Bash monitor’s alerts.
+
+## LogQL query to use
+Set Explore’s time range to the incident UTC window.
+```logql
+{job="tradeops",service="alerts"} |= "cpu"
+```
 
 ## Step-by-step checks
 Run in order; save output before changing anything.

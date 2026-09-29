@@ -267,3 +267,137 @@ to ERROR/WARN/INFO; unfamiliar formats are labelled UNKNOWN.
 - Blue-green would run two environments and switch traffic between them. This
   lab restarts a single environment, so it has brief downtime and makes no
   zero-downtime claim.
+
+## Phase 2: 25 more interview questions (26–50)
+
+**26. How does Prometheus get this project's metrics?**  
+It pulls HTTP `/metrics` endpoints every 15 seconds. The applications expose
+numbers; they do not push each measurement to Prometheus.
+
+**27. Why use exporters?**  
+node_exporter exposes VM CPU, memory, disk and network counters.
+blackbox_exporter makes HTTP and TCP probes. Neither requires adding host checks
+to the trading code.
+
+**28. What does `up` mean?**  
+Prometheus successfully scraped that target. It does not prove every business
+operation worked. That is why this lab also checks probes, prices and orders.
+
+**29. How is `probe_success` different?**  
+It is the result of an external HTTP/TCP check. A blackbox scrape can succeed
+(`up=1`) while the target it probes fails (`probe_success=0`).
+
+**30. Where do you use a counter?**  
+`tradeops_orders_total{side="BUY"}` counts completed synthetic decisions.
+Counters normally increase, but reset when the process restarts.
+
+**31. Where do you use a gauge?**  
+`tradeops_last_price{symbol="NIFTY"}` can rise or fall. The last successful fetch
+timestamp is another gauge; subtract it from the current time to measure age.
+
+**32. Why use a histogram for latency?**  
+It counts observations in fixed buckets and exposes their sum and count.
+This lets Prometheus estimate percentiles over a chosen time window without
+saving every individual request.
+
+**33. What exactly is this project's latency metric?**  
+Elapsed time for one order-service feed-fetch cycle, including failed attempts.
+It is not exchange execution latency, nor one observation per synthetic order.
+
+**34. What does `rate(counter[1m])` do?**  
+It estimates increase per second over one minute and handles observed resets.
+Multiply orders per second by 60 to show orders per minute. Very short windows
+are noisy and need enough scrape samples.
+
+**35. How do you calculate p95 here?**  
+`histogram_quantile(0.95, sum by (le, service)
+(rate(tradeops_order_latency_seconds_bucket[1m])))`. Keep `le` because the
+function needs the bucket boundaries. p95 is an estimate, not an exact request.
+
+**36. Why does the slow-feed drill use 350 ms?**  
+It exceeds the 300 ms alert threshold while normally staying below the
+application's 400 ms rejection limit. Only `/prices` is delayed; `/health` and
+`/metrics` remain responsive. Remove the root-owned flag to recover.
+
+**37. What does an alert's `for:` mean?**  
+Its expression must remain true continuously for that duration before firing.
+HighOrderLatency waits two minutes. Scrape and evaluation timing add detection
+delay, and the rate window must first reflect the fault.
+
+**38. What are pending, firing and resolved?**  
+Pending means the condition is true but has not lasted long enough. Firing means
+the waiting period passed. Resolved means the condition stopped being active.
+Prometheus's active-alert API drops resolved alerts; saved snapshots preserve
+what was seen during the incident.
+
+**39. Why group alerts in Alertmanager?**  
+This project groups by alert name and service so related notifications can be
+sent together. Severity routes use different repeat intervals.
+
+**40. What does inhibition do?**  
+A ServiceDown P1 suppresses smaller notifications for the same service and
+environment. It does not stop Prometheus evaluating those rules or hide their
+metrics. Check `inhibitedBy` in Alertmanager evidence.
+
+**41. Why keep the Telegram token in a file?**  
+It avoids embedding a secret in tracked configuration. The token, chat-ID file,
+.env and generated receiver configuration are ignored by Git. Actual delivery
+still requires valid credentials and a real test; validation alone is not proof.
+
+**42. How do logs reach Grafana?**  
+Alloy tails `/var/log/tradeops/*.log`, parses timestamps and levels, and sends
+them to Loki. Grafana queries Loki. Position state and storage use named volumes.
+
+**43. What is the difference between labels and text filtering in Loki?**  
+`{job="tradeops",service="orders"}` selects indexed streams, then `|= "feed
+unreachable"` filters their message text. Indexing every price or order ID would
+create too many streams; keep labels bounded.
+
+**44. How are Docker and the VM used differently?**  
+Multipass provides a Linux VM with its own kernel. The monitoring containers
+share that VM's kernel. The two Python applications run under systemd outside
+those containers. This is not a Kubernetes project.
+
+**45. Why are Docker volumes necessary?**  
+They keep Prometheus, Loki, Grafana and Alloy state outside disposable container
+filesystems. They survive ordinary container restarts. `docker compose down -v`
+explicitly deletes named volumes, so it is not a routine restart command.
+
+**46. Why use host networking here?**  
+The application binds only to VM loopback. Linux host-network containers can
+reach those listeners at 127.0.0.1. It also means whole-loopback network delay
+can affect monitoring. This setup is for a trusted local lab; Mac Docker's
+network behaviour is not the assumption here.
+
+**47. What does Compose add?**  
+One YAML file declares the seven pinned images, mounts, environment, networking,
+restart policy and storage. `docker compose config` validates the model but
+does not prove the services will start or connect; runtime checks do that.
+
+**48. What does CI prove, and what does it miss?**  
+It catches shell issues, Python lint failures, incorrect tested helper behaviour
+and invalid monitoring config. The 39 Python cases cover random-walk prices,
+order rules, alert formatting and handover parsing. Unit/config checks do not
+prove real alert delivery, dashboard rendering or production reliability.
+
+**49. How does your release rollback work?**  
+Code is copied into a versioned directory, `current` is changed atomically, and
+services restart. A health gate restores the previous release if the new one
+fails. Three managed releases are retained, protecting current and previous.
+Shared dependencies and database changes need separate rollback planning.
+
+**50. Is this blue-green deployment, and how do you prove recovery?**  
+No. Blue-green runs two environments and switches traffic. This single-instance
+lab has restart downtime. I prove recovery with health endpoints, the Bash
+check, cleared alerts and saved UTC evidence; a successful restart command alone
+is insufficient.
+
+### Reading the real incident timings
+
+Prometheus `activeAt` is when the alert became active (including pending), not
+necessarily when it first fired. Each Phase 2 timeline separately records the
+fault start, first polling observation of firing in both systems, fix start,
+first observation that both systems cleared the selected alert, and final Bash
+health. Detection and resolution observations have polling uncertainty. A P3
+recent-start rule intentionally remains active for ten minutes after restart;
+the five-minute error window can also outlast the outage.

@@ -1,0 +1,32 @@
+2026-09-29T16:56:03Z | healthcheck exit=0 CPU=2% memory=24% disk=69% errors=0
+# TradeOps shift handover
+
+Window (UTC): 2026-09-29T15:56:03.547197+00:00 to 2026-09-29T16:56:03.547197+00:00
+
+## Services now
+- tradeops-feed: active
+- tradeops-orders: active
+
+## Alerts by severity
+- P1: 3 notifications; service-orders (1), port-9002 (1), http-9002 (1)
+- P2: 1 notifications; restart-orders (1)
+- P3: 0 notifications; none
+
+## Open issues (latest health check)
+- None in latest snapshot.
+
+## Resolved issues
+- http-9002: absent from latest check
+- port-9002: absent from latest check
+- restart-orders: absent from latest check
+- service-orders: absent from latest check
+
+## Top errors
+- 1 × feed unreachable: feed slow: 676.54 ms
+
+## Notes for next shift
+- Confirm both HTTP health endpoints and review active alerts.
+- An error-rate alert may persist for 5 minutes after recovery.
+- Read incidents/ and record owner, next action, and escalation for any unresolved issue.
+
+Saved: /var/log/tradeops/handover-20260929-1656.md

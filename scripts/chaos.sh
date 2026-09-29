@@ -39,6 +39,8 @@ net-delay)
     echo 'Loopback delay 500ms (affects both services). Undo: fix-delay'
     ;;
 fix-delay) fix_delay ;;
-cleanup) fix_cpu; fix_port; fix_delay; rm -f /var/lib/tradeops/disk-fill; systemctl start tradeops-feed tradeops-orders; echo 'All TradeOps chaos changes removed' ;;
-*) echo 'Usage: chaos.sh {kill-feed|stop-feed|fix-feed|fill-disk|fix-disk|cpu-spike|fix-cpu|block-port|fix-port|net-delay|fix-delay|cleanup}'; exit 2 ;;
+slow-feed) touch /var/lib/tradeops/slow-feed; echo "Added 350ms delay to price requests. Undo: fix-slow-feed" ;;
+fix-slow-feed) rm -f /var/lib/tradeops/slow-feed ;;
+cleanup) fix_cpu; fix_port; fix_delay; rm -f /var/lib/tradeops/disk-fill /var/lib/tradeops/slow-feed; systemctl start tradeops-feed tradeops-orders; echo 'All TradeOps chaos changes removed' ;;
+*) echo 'Usage: chaos.sh {kill-feed|stop-feed|fix-feed|fill-disk|fix-disk|cpu-spike|fix-cpu|block-port|fix-port|net-delay|fix-delay|slow-feed|fix-slow-feed|cleanup}'; exit 2 ;;
 esac
