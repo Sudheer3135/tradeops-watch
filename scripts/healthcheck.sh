@@ -9,7 +9,7 @@ set -uo pipefail
 [[ $EUID == 0 ]] || { echo 'Run with sudo'; exit 2; }
 mkdir -p /var/lib/tradeops /var/log/tradeops
 exec 9>/var/lib/tradeops/healthcheck.lock
-flock -n 9 || exit 0
+flock -w 15 9 || { echo "Another health check is still running; no result collected"; exit 1; }
 [[ ! -f /etc/tradeops/alert.env ]] || source /etc/tradeops/alert.env
 now=$(date -u +%s)
 active=$(mktemp /var/lib/tradeops/active.XXXXXX)
