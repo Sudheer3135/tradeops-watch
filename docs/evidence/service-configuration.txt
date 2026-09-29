@@ -1,0 +1,46 @@
+Restart=on-failure
+RestartUSec=5s
+User=tradeops
+Group=tradeops
+ProtectSystem=strict
+NoNewPrivileges=yes
+
+Restart=on-failure
+RestartUSec=5s
+User=tradeops
+Group=tradeops
+ProtectSystem=strict
+NoNewPrivileges=yes
+warning: logrotate in debug mode does nothing except printing debug messages!  Consider using verbose mode (-v) instead if this is not what you want.
+
+reading config file /etc/logrotate.d/tradeops
+Reading state from file: /var/lib/logrotate/status
+state file /var/lib/logrotate/status does not exist
+Allocating hash table for state file, size 64 entries
+
+Handling 1 logs
+
+rotating pattern: /var/log/tradeops/alerts.log /var/log/tradeops/cron.log  after 1 days (7 rotations)
+empty log files are not rotated, old logs are removed
+switching euid from 0 to 999 and egid from 0 to 988 (pid 5661)
+considering log /var/log/tradeops/alerts.log
+Creating new state
+  Now: 2026-09-29 16:49
+  Last rotated at 2026-09-29 16:00
+  log does not need rotating (log has already been rotated)
+considering log /var/log/tradeops/cron.log
+Creating new state
+  Now: 2026-09-29 16:49
+  Last rotated at 2026-09-29 16:00
+  log does not need rotating (log has already been rotated)
+switching euid from 999 to 0 and egid from 988 to 0 (pid 5661)
+Netid State  Recv-Q Send-Q      Local Address:Port Peer Address:PortProcess                                               
+udp   UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=16))            
+udp   UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=14))            
+udp   UNCONN 0      0      192.168.2.2%enp0s1:68        0.0.0.0:*    users:(("systemd-network",pid=647,fd=21))            
+tcp   LISTEN 0      4096              0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=989,fd=3),("systemd",pid=1,fd=73))
+tcp   LISTEN 0      4096           127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=17))            
+tcp   LISTEN 0      4096        127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=15))            
+tcp   LISTEN 0      5               127.0.0.1:9002      0.0.0.0:*    users:(("python3",pid=4077,fd=4))                    
+tcp   LISTEN 0      5               127.0.0.1:9001      0.0.0.0:*    users:(("python3",pid=4549,fd=4))                    
+tcp   LISTEN 0      4096                 [::]:22           [::]:*    users:(("sshd",pid=989,fd=4),("systemd",pid=1,fd=74))

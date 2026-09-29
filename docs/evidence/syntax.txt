@@ -1,0 +1,1 @@
+PASS Bash syntax and Python compilation inside Ubuntu

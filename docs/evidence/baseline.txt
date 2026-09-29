@@ -1,0 +1,4 @@
+2026-09-29T11:17:23Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=0
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 15, "last_success": 1790680643.157902}

@@ -1,0 +1,20 @@
+START fill-disk 2026-09-29T11:18:04Z
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       8.7G  7.6G  1.2G  88% /
+Disk filled toward 87%; at least 600 MiB reserved at allocation. Undo: fix-disk
+2026-09-29T11:18:10Z | P2 | disk | Disk 88% >= 85% | runbooks/disk-full.md
+2026-09-29T11:18:10Z | healthcheck exit=1 CPU=0% memory=14% disk=88% errors=5
+HEALTHCHECK_EXIT=1
+ACTIVE ALERTS
+P2|disk|Disk 88% >= 85%
+RUNBOOK DIAGNOSTICS
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       8.7G  7.6G  1.2G  88% /
+5.6G	/var/lib/tradeops
+40K	/var/log/tradeops
+FIX fix-disk 2026-09-29T11:18:10Z
+2026-09-29T11:18:15Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=5
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 115, "last_success": 1790680694.0985308}
+PASS fill-disk 2026-09-29T11:18:15Z

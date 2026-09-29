@@ -1,0 +1,1 @@
+install: omitting directory '/home/ubuntu/tradeops-watch/scripts/__pycache__'

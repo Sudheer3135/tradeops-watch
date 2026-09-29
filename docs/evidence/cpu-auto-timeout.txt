@@ -1,0 +1,6 @@
+START CPU automatic expiry 2026-09-29T11:24:10Z
+Running as unit: tradeops-chaos-cpu.service; invocation ID: 692632b5afbf436291404c97352dc0be
+CPU workers run for 120s, systemd also enforces 125s limit. Undo: fix-cpu
+active
+2026-09-29T11:24:16Z | healthcheck exit=1 CPU=100% memory=14% disk=24% errors=4
+During CPU load healthcheck exit=1

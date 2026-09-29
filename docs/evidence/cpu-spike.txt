@@ -1,0 +1,30 @@
+START cpu-spike 2026-09-29T11:18:15Z
+Running as unit: tradeops-chaos-cpu.service; invocation ID: b82924a67f3740d2bb14df2fc9a38bde
+CPU workers run for 120s, systemd also enforces 125s limit. Undo: fix-cpu
+2026-09-29T11:18:21Z | P2 | cpu | CPU 100% >= 85% | runbooks/high-cpu.md
+2026-09-29T11:18:21Z | healthcheck exit=1 CPU=100% memory=14% disk=24% errors=5
+HEALTHCHECK_EXIT=1
+ACTIVE ALERTS
+P2|cpu|CPU 100% >= 85%
+RUNBOOK DIAGNOSTICS
+    PID USER     STAT %CPU %MEM COMMAND
+   4802 root     R    99.5  0.0 yes
+   4804 root     R    99.5  0.0 yes
+      1 root     Ss    0.9  0.6 /sbin/init
+   1770 root     Ssl   0.5  2.1 /usr/lib/snapd/snapd
+   4549 tradeops Ssl   0.3  0.9 /usr/bin/python3 /opt/tradeops/services/market_feed.py
+   4077 tradeops Ssl   0.2  1.1 /usr/bin/python3 /opt/tradeops/services/order_service.py
+    280 root     S<s   0.1  0.5 /usr/lib/systemd/systemd-journald
+    764 message+ Ss    0.0  0.2 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+    708 root     I     0.0  0.0 [kworker/u4:5-writeback]
+     11 root     I     0.0  0.0 [kworker/u4:0-ext4-rsv-conversion]
+    353 root     Ss    0.0  0.3 /usr/lib/systemd/systemd-udevd
+               total        used        free      shared  buff/cache   available
+Mem:            1955         266        1090           1         684        1689
+Swap:              0           0           0
+FIX fix-cpu 2026-09-29T11:18:21Z
+2026-09-29T11:18:26Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=5
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 145, "last_success": 1790680706.1638227}
+PASS cpu-spike 2026-09-29T11:18:26Z

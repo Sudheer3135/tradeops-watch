@@ -1,0 +1,70 @@
+START block-port 2026-09-29T11:18:26Z
+Loopback TCP 9001 rejected. Undo: fix-port
+2026-09-29T11:18:32Z | P2 | error-rate | 8 errors in last 5 minutes > 5 | runbooks/service-down.md
+2026-09-29T11:18:32Z | healthcheck exit=2 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=2
+ACTIVE ALERTS
+P1|http-9001|health endpoint failed or degraded
+P1|http-9002|health endpoint failed or degraded
+P2|error-rate|8 errors in last 5 minutes > 5
+RUNBOOK DIAGNOSTICS
+Netid State  Recv-Q Send-Q      Local Address:Port Peer Address:PortProcess                                               
+udp   UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=16))            
+udp   UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=14))            
+udp   UNCONN 0      0      192.168.2.2%enp0s1:68        0.0.0.0:*    users:(("systemd-network",pid=647,fd=21))            
+tcp   LISTEN 0      4096              0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=989,fd=3),("systemd",pid=1,fd=73))
+tcp   LISTEN 0      4096           127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=17))            
+tcp   LISTEN 0      4096        127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=15))            
+tcp   LISTEN 0      5               127.0.0.1:9002      0.0.0.0:*    users:(("python3",pid=4077,fd=4))                    
+tcp   LISTEN 0      5               127.0.0.1:9001      0.0.0.0:*    users:(("python3",pid=4549,fd=4))                    
+tcp   LISTEN 0      4096                 [::]:22           [::]:*    users:(("sshd",pid=989,fd=4),("systemd",pid=1,fd=74))
+Chain OUTPUT (policy ACCEPT 14 packets, 1208 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    4   240 REJECT     6    --  *      lo      0.0.0.0/0            0.0.0.0/0            tcp dpt:9001 /* tradeops-chaos */ reject-with icmp-port-unreachable
+qdisc noqueue 0: root refcnt 2 
+2026-09-29T11:17:25Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:17:27Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:17:53Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:17:55Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:17:57Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:18:28Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:18:30Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:18:32Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+FIX fix-port 2026-09-29T11:18:32Z
+2026-09-29T11:18:37Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:18:54Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:19:10Z | healthcheck exit=1 CPU=0% memory=13% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:19:26Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:19:42Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:19:58Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:20:14Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:20:30Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:20:47Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:21:04Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:21:20Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:21:36Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:21:52Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:22:08Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:22:24Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+HEALTHCHECK_EXIT=1
+2026-09-29T11:22:40Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=6
+HEALTHCHECK_EXIT=1
+2026-09-29T11:22:57Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=4
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 790, "last_success": 1790680975.1869707}
+PASS block-port 2026-09-29T11:22:57Z

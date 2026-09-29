@@ -1,0 +1,25 @@
+Synchronizing state of cron.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable cron
+● tradeops-feed.service - TradeOps synthetic market feed
+     Loaded: loaded (/etc/systemd/system/tradeops-feed.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 16:47:19 IST; 3s ago
+   Main PID: 4076 (python3)
+      Tasks: 2 (limit: 2259)
+     Memory: 10.1M (peak: 10.6M)
+        CPU: 36ms
+     CGroup: /system.slice/tradeops-feed.service
+             └─4076 /usr/bin/python3 /opt/tradeops/services/market_feed.py
+
+Sep 29 16:47:19 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+
+● tradeops-orders.service - TradeOps fake order service
+     Loaded: loaded (/etc/systemd/system/tradeops-orders.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 16:47:19 IST; 3s ago
+   Main PID: 4077 (python3)
+      Tasks: 2 (limit: 2259)
+     Memory: 11.6M (peak: 12.1M)
+        CPU: 50ms
+     CGroup: /system.slice/tradeops-orders.service
+             └─4077 /usr/bin/python3 /opt/tradeops/services/order_service.py
+
+Sep 29 16:47:19 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.

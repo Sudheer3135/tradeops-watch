@@ -1,0 +1,11 @@
+Name:           tradeops
+State:          Running
+Snapshots:      0
+IPv4:           192.168.2.2
+Release:        Ubuntu 24.04.5 LTS
+Image hash:     1d6bffe64b84 (Ubuntu 24.04 LTS)
+CPU(s):         2
+Load:           0.15 0.13 0.05
+Disk usage:     2.1GiB out of 9.6GiB
+Memory usage:   271.6MiB out of 1.9GiB
+Mounts:         --

@@ -1,0 +1,2 @@
+REFUSED: requires sudo inside Linux VM named tradeops
+Exit code: 1 (expected 1)

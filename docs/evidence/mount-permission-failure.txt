@@ -1,0 +1,1 @@
+bash: /home/ubuntu/tradeops-watch/scripts/install.sh: Operation not permitted

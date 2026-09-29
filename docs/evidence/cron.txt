@@ -1,0 +1,20 @@
+Sep 29 16:44:56 tradeops (cron)[763]: cron.service: Referenced but unset environment variable evaluates to an empty string: EXTRA_OPTS
+Sep 29 16:44:56 tradeops systemd[1]: Started cron.service - Regular background program processing daemon.
+Sep 29 16:44:56 tradeops cron[763]: (CRON) INFO (pidfile fd = 3)
+Sep 29 16:44:56 tradeops cron[763]: (CRON) INFO (Running @reboot jobs)
+Sep 29 16:45:01 tradeops CRON[1236]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+Sep 29 16:45:01 tradeops CRON[1237]: (root) CMD (command -v debian-sa1 > /dev/null && debian-sa1 1 1)
+Sep 29 16:45:01 tradeops CRON[1236]: pam_unix(cron:session): session closed for user root
+Sep 29 16:47:01 tradeops CRON[3496]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+Sep 29 16:47:01 tradeops CRON[3497]: (root) CMD (/opt/tradeops/scripts/healthcheck.sh >> /var/log/tradeops/cron.log 2>&1)
+Sep 29 16:47:02 tradeops CRON[3496]: pam_unix(cron:session): session closed for user root
+Sep 29 16:48:01 tradeops cron[763]: (*system*tradeops) RELOAD (/etc/cron.d/tradeops)
+Sep 29 16:48:01 tradeops CRON[4553]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+Sep 29 16:48:01 tradeops CRON[4554]: (root) CMD (/opt/tradeops/scripts/healthcheck.sh >> /var/log/tradeops/cron.log 2>&1)
+Sep 29 16:48:02 tradeops CRON[4553]: pam_unix(cron:session): session closed for user root
+Sep 29 16:49:01 tradeops CRON[5177]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+Sep 29 16:49:01 tradeops CRON[5178]: (root) CMD (/opt/tradeops/scripts/healthcheck.sh >> /var/log/tradeops/cron.log 2>&1)
+Sep 29 16:49:02 tradeops CRON[5177]: pam_unix(cron:session): session closed for user root
+2026-09-29T11:17:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=0
+2026-09-29T11:18:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=5
+2026-09-29T11:19:02Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8

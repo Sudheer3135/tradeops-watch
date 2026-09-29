@@ -1,0 +1,3 @@
+PASS five positive symbol prices change over time: {'NIFTY': 23970.72, 'BANKNIFTY': 49548.49, 'RELIANCE': 2918.56, 'TCS': 4008.57, 'INFY': 1899.63} -> {'NIFTY': 23966.27, 'BANKNIFTY': 49564.98, 'RELIANCE': 2916.4, 'TCS': 4015.6, 'INFY': 1898.46}
+PASS order count increases: 220 -> 225
+PASS JSON content types, healthy endpoints, and 404 responses

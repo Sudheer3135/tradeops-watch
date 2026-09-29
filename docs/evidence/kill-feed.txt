@@ -1,0 +1,52 @@
+START kill-feed 2026-09-29T11:17:23Z
+Killed feed; systemd restarts after 5s. Undo: fix-feed
+2026-09-29T11:17:24Z | P1 | service-feed | service inactive | runbooks/service-down.md
+2026-09-29T11:17:24Z | P1 | port-9001 | port not listening | runbooks/port-blocked.md
+2026-09-29T11:17:24Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:17:25Z | healthcheck exit=2 CPU=0% memory=13% disk=24% errors=1
+HEALTHCHECK_EXIT=2
+ACTIVE ALERTS
+P1|service-feed|service inactive
+P1|port-9001|port not listening
+P1|http-9001|health endpoint failed or degraded
+RUNBOOK DIAGNOSTICS
+● tradeops-feed.service - TradeOps synthetic market feed
+     Loaded: loaded (/etc/systemd/system/tradeops-feed.service; enabled; preset: enabled)
+     Active: activating (auto-restart) (Result: signal) since Tue 2026-09-29 16:47:23 IST; 2s ago
+    Process: 4076 ExecStart=/usr/bin/python3 /opt/tradeops/services/market_feed.py (code=killed, signal=KILL)
+   Main PID: 4076 (code=killed, signal=KILL)
+        CPU: 45ms
+
+● tradeops-orders.service - TradeOps fake order service
+     Loaded: loaded (/etc/systemd/system/tradeops-orders.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 16:47:19 IST; 6s ago
+   Main PID: 4077 (python3)
+      Tasks: 2 (limit: 2259)
+     Memory: 11.7M (peak: 12.2M)
+        CPU: 62ms
+     CGroup: /system.slice/tradeops-orders.service
+             └─4077 /usr/bin/python3 /opt/tradeops/services/order_service.py
+
+Sep 29 16:47:19 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 16:46:51 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+Sep 29 16:46:51 tradeops systemd[1]: Stopping tradeops-feed.service - TradeOps synthetic market feed...
+Sep 29 16:46:51 tradeops systemd[1]: tradeops-feed.service: Deactivated successfully.
+Sep 29 16:46:51 tradeops systemd[1]: Stopped tradeops-feed.service - TradeOps synthetic market feed.
+Sep 29 16:46:51 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+Sep 29 16:47:19 tradeops systemd[1]: Stopping tradeops-feed.service - TradeOps synthetic market feed...
+Sep 29 16:47:19 tradeops systemd[1]: tradeops-feed.service: Deactivated successfully.
+Sep 29 16:47:19 tradeops systemd[1]: Stopped tradeops-feed.service - TradeOps synthetic market feed.
+Sep 29 16:47:19 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+Sep 29 16:47:23 tradeops systemd[1]: tradeops-feed.service: Main process exited, code=killed, status=9/KILL
+Sep 29 16:47:23 tradeops systemd[1]: tradeops-feed.service: Failed with result 'signal'.
+AUTOMATIC RESTART VERIFIED (before manual fix)
+NRestarts=1
+FIX fix-feed 2026-09-29T11:17:31Z
+2026-09-29T11:17:35Z | P2 | restart-feed | automatic restarts increased 0 -> 1 | runbooks/service-down.md
+2026-09-29T11:17:36Z | healthcheck exit=1 CPU=2% memory=14% disk=24% errors=2
+HEALTHCHECK_EXIT=1
+2026-09-29T11:17:52Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=2
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 75, "last_success": 1790680671.6667073}
+PASS kill-feed 2026-09-29T11:17:52Z

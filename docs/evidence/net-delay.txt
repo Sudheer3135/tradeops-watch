@@ -1,0 +1,37 @@
+START net-delay 2026-09-29T11:22:57Z
+Loopback delay 500ms (affects both services). Undo: fix-delay
+2026-09-29T11:23:11Z | healthcheck exit=2 CPU=0% memory=14% disk=24% errors=7
+HEALTHCHECK_EXIT=2
+ACTIVE ALERTS
+P1|http-9001|health endpoint failed or degraded
+P1|http-9002|health endpoint failed or degraded
+P2|error-rate|7 errors in last 5 minutes > 5
+RUNBOOK DIAGNOSTICS
+Netid State  Recv-Q Send-Q      Local Address:Port Peer Address:PortProcess                                               
+udp   UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=16))            
+udp   UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=14))            
+udp   UNCONN 0      0      192.168.2.2%enp0s1:68        0.0.0.0:*    users:(("systemd-network",pid=647,fd=21))            
+tcp   LISTEN 0      4096              0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=989,fd=3),("systemd",pid=1,fd=73))
+tcp   LISTEN 0      4096           127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=17))            
+tcp   LISTEN 0      4096        127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=470,fd=15))            
+tcp   LISTEN 0      5               127.0.0.1:9002      0.0.0.0:*    users:(("python3",pid=4077,fd=4))                    
+tcp   LISTEN 0      5               127.0.0.1:9001      0.0.0.0:*    users:(("python3",pid=4549,fd=4))                    
+tcp   LISTEN 0      4096                 [::]:22           [::]:*    users:(("sshd",pid=989,fd=4),("systemd",pid=1,fd=74))
+Chain OUTPUT (policy ACCEPT 2501 packets, 238K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+qdisc netem 8001: root refcnt 2 limit 1000 delay 500ms
+2026-09-29T11:18:28Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:18:30Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:18:32Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:22:59Z | ERROR | feed unreachable: feed slow: 2174.66 ms
+2026-09-29T11:23:03Z | ERROR | feed unreachable: feed slow: 2060.29 ms
+2026-09-29T11:23:07Z | ERROR | feed unreachable: feed slow: 2090.21 ms
+2026-09-29T11:23:11Z | ERROR | feed unreachable: feed slow: 2088.12 ms
+FIX fix-delay 2026-09-29T11:23:11Z
+2026-09-29T11:23:16Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=7
+HEALTHCHECK_EXIT=1
+2026-09-29T11:23:32Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=5
+HEALTHCHECK_EXIT=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 840, "last_success": 1790681012.0439901}
+PASS net-delay 2026-09-29T11:23:32Z
