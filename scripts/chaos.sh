@@ -7,7 +7,7 @@ fix_port() { while iptables -C OUTPUT "${rule[@]}" 2>/dev/null; do iptables -D O
 fix_delay() { if [[ -f /var/lib/tradeops/net-delay ]]; then tc qdisc del dev lo root 2>/dev/null || true; rm -f /var/lib/tradeops/net-delay; fi; }
 fix_cpu() { systemctl stop tradeops-chaos-cpu.service 2>/dev/null || true; }
 case "${1:-}" in
-kill-feed) kill -9 "$(systemctl show tradeops-feed -p MainPID --value)"; echo 'Killed feed; systemd restarts after 5s. Undo: fix-feed' ;;
+kill-feed) pid=$(systemctl show tradeops-feed -p MainPID --value); [[ $pid =~ ^[0-9]+$ ]] && (( pid > 1 )) || { echo "Feed has no running PID"; exit 1; }; kill -9 "$pid"; echo 'Killed feed; systemd restarts after 5s. Undo: fix-feed' ;;
 stop-feed) systemctl stop tradeops-feed; echo 'Feed stopped. Undo: fix-feed' ;;
 fix-feed) systemctl start tradeops-feed ;;
 fill-disk)
