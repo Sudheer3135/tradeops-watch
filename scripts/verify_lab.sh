@@ -14,8 +14,8 @@ check() {
     return "$result"
 }
 healthy() {
-    local attempt
-    for attempt in $(seq 1 24); do
+    local _attempt
+    for _attempt in $(seq 1 24); do
         if check; then
             curl -fsS --max-time 2 http://127.0.0.1:9001/health; echo
             curl -fsS --max-time 2 http://127.0.0.1:9002/health; echo

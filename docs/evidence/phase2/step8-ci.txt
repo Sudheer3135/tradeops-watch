@@ -1,0 +1,25 @@
+All checks passed!
+10 files already formatted
+.......................................                                  [100%]
+39 passed in 0.07s
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 1 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/rules/tradeops-alerts.yml
+  SUCCESS: 10 rules found
+
+Checking /etc/prometheus/rules/tradeops-alerts.yml
+  SUCCESS: 10 rules found
+
+  SUCCESS
+
+Checking '/etc/alertmanager/alertmanager.yml'  SUCCESS
+Found:
+ - global config
+ - route
+ - 2 inhibit rules
+ - 4 receivers
+ - 0 templates
+
+PASS all CI checks

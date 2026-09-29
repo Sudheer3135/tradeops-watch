@@ -6,10 +6,14 @@ DISK_THRESHOLD=${DISK_THRESHOLD:-85}
 ERROR_THRESHOLD=${ERROR_THRESHOLD:-5}
 COOLDOWN=${COOLDOWN:-600}
 set -uo pipefail
+# shellcheck source=alert_format.sh
+source "$(dirname "$0")/alert_format.sh"
 [[ $EUID == 0 ]] || { echo 'Run with sudo'; exit 2; }
 mkdir -p /var/lib/tradeops /var/log/tradeops
 exec 9>/var/lib/tradeops/healthcheck.lock
 flock -w 15 9 || { echo "Another health check is still running; no result collected"; exit 1; }
+# Optional root-owned runtime configuration is not present in the repository.
+# shellcheck disable=SC1091
 [[ ! -f /etc/tradeops/alert.env ]] || source /etc/tradeops/alert.env
 now=$(date -u +%s)
 active=$(mktemp /var/lib/tradeops/active.XXXXXX)
@@ -21,7 +25,7 @@ alert() {
     printf '%s|%s|%s\n' "$severity" "$check" "$details" >> "$active"
     [[ ! -f /var/lib/tradeops/last-$check ]] || read -r last < "/var/lib/tradeops/last-$check"
     if (( now - last >= COOLDOWN )); then
-        line="$(date -u +%FT%TZ) | $severity | $check | $details | runbooks/$book.md"
+        line=$(format_alert_line "$(date -u +%FT%TZ)" "$severity" "$check" "$details" "runbooks/$book.md")
         echo "$line" | tee -a /var/log/tradeops/alerts.log
         echo "$now" > "/var/lib/tradeops/last-$check"
         if [[ -n ${TELEGRAM_BOT_TOKEN:-} && -n ${TELEGRAM_CHAT_ID:-} ]]; then

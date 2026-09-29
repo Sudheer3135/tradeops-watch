@@ -61,7 +61,7 @@ successfully through Grafana's own data-source proxies. The alerts panel was
 empty because no alerts were firing at that sample. Verification is API-based;
 no screenshot or visual rendering review is claimed. See `step6-*` evidence.
 
-## Step 7: verified; paused for the requested review
+## Step 7: verified; continuation authorized
 The installer migrated services to `/opt/tradeops/current` and passed another
 rerun without creating a duplicate release. Real tests passed: good deployment,
 a deliberately broken order service, health-gate rejection, automatic rollback,
@@ -76,6 +76,12 @@ Evidence: `step7-deploy-rollback.txt`, `step7-final-health.txt`,
 `step7-loki-deployment-errors.json`. The broken code was confined to a temporary
 fixture; the source repository's application code was not damaged.
 
-Paused here as requested. Steps 8–10 (CI/pytest, slow-feed and full chaos evidence,
-new incident reports, screenshots checklist and final interview/demo/resume
-materials) are not complete and await this review. No screenshots were taken.
+The user approved continuation after this review. No screenshots were taken.
+
+## Step 8: verified locally
+The push/pull-request workflow runs the same `scripts/ci_check.sh` that passed
+in Ubuntu: ShellCheck on every shell script, Ruff lint/format, 39 pytest cases,
+Compose validation, Prometheus config/rules plus eleven rule cases, and
+Alertmanager config validation. Python imports are safe for unit testing; alert
+formatting and handover parsing share tested validation. See `step8-ci.txt`.
+GitHub-hosted CI is pending publication; no Git remote is configured.

@@ -7,7 +7,7 @@ fix_port() { while iptables -C OUTPUT "${rule[@]}" 2>/dev/null; do iptables -D O
 fix_delay() { if [[ -f /var/lib/tradeops/net-delay ]]; then tc qdisc del dev lo root 2>/dev/null || true; rm -f /var/lib/tradeops/net-delay; fi; }
 fix_cpu() { systemctl stop tradeops-chaos-cpu.service 2>/dev/null || true; }
 case "${1:-}" in
-kill-feed) pid=$(systemctl show tradeops-feed -p MainPID --value); [[ $pid =~ ^[0-9]+$ ]] && (( pid > 1 )) || { echo "Feed has no running PID"; exit 1; }; kill -9 "$pid"; echo 'Killed feed; systemd restarts after 5s. Undo: fix-feed' ;;
+kill-feed) pid=$(systemctl show tradeops-feed -p MainPID --value); if [[ ! $pid =~ ^[0-9]+$ ]] || (( pid <= 1 )); then echo "Feed has no running PID"; exit 1; fi; kill -9 "$pid"; echo 'Killed feed; systemd restarts after 5s. Undo: fix-feed' ;;
 stop-feed) systemctl stop tradeops-feed; echo 'Feed stopped. Undo: fix-feed' ;;
 fix-feed) systemctl start tradeops-feed ;;
 fill-disk)
@@ -23,6 +23,8 @@ fill-disk)
 fix-disk) rm -f /var/lib/tradeops/disk-fill ;;
 cpu-spike)
     systemctl reset-failed tradeops-chaos-cpu.service 2>/dev/null || true
+    # The child bash must expand nproc and i, not this parent shell.
+    # shellcheck disable=SC2016
     systemd-run --unit=tradeops-chaos-cpu --collect --property=RuntimeMaxSec=125 /usr/bin/timeout 120 /bin/bash -c 'for ((i=0;i<$(nproc);i++)); do yes > /dev/null & done; wait'
     echo 'CPU workers run for 120s, systemd also enforces 125s limit. Undo: fix-cpu'
     ;;

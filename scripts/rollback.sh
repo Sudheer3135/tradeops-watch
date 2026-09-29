@@ -5,9 +5,9 @@ source "$(dirname "$0")/deploy_common.sh"
 require_deploy_vm
 current=$(readlink -f /opt/tradeops/current)
 previous=$(readlink -f /opt/tradeops/previous || true)
-valid_release "$current" && valid_release "$previous" && [[ ! -f $previous/.failed ]] || {
+if ! valid_release "$current" || ! valid_release "$previous" || [[ -f $previous/.failed ]]; then
     echo 'No valid previous release available'; exit 1;
-}
+fi
 switched=0
 on_exit() {
     local status=$1
