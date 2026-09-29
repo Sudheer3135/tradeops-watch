@@ -1,0 +1,12 @@
+Checking /etc/prometheus/rules/tradeops-alerts.yml
+  SUCCESS: 10 rules found
+
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 1 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/rules/tradeops-alerts.yml
+  SUCCESS: 10 rules found
+
+  SUCCESS
+

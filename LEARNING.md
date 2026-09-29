@@ -143,3 +143,36 @@ windows intentionally delay full recovery status. Disk safety is a preallocation
 check, not a reservation against other concurrent writers. Telegram is optional
 and needs a real destination to test delivery. Read the evidence before describing
 any capability as tested.
+
+
+## Phase 2 first checkpoint (Steps 1–3)
+
+- Docker Engine runs the monitoring programs in containers inside Ubuntu.
+  The VM still provides the real Linux kernel; Docker does not replace it.
+- `scripts/install_docker.sh` installs Docker from its official Ubuntu apt
+  repository. `monitoring/docker-compose.yml` starts seven pinned images.
+- Prometheus pulls numerical metrics every 15 seconds. `service` labels let
+  us connect application scrapes, HTTP probes and alerts for the same service.
+- node_exporter reads the VM's real CPU/memory/filesystem using read-only host
+  mounts. blackbox_exporter tests HTTP and TCP from outside the application.
+- `/opt/tradeops/venv` isolates `prometheus-client==0.26.0` from system Python.
+  The application installer can be run again without duplicating the setup.
+- A counter increases until a process restarts; a gauge reports a current
+  value; a histogram counts observations in latency buckets. The order-cycle
+  histogram measures one fetch attempt, not each of the five orders it produces.
+- `rate(counter[1m])` estimates growth per second and handles counter resets.
+  `histogram_quantile(0.95, ...)` estimates p95 from bucket rates, so it is an
+  approximation whose resolution depends on the bucket boundaries.
+- Alert `for:` is a continuous waiting period: the condition must remain true
+  throughout it. A rate window is additional smoothing, not the same timer.
+- A `P3` recent-start notification also covers a normal deployment or first
+  startup. It is a clue to investigate, not proof of a crash.
+- `scripts/verify_stack.py` checks live readiness/probes/targets.
+  `scripts/verify_metrics.py` checks real metrics, old APIs and recovery from
+  a three-second feed outage. `monitoring/prometheus/rules-tests.yml` supplies
+  synthetic time series for promtool; those are unit tests, not real incidents.
+- Named volumes retain data after restart. Host networking lets containers
+  access the same VM loopback addresses as the original systemd services.
+
+The next 25 interview questions and full file guide will be added in Step 10,
+after the remaining components have actually been built and tested.

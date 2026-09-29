@@ -1,0 +1,4 @@
+PASS ten live alert rules evaluate without errors
+PASS real recent-start P3 alert reached Alertmanager without Telegram
+{"endsAt": "2026-09-29T11:45:33.889Z", "labels": {"alertname": "ServiceRestartedRecently", "environment": "tradeops-lab", "instance": "127.0.0.1:9001", "job": "tradeops", "service": "feed", "severity": "P3", "team": "tradeops"}, "startsAt": "2026-09-29T11:41:33.889Z", "status": {"inhibitedBy": [], "mutedBy": [], "silencedBy": [], "state": "active"}}
+{"endsAt": "2026-09-29T11:45:33.889Z", "labels": {"alertname": "ServiceRestartedRecently", "environment": "tradeops-lab", "instance": "127.0.0.1:9002", "job": "tradeops", "service": "orders", "severity": "P3", "team": "tradeops"}, "startsAt": "2026-09-29T11:41:33.889Z", "status": {"inhibitedBy": [], "mutedBy": [], "silencedBy": [], "state": "active"}}

@@ -1,0 +1,421 @@
+{
+  "rule_files": [
+    "rules/tradeops-alerts.yml"
+  ],
+  "evaluation_interval": "15s",
+  "tests": [
+    {
+      "name": "ServiceDown-P1",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "up{job=\"tradeops\",instance=\"lab\",service=\"feed\"}",
+          "values": "0x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "ServiceDown",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "ServiceDown",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "tradeops",
+                "instance": "lab",
+                "service": "feed",
+                "severity": "P1",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "feed scrape target is down",
+                "description": "Prometheus cannot scrape lab. Check the service, listener and firewall.",
+                "runbook": "runbooks/service-down.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HealthProbeFailed-P1",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "probe_success{job=\"blackbox-http\",instance=\"lab\",service=\"feed\"}",
+          "values": "0x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "HealthProbeFailed",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "HealthProbeFailed",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "blackbox-http",
+                "instance": "lab",
+                "service": "feed",
+                "severity": "P1",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "feed health probe failed",
+                "description": "The HTTP or TCP probe for lab has failed for at least 15 seconds.",
+                "runbook": "runbooks/port-blocked.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NoPricesFlowing-P1",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "tradeops_prices_published_total{job=\"tradeops\",service=\"feed\",symbol=\"NIFTY\"}",
+          "values": "100x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "30s",
+          "alertname": "NoPricesFlowing",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "NoPricesFlowing",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "service": "feed",
+                "severity": "P1",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "feed has stopped publishing prices",
+                "description": "The total price publication rate has stayed zero for one minute after the one-minute rate window became flat.",
+                "runbook": "runbooks/service-down.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FeedErrorsHigh-P2",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "tradeops_feed_errors_total{job=\"tradeops\",instance=\"lab\",service=\"orders\"}",
+          "values": "0+3x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "FeedErrorsHigh",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "FeedErrorsHigh",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "tradeops",
+                "instance": "lab",
+                "service": "orders",
+                "severity": "P2",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "orders feed fetch errors are elevated",
+                "description": "More than six feed errors per minute, averaged over two minutes, sustained for 30 seconds.",
+                "runbook": "runbooks/service-down.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HighOrderLatency-P2",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "tradeops_order_latency_seconds_bucket{job=\"tradeops\",service=\"orders\",le=\"0.3\"}",
+          "values": "0x40"
+        },
+        {
+          "series": "tradeops_order_latency_seconds_bucket{job=\"tradeops\",service=\"orders\",le=\"0.4\"}",
+          "values": "0+10x40"
+        },
+        {
+          "series": "tradeops_order_latency_seconds_bucket{job=\"tradeops\",service=\"orders\",le=\"+Inf\"}",
+          "values": "0+10x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "90s",
+          "alertname": "HighOrderLatency",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "HighOrderLatency",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "service": "orders",
+                "severity": "P2",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "orders p95 order-cycle latency is high",
+                "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+                "runbook": "runbooks/port-blocked.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HighCPU-P2",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "node_cpu_seconds_total{job=\"node\",instance=\"lab\",service=\"host\",cpu=\"0\",mode=\"idle\"}",
+          "values": "0+1x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "HighCPU",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "HighCPU",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "instance": "lab",
+                "service": "host",
+                "severity": "P2",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "host CPU exceeds 85 percent",
+                "description": "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window.",
+                "runbook": "runbooks/high-cpu.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HighMemory-P2",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "node_memory_MemTotal_bytes{job=\"node\",instance=\"lab\",service=\"host\"}",
+          "values": "100x40"
+        },
+        {
+          "series": "node_memory_MemAvailable_bytes{job=\"node\",instance=\"lab\",service=\"host\"}",
+          "values": "10x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "90s",
+          "alertname": "HighMemory",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "HighMemory",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "node",
+                "instance": "lab",
+                "service": "host",
+                "severity": "P2",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "host memory exceeds 85 percent",
+                "description": "Available-memory based usage exceeds 85 percent for two minutes; reclaimable cache is treated as available.",
+                "runbook": "runbooks/high-cpu.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DiskAlmostFull-P2",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "node_filesystem_size_bytes{job=\"node\",instance=\"lab\",service=\"host\",mountpoint=\"/\",fstype=\"ext4\",device=\"/dev/sda1\"}",
+          "values": "100x40"
+        },
+        {
+          "series": "node_filesystem_avail_bytes{job=\"node\",instance=\"lab\",service=\"host\",mountpoint=\"/\",fstype=\"ext4\",device=\"/dev/sda1\"}",
+          "values": "15x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "DiskAlmostFull",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "DiskAlmostFull",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "node",
+                "instance": "lab",
+                "service": "host",
+                "mountpoint": "/",
+                "fstype": "ext4",
+                "device": "/dev/sda1",
+                "severity": "P2",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "host root disk is almost full",
+                "description": "Root usage is at least 85 percent but below 95 percent for 30 seconds. Inspect growth before deleting files.",
+                "runbook": "runbooks/disk-full.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DiskAlmostFull-P1",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "node_filesystem_size_bytes{job=\"node\",instance=\"lab\",service=\"host\",mountpoint=\"/\",fstype=\"ext4\",device=\"/dev/sda1\"}",
+          "values": "100x40"
+        },
+        {
+          "series": "node_filesystem_avail_bytes{job=\"node\",instance=\"lab\",service=\"host\",mountpoint=\"/\",fstype=\"ext4\",device=\"/dev/sda1\"}",
+          "values": "5x40"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "DiskAlmostFull",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "DiskAlmostFull",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "node",
+                "instance": "lab",
+                "service": "host",
+                "mountpoint": "/",
+                "fstype": "ext4",
+                "device": "/dev/sda1",
+                "severity": "P1",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "host root disk is critically full",
+                "description": "Root usage is at least 95 percent for 15 seconds. Escalate immediately; do not deliberately fill the lab to this level.",
+                "runbook": "runbooks/disk-full.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ServiceRestartedRecently-P3",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "process_start_time_seconds{job=\"tradeops\",instance=\"lab\",service=\"feed\"}",
+          "values": "0x50"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "0s",
+          "alertname": "ServiceRestartedRecently",
+          "exp_alerts": []
+        },
+        {
+          "eval_time": "3m",
+          "alertname": "ServiceRestartedRecently",
+          "exp_alerts": [
+            {
+              "exp_labels": {
+                "job": "tradeops",
+                "instance": "lab",
+                "service": "feed",
+                "severity": "P3",
+                "team": "tradeops"
+              },
+              "exp_annotations": {
+                "summary": "feed process started recently",
+                "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+                "runbook": "runbooks/service-down.md"
+              }
+            }
+          ]
+        },
+        {
+          "eval_time": "11m",
+          "alertname": "ServiceRestartedRecently",
+          "exp_alerts": []
+        }
+      ]
+    },
+    {
+      "name": "brief-scrape-failure-recovers",
+      "interval": "15s",
+      "input_series": [
+        {
+          "series": "up{job=\"tradeops\",instance=\"lab\",service=\"feed\"}",
+          "values": "0 1x20"
+        }
+      ],
+      "alert_rule_test": [
+        {
+          "eval_time": "30s",
+          "alertname": "ServiceDown",
+          "exp_alerts": []
+        }
+      ]
+    }
+  ]
+}

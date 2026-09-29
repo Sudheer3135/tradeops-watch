@@ -3,7 +3,12 @@
 An L1 DevOps / production support portfolio project: operate two synthetic
 trading services, detect failures, debug Linux, follow runbooks, record incidents,
 and hand over a shift. Built for an Apple Silicon Mac with Ubuntu in Multipass.
-No real trading, broker connections, Docker, or pip in Phase 1.
+No real trading or broker connections. Phase 1 used only the Python standard
+library and Bash; the current Phase 2 checkpoint adds Docker monitoring and
+a Python metrics dependency while preserving the Phase 1 operations tools.
+
+**Phase 2 checkpoint: Steps 0–3.** See [monitoring setup and URLs](monitoring/README.md)
+and [progress/evidence](docs/phase2-progress.md). Later steps require the requested review.
 
 ```text
 MacBook M2 -> Multipass Ubuntu 24.04 (tradeops)
@@ -22,13 +27,14 @@ MacBook M2 -> Multipass Ubuntu 24.04 (tradeops)
 
 Python 3 standard library (`http.server`, `urllib`, `logging`, threads), Bash,
 Ubuntu 24.04 ARM64, systemd, cron, curl, iproute2/ss/tc, iptables, logrotate,
-and Git. No third-party Python packages. Both HTTP listeners are VM-local.
+and Git. Phase 2 adds pinned `prometheus-client` in a virtual environment and
+seven pinned monitoring containers. Both application HTTP listeners remain VM-local.
 
 ## Start from scratch (Mac terminal)
 
 ```bash
 cd '/Users/sudheer/Desktop/TradeOps Watch'
-multipass launch 24.04 --name tradeops --cpus 2 --memory 2G --disk 10G
+multipass launch 24.04 --name tradeops --cpus 2 --memory 4G --disk 10G
 multipass mount "$PWD" tradeops:/home/ubuntu/tradeops-watch
 multipass exec tradeops -- sudo bash /home/ubuntu/tradeops-watch/scripts/install.sh
 ```
@@ -233,9 +239,21 @@ Window (UTC): 2026-09-29T03:23:34.074921+00:00 to 2026-09-29T11:23:34.074921+00:
 - Read incidents/ and record owner, next action, and escalation for any unresolved issue.
 ```
 
-## Phase 2 roadmap — not implemented
+## Phase 2 checkpoint and remaining work
 
-Only after explicit approval to start Phase 2: Docker Compose with Prometheus,
-node_exporter, Grafana, Loki, Promtail and Alertmanager; application metrics,
-Telegram routing, provisioned dashboards, GitHub Actions checks, versioned
-deployment/rollback, and another evidence-backed chaos test pass.
+Steps 0–3: Phase 1 reviewed; Docker stack runs in the 4 GB Ubuntu VM; both
+services expose metrics; ten Prometheus rules have validation and unit tests.
+The existing APIs and Phase 1 monitoring scripts have real regression evidence.
+
+Open [monitoring/README.md](monitoring/README.md) for setup, credentials handling,
+metric definitions, alert thresholds and review commands. The live stack uses
+Grafana Alloy, not Promtail. Alloy log shipping is pending Step 5.
+
+Remaining after review: Telegram severity routing and inhibition; Alloy log
+parsing; TradeOps dashboard; deployment/automatic rollback; GitHub Actions and
+unit tests; seven complete chaos runs; screenshots checklist; updated interview
+questions, spoken demo, and evidence-backed resume bullets.
+
+The original Phase 1 evidence remains in `docs/evidence/`. New evidence is in
+`docs/evidence/phase2/`; synthetic rule fixtures are explicitly identified and
+are not represented as real incidents.

@@ -1,0 +1,5 @@
+BEFORE restart [{"metric": {}, "value": [1790682017.828, "2"]}]
+ Container tradeops-monitoring-prometheus-1 Restarting 
+ Container tradeops-monitoring-prometheus-1 Started 
+AFTER restart [{"metric": {}, "value": [1790682017.828, "2"]}]
+PASS historical sample retained across Prometheus container restart

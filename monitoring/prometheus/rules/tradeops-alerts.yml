@@ -1,0 +1,104 @@
+groups:
+  - name: tradeops
+    interval: 15s
+    rules:
+      - alert: ServiceDown
+        expr: "up == 0"
+        for: 15s
+        labels:
+          severity: P1
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} scrape target is down"
+          description: "Prometheus cannot scrape {{ $labels.instance }}. Check the service, listener and firewall."
+          runbook: runbooks/service-down.md
+      - alert: HealthProbeFailed
+        expr: "probe_success{job=~\"blackbox-http|blackbox-tcp\"} == 0"
+        for: 15s
+        labels:
+          severity: P1
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} health probe failed"
+          description: "The HTTP or TCP probe for {{ $labels.instance }} has failed for at least 15 seconds."
+          runbook: runbooks/port-blocked.md
+      - alert: NoPricesFlowing
+        expr: "sum by (service) (rate(tradeops_prices_published_total{job=\"tradeops\"}[1m])) == 0"
+        for: 1m
+        labels:
+          severity: P1
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} has stopped publishing prices"
+          description: "The total price publication rate has stayed zero for one minute after the one-minute rate window became flat."
+          runbook: runbooks/service-down.md
+      - alert: FeedErrorsHigh
+        expr: "rate(tradeops_feed_errors_total{job=\"tradeops\"}[2m]) > 0.1"
+        for: 30s
+        labels:
+          severity: P2
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} feed fetch errors are elevated"
+          description: "More than six feed errors per minute, averaged over two minutes, sustained for 30 seconds."
+          runbook: runbooks/service-down.md
+      - alert: HighOrderLatency
+        expr: "histogram_quantile(0.95, sum by (le, service) (rate(tradeops_order_latency_seconds_bucket{job=\"tradeops\"}[1m]))) > 0.3"
+        for: 2m
+        labels:
+          severity: P2
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} p95 order-cycle latency is high"
+          description: "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included."
+          runbook: runbooks/port-blocked.md
+      - alert: HighCPU
+        expr: "100 * (1 - avg by (instance, service) (rate(node_cpu_seconds_total{job=\"node\",mode=\"idle\"}[1m]))) > 85"
+        for: 30s
+        labels:
+          severity: P2
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} CPU exceeds 85 percent"
+          description: "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window."
+          runbook: runbooks/high-cpu.md
+      - alert: HighMemory
+        expr: "100 * (1 - node_memory_MemAvailable_bytes{job=\"node\"} / node_memory_MemTotal_bytes{job=\"node\"}) > 85"
+        for: 2m
+        labels:
+          severity: P2
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} memory exceeds 85 percent"
+          description: "Available-memory based usage exceeds 85 percent for two minutes; reclaimable cache is treated as available."
+          runbook: runbooks/high-cpu.md
+      - alert: DiskAlmostFull
+        expr: "(100 * (1 - node_filesystem_avail_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"} / node_filesystem_size_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"}) >= 85) and (100 * (1 - node_filesystem_avail_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"} / node_filesystem_size_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"}) < 95)"
+        for: 30s
+        labels:
+          severity: P2
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} root disk is almost full"
+          description: "Root usage is at least 85 percent but below 95 percent for 30 seconds. Inspect growth before deleting files."
+          runbook: runbooks/disk-full.md
+      - alert: DiskAlmostFull
+        expr: "100 * (1 - node_filesystem_avail_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"} / node_filesystem_size_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"}) >= 95"
+        for: 15s
+        labels:
+          severity: P1
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} root disk is critically full"
+          description: "Root usage is at least 95 percent for 15 seconds. Escalate immediately; do not deliberately fill the lab to this level."
+          runbook: runbooks/disk-full.md
+      - alert: ServiceRestartedRecently
+        expr: "(time() - process_start_time_seconds{job=\"tradeops\"} < 600) and (time() - process_start_time_seconds{job=\"tradeops\"} >= 0)"
+        for: 30s
+        labels:
+          severity: P3
+          team: tradeops
+        annotations:
+          summary: "{{ $labels.service }} process started recently"
+          description: "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal."
+          runbook: runbooks/service-down.md

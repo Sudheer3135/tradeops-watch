@@ -112,3 +112,44 @@ sudo /opt/tradeops/venv/bin/python ../scripts/verify_metrics.py
 The last command deliberately stops the feed for three seconds and restores it
 in a `finally` block. It verifies HTTP 503 during dependency failure while the
 order service's metrics endpoint remains accessible.
+
+## Step 3 alert rules and review gate
+
+Every rule includes severity, team `tradeops`, service identity from its input
+metrics, and a relative `runbooks/*.md` annotation. Open that path in this repo.
+
+| Alert | Condition and waiting period |
+|---|---|
+| ServiceDown, P1 | Any configured scrape is down for 15 seconds |
+| HealthProbeFailed, P1 | HTTP/TCP probe fails for 15 seconds |
+| NoPricesFlowing, P1 | One-minute publication rate remains zero for a further minute |
+| FeedErrorsHigh, P2 | Two-minute average above 0.1 errors/sec for 30 seconds |
+| HighOrderLatency, P2 | One-minute p95 above 300 ms for 2 minutes |
+| HighCPU, P2 | One-minute aggregate CPU usage above 85% for 30 seconds |
+| HighMemory, P2 | Usage based on MemAvailable above 85% for 2 minutes |
+| DiskAlmostFull, P2 | Root usage 85–below 95% for 30 seconds |
+| DiskAlmostFull, P1 | Root usage at least 95% for 15 seconds |
+| ServiceRestartedRecently, P3 | Process started within 10 minutes, observed for 30 seconds |
+
+Recent-start P3 alerts include first startup and intentional restarts. They do
+not prove a crash; correlate with `journalctl` and the Phase 1 restart counter.
+A five-second feed crash can be shorter than the P1 waiting period; P3 still
+records its new process start. Disk calculations use space available to ordinary
+users and may differ slightly from rounded `df` percentages.
+
+```bash
+docker compose exec -T prometheus promtool check rules /etc/prometheus/rules/tradeops-alerts.yml
+docker compose exec -T prometheus promtool check config /etc/prometheus/prometheus.yml
+docker compose exec -T prometheus promtool test rules /etc/prometheus/rules-tests.yml
+curl -fsS http://127.0.0.1:9090/api/v1/alerts
+curl -fsS http://127.0.0.1:9093/api/v2/alerts
+```
+
+`rules-tests.yml` contains synthetic unit-test input, not incident evidence.
+It covers all ten rules, pending periods, disk severity boundaries, expiry of
+the recent-start window, and a short scrape failure that must not fire.
+The real live APIs are captured separately under `docs/evidence/phase2/`.
+
+Stop here for the requested review. Telegram routing/inhibition (Step 4), Alloy
+log shipping (Step 5), the full dashboard (Step 6), and deployments (Step 7)
+are still pending. Full chaos alert/resolution runs belong to Step 9.

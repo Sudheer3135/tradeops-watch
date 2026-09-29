@@ -28,3 +28,14 @@ confirmed increasing counters, histogram observations, original JSON fields,
 HTTP 404 behavior, HTTP 503 during a brief feed outage, and automatic retries.
 The unchanged Phase 1 monitoring/log/handover checks passed. Prometheus now
 scrapes all nine configured targets successfully. Evidence: `step2-*.txt`.
+
+## Step 3: verified; review continuation authorized
+Ten alert rules passed promtool syntax/config validation and eleven synthetic
+unit cases (all rules, waiting periods, exact disk boundaries, recent-start
+expiry, and a transient failure). All ten live rules evaluate without errors.
+Real recent-start P3 alerts reached Alertmanager, and a historical sample survived
+a Prometheus container restart. Phase 1 health remains good. See `step3-*` evidence.
+
+The user replied `continue` after the rule-validation update. This authorizes
+continuation beyond this checkpoint. The separate review gate after Step 7 remains.
+Synthetic rule tests are not real incident reports; full fault runs remain Step 9.
