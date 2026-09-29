@@ -1,0 +1,41 @@
+# High CPU or memory
+
+Run these commands inside `multipass shell tradeops`.
+
+## Symptoms
+CPU or memory exceeds 85%; requests may become slow.
+
+## Alert that fires
+P2 cpu or memory
+
+## Step-by-step checks
+Run in order; save output before changing anything.
+```bash
+top -b -n 1 | head -25
+ps -eo pid,ppid,user,stat,pcpu,pmem,args --sort=-pcpu | head -20
+free -m
+systemctl status tradeops-chaos-cpu --no-pager
+```
+
+## Fix
+```bash
+sudo /opt/tradeops/scripts/chaos.sh fix-cpu
+# CPU drill also expires after 120 seconds. Inspect before killing real processes.
+```
+
+## How to verify
+```bash
+curl -fsS --max-time 2 http://127.0.0.1:9001/health
+curl -fsS --max-time 2 http://127.0.0.1:9002/health
+sudo /opt/tradeops/scripts/healthcheck.sh
+```
+Expect both endpoints healthy and healthcheck exit 0. Recent errors remain in
+the five-minute window; wait for them to age out and run the check again.
+
+## When and whom to escalate
+Escalate immediately to the on-call DevOps/SRE owner if recovery fails, or if
+this could affect live trading. Notify the application owner for repeated
+application errors and the network owner for unexplained network rules.
+In this isolated lab, those are role names, not actual contacts.
+Include UTC start time, severity, business impact, commands and output,
+recent changes, attempted fixes, current status, and next action/owner.
