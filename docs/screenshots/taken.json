@@ -1,0 +1,107 @@
+[
+  {
+    "file": "phase2-alert-history.png",
+    "taken_at": "2026-09-29T19:36:41Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-block-port-logs.png",
+    "taken_at": "2026-09-29T19:34:55Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-block-port-metrics.png",
+    "taken_at": "2026-09-29T19:34:47Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-ci-success.png",
+    "taken_at": "2026-09-29T19:54:01Z",
+    "note": "Hosted GitHub Actions run 36618829427 on commit e4b2856: Success"
+  },
+  {
+    "file": "phase2-cpu-spike-logs.png",
+    "taken_at": "2026-09-29T19:33:54Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-cpu-spike-metrics.png",
+    "taken_at": "2026-09-29T19:33:46Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-deploy-rollback.png",
+    "taken_at": "2026-09-29T19:36:41Z",
+    "note": "Rendering of the saved file step7-deploy-rollback.txt, not a live terminal"
+  },
+  {
+    "file": "phase2-fill-disk-logs.png",
+    "taken_at": "2026-09-29T19:33:39Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-fill-disk-metrics.png",
+    "taken_at": "2026-09-29T19:33:31Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-kill-feed-logs.png",
+    "taken_at": "2026-09-29T19:34:24Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-kill-feed-metrics.png",
+    "taken_at": "2026-09-29T19:34:17Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-net-delay-logs.png",
+    "taken_at": "2026-09-29T19:35:10Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-net-delay-metrics.png",
+    "taken_at": "2026-09-29T19:35:03Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-overview-healthy.png",
+    "taken_at": "2026-09-29T19:36:26Z",
+    "note": "Last 15 minutes after all drills; no alerts firing"
+  },
+  {
+    "file": "phase2-slow-feed-logs.png",
+    "taken_at": "2026-09-29T19:34:09Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-slow-feed-metrics.png",
+    "taken_at": "2026-09-29T19:34:01Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-slow-feed-trading.png",
+    "taken_at": "2026-09-29T19:36:34Z",
+    "note": "Historical window from the checklist above"
+  },
+  {
+    "file": "phase2-stop-feed-alertmanager.png",
+    "taken_at": "2026-09-29T19:40:05Z",
+    "note": "Same fresh drill; Inhibited filter on, groups expanded"
+  },
+  {
+    "file": "phase2-stop-feed-alerts.png",
+    "taken_at": "2026-09-29T19:39:56Z",
+    "note": "Fresh stop-feed drill (fault 2026-09-29T19:37:29Z, cleanup 19:40:33Z)"
+  },
+  {
+    "file": "phase2-stop-feed-logs.png",
+    "taken_at": "2026-09-29T19:40:14Z",
+    "note": "Same fresh drill; last 5 minutes"
+  },
+  {
+    "file": "phase2-stop-feed-metrics.png",
+    "taken_at": "2026-09-29T19:34:32Z",
+    "note": "Historical window from the checklist above"
+  }
+]

@@ -113,5 +113,14 @@ against every timeline timestamp, alert snapshot and link.
 ## Step 10: documentation complete
 LEARNING.md has the full file guide and questions 26–50. The spoken demo and
 resume bullets were checked against evidence; README marks the current status
-and links every evidence file. Screenshots and hosted CI remain manual steps
-that must be done after publishing.
+and links every evidence file.
+
+## Publication and screenshots
+The repository was published and the first hosted GitHub Actions run passed.
+Twenty screenshots were captured with headless Chromium (times in
+`docs/screenshots/README.md`). While capturing them, Grafana was repeatedly
+OOM-killed at its 512 MiB container limit (kernel log: memory cgroup out of
+memory, five container restarts). The limit is now 1 GiB; total container
+limits (about 2.7 GB) still fit the 3.8 GB VM. The capture also exposed that
+the checklist windows overlapped the next drill; each window now ends one
+second before the next fault, and the incident reports were regenerated.

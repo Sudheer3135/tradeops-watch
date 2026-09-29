@@ -263,7 +263,7 @@ The first Step 9 attempt aborted after injecting kill-feed because the
 verifier's terminal output closed (`BrokenPipeError`); its cleanup ran and its
 files are kept in `kill-feed-aborted-20260929/`. The fixed verifier reran
 kill-feed and the remaining drills. Telegram configuration validates, but real
-delivery is untested without credentials. Screenshots are still a manual task.
+delivery is untested without credentials.
 
 - [Monitoring setup, credentials and URLs](monitoring/README.md)
 - [Optional Telegram setup](docs/telegram-setup.md)
@@ -337,25 +337,50 @@ The workflow runs on pushes and pull requests. It validates shell/Python code,
 and Alertmanager configuration. Real chaos tests stay outside ordinary CI
 because they require this disposable VM and deliberately disrupt services.
 
-## Screenshots to add manually
+## Screenshots
 
-No screenshots were generated or reviewed. Use the exact UTC windows and
-filenames in [the screenshot checklist](docs/screenshots/README.md), then replace
-these placeholders with your real images before sharing the portfolio:
+Captured with headless Chromium from the live VM; exact UTC windows and capture
+times are in the [screenshot checklist](docs/screenshots/README.md). Each drill
+window ends before the next drill's fault so no image mixes two scenarios.
 
-- `docs/screenshots/phase2-overview-healthy.png` — provisioned dashboard.
-- `docs/screenshots/phase2-slow-feed-trading.png` — sustained high p95 and recovery.
-- `docs/screenshots/phase2-stop-feed-alerts.png` — live alert in Prometheus.
-- `docs/screenshots/phase2-stop-feed-alertmanager.png` — Alertmanager grouping.
-- `docs/screenshots/phase2-stop-feed-logs.png` — real Loki dependency errors.
-- `docs/screenshots/phase2-deploy-rollback.png` — terminal rollback evidence.
-- `docs/screenshots/phase2-ci-success.png` — actual hosted Actions run after push.
+**Healthy dashboard after all drills** (last 15 minutes, no alerts firing)
 
-Historical alerts are visible using a Grafana time-series query for `ALERTS`;
-the Prometheus/Alertmanager active-alert pages are not historical archives.
-For an active-alert screenshot, rerun the controlled fault and capture it before
-fixing, then record that new window. Loki/Prometheus retain only about two days;
-raw saved evidence remains after live history expires.
+![Healthy TradeOps Overview](docs/screenshots/phase2-overview-healthy.png)
+
+**Live stop-feed drill:** Alertmanager marks both feed probe alerts *Inhibited*
+by ServiceDown, while the orders alerts stay active. Prometheus still shows all
+of them firing.
+
+![Alertmanager inhibition](docs/screenshots/phase2-stop-feed-alertmanager.png)
+
+![Prometheus firing alerts](docs/screenshots/phase2-stop-feed-alerts.png)
+
+![Loki feed dependency errors](docs/screenshots/phase2-stop-feed-logs.png)
+
+**Slow-feed latency and its alert history**
+
+![Order-cycle latency during slow-feed](docs/screenshots/phase2-slow-feed-trading.png)
+
+![HighOrderLatency firing interval](docs/screenshots/phase2-alert-history.png)
+
+**Every drill (dashboard and WARN/ERROR logs for the same window)**
+
+| Drill | Dashboard | Logs |
+|---|---|---|
+| fill-disk | [metrics](docs/screenshots/phase2-fill-disk-metrics.png) | [logs](docs/screenshots/phase2-fill-disk-logs.png) |
+| cpu-spike | [metrics](docs/screenshots/phase2-cpu-spike-metrics.png) | [logs](docs/screenshots/phase2-cpu-spike-logs.png) |
+| slow-feed | [metrics](docs/screenshots/phase2-slow-feed-metrics.png) | [logs](docs/screenshots/phase2-slow-feed-logs.png) |
+| kill-feed | [metrics](docs/screenshots/phase2-kill-feed-metrics.png) | [logs](docs/screenshots/phase2-kill-feed-logs.png) |
+| stop-feed | [metrics](docs/screenshots/phase2-stop-feed-metrics.png) | [logs](docs/screenshots/phase2-stop-feed-logs.png) |
+| block-port | [metrics](docs/screenshots/phase2-block-port-metrics.png) | [logs](docs/screenshots/phase2-block-port-logs.png) |
+| net-delay | [metrics](docs/screenshots/phase2-net-delay-metrics.png) | [logs](docs/screenshots/phase2-net-delay-logs.png) |
+
+Deployment evidence: [rendered deploy/rollback record](docs/screenshots/phase2-deploy-rollback.png)
+(a rendering of the saved `step7-deploy-rollback.txt`, not a live terminal).
+Hosted CI: [Actions run](docs/screenshots/phase2-ci-success.png).
+
+Loki/Prometheus keep about two days of history; the saved evidence files and
+these images remain after live history expires.
 
 ## Publish to GitHub
 
