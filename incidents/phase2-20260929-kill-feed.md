@@ -7,7 +7,7 @@ This was a deliberate lab drill on 2026-09-29, not a production incident.
 Injected cause: Feed process killed; systemd automatically restarts it. The selected live alert was **ServiceRestartedRecently (P3)**.
 Prometheus and Alertmanager both contained it during the fault. Grafana's
 provisioned dashboard and live alert query succeeded, and its Loki proxy returned
-real log streams. The saved WARN/ERROR search contains 47 lines (at most 1000);
+real log streams. The saved WARN/ERROR search contains 6 lines (at most 1000);
 this count can include other operational messages within the displayed window.
 Use the raw labels and messages to attribute individual symptoms.
 

@@ -96,6 +96,11 @@ def main():
         "| Metrics filename / dashboard | UTC From → To | Panel / expected evidence | Logs filename |",
         "|---|---|---|---|",
     ]
+    fault_starts = [
+        parse(json.loads(path.read_text())["fault_started_at"])
+        for path in EVIDENCE.glob("*/timeline.json")
+        if "fault_started_at" in json.loads(path.read_text())
+    ]
     for scenario, (runbook, cause, panels, alert) in DETAILS.items():
         folder = EVIDENCE / scenario
         path = folder / "timeline.json"
@@ -109,7 +114,11 @@ def main():
             continue
         start = parse(timeline["fault_started_at"]) - timedelta(minutes=1)
         end = parse(timeline["healthy_at"]) + timedelta(minutes=1)
-        # The extra minute is a display margin; no future observations are invented.
+        # The extra minute is a display margin, cut short before the next drill's fault
+        # so a window never shows another scenario; no future observations are invented.
+        later = [f for f in fault_starts if f > parse(timeline["fault_started_at"])]
+        if later:
+            end = min(end, min(later) - timedelta(seconds=1))
         params = {
             "query": f'ALERTS{{alertname="{alert}"}}',
             "start": start.timestamp(),
@@ -263,6 +272,20 @@ This drill validates a small VM; it establishes no production availability SLO.
         "",
         "Do not expose `.env`, bot tokens, passwords or chat IDs in screenshots.",
     ]
+    taken = ROOT / "docs/screenshots/taken.json"
+    if taken.exists():
+        shots[2] = "Screenshots were captured with headless Chromium (times below). VM URL:"
+        shots += [
+            "",
+            "## Screenshots taken (UTC)",
+            "",
+            "| File | Taken at | Note |",
+            "|---|---|---|",
+        ]
+        shots += [
+            f"| [{row['file']}]({row['file']}) | {row['taken_at']} | {row['note']} |"
+            for row in json.loads(taken.read_text())
+        ]
     (EVIDENCE / "README.md").write_text("\n".join(index) + "\n")
     (ROOT / "docs/screenshots").mkdir(exist_ok=True)
     (ROOT / "docs/screenshots/README.md").write_text("\n".join(shots) + "\n")

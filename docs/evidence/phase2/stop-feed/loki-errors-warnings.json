@@ -60,10 +60,6 @@
           [
             "1790707442000000000",
             "2026-09-29T18:44:02Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=11"
-          ],
-          [
-            "1790707802000000000",
-            "2026-09-29T18:50:02Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=1"
           ]
         ]
       },
@@ -228,58 +224,6 @@
           [
             "1790707496000000000",
             "2026-09-29T18:44:56Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707800000000000",
-            "2026-09-29T18:50:00Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707802000000000",
-            "2026-09-29T18:50:02Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707804000000000",
-            "2026-09-29T18:50:04Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707806000000000",
-            "2026-09-29T18:50:06Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707808000000000",
-            "2026-09-29T18:50:08Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707810000000000",
-            "2026-09-29T18:50:10Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707812000000000",
-            "2026-09-29T18:50:12Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707814000000000",
-            "2026-09-29T18:50:14Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707816000000000",
-            "2026-09-29T18:50:16Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707818000000000",
-            "2026-09-29T18:50:18Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707820000000000",
-            "2026-09-29T18:50:20Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707822000000000",
-            "2026-09-29T18:50:22Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790707824000000000",
-            "2026-09-29T18:50:24Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
           ]
         ]
       },
@@ -338,18 +282,18 @@
     ],
     "stats": {
       "summary": {
-        "bytesProcessedPerSecond": 631188,
-        "linesProcessedPerSecond": 6240,
-        "totalBytesProcessed": 6878,
-        "totalLinesProcessed": 68,
-        "execTime": 0.010897,
-        "queueTime": 0.002823,
+        "bytesProcessedPerSecond": 4401714,
+        "linesProcessedPerSecond": 30656,
+        "totalBytesProcessed": 17948,
+        "totalLinesProcessed": 125,
+        "execTime": 0.004078,
+        "queueTime": 0.00021,
         "subqueries": 0,
-        "totalEntriesReturned": 68,
+        "totalEntriesReturned": 54,
         "splits": 2,
         "shards": 2,
-        "totalPostFilterLines": 68,
-        "totalStructuredMetadataBytesProcessed": 544
+        "totalPostFilterLines": 125,
+        "totalStructuredMetadataBytesProcessed": 3750
       },
       "querier": {
         "store": {
@@ -388,31 +332,31 @@
             "totalPageDownloadTime": 0
           }
         },
-        "querierExecTime": 0.010802
+        "querierExecTime": 0.005386
       },
       "ingester": {
         "totalReached": 2,
-        "totalChunksMatched": 10,
+        "totalChunksMatched": 0,
         "totalBatches": 4,
-        "totalLinesSent": 68,
+        "totalLinesSent": 54,
         "store": {
-          "totalChunksRef": 0,
-          "totalChunksDownloaded": 0,
-          "chunksDownloadTime": 0,
+          "totalChunksRef": 10,
+          "totalChunksDownloaded": 10,
+          "chunksDownloadTime": 222001,
           "queryReferencedStructuredMetadata": false,
           "queryUsedV2Engine": false,
           "chunk": {
-            "headChunkBytes": 6878,
-            "headChunkLines": 68,
-            "decompressedBytes": 0,
-            "decompressedLines": 0,
-            "compressedBytes": 0,
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 17948,
+            "decompressedLines": 125,
+            "compressedBytes": 4544,
             "totalDuplicates": 0,
-            "postFilterLines": 68,
-            "headChunkStructuredMetadataBytes": 544,
-            "decompressedStructuredMetadataBytes": 0
+            "postFilterLines": 125,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 3750
           },
-          "chunkRefsFetchTime": 261875,
+          "chunkRefsFetchTime": 278741,
           "congestionControlLatency": 0,
           "pipelineWrapperFilteredLines": 0,
           "dataobj": {
@@ -431,7 +375,7 @@
             "totalPageDownloadTime": 0
           }
         },
-        "recvWaitTime": 0.001679
+        "recvWaitTime": 0.001508
       },
       "cache": {
         "chunk": {
@@ -467,12 +411,12 @@
         "statsResult": {
           "entriesFound": 2,
           "entriesRequested": 2,
-          "entriesStored": 2,
-          "bytesReceived": 790,
+          "entriesStored": 0,
+          "bytesReceived": 482,
           "bytesSent": 0,
-          "requests": 4,
-          "downloadTime": 5625,
-          "queryLengthServed": 180000000000
+          "requests": 2,
+          "downloadTime": 5290,
+          "queryLengthServed": 498000000000
         },
         "volumeResult": {
           "entriesFound": 0,

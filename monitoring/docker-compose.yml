@@ -39,7 +39,8 @@ services:
   grafana:
     <<: *common
     image: grafana/grafana:13.2.3
-    mem_limit: 512m
+    # 512m was OOM-killed while rendering the full dashboard over past windows.
+    mem_limit: 1g
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Create monitoring/.env first}

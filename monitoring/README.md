@@ -57,7 +57,8 @@ and read-only copies of `/proc`, `/sys`, and `/` to report real VM metrics.
 Named volumes preserve metrics, alert state, Grafana settings, Loki chunks,
 and Alloy positions across container restarts. Prometheus retains at most two
 days/512 MB of blocks; Loki retention is 48 hours (deletion is asynchronous).
-Each container has a memory ceiling and bounded Docker logs. Limits are guardrails,
+Each container has a memory ceiling and bounded Docker logs (Grafana has 1 GiB:
+512 MiB was OOM-killed while rendering long historical windows). Limits are guardrails,
 not preallocated RAM. `docker compose down` preserves volumes; do not add `-v`
 unless you deliberately want to erase the monitoring history.
 
@@ -182,7 +183,7 @@ Set **Last 30 minutes**, refresh **15s**. An empty alerts table means no current
 firing alerts; an empty logs panel means no matching lines in that time range.
 The current dashboard's links use this VM IP; update them if Multipass assigns
 a different address. `scripts/verify_dashboard.py` checks provisioning and runs
-all 19 queries through Grafana; screenshots remain a manual Step 9 task.
+all 19 queries through Grafana. Screenshots are in `../docs/screenshots/`.
 
 ## Step 7: releases
 

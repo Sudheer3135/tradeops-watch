@@ -6,26 +6,6 @@
       {
         "stream": {
           "detected_level": "error",
-          "filename": "/var/log/tradeops/alerts.log",
-          "job": "tradeops",
-          "level": "ERROR",
-          "service": "alerts",
-          "service_name": "alerts"
-        },
-        "values": [
-          [
-            "1790708163000000000",
-            "2026-09-29T18:56:03Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
-          ],
-          [
-            "1790708165000000000",
-            "2026-09-29T18:56:05Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
-          ]
-        ]
-      },
-      {
-        "stream": {
-          "detected_level": "error",
           "filename": "/var/log/tradeops/cron.log",
           "job": "tradeops",
           "level": "ERROR",
@@ -36,18 +16,6 @@
           [
             "1790707802000000000",
             "2026-09-29T18:50:02Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=1"
-          ],
-          [
-            "1790708163000000000",
-            "2026-09-29T18:56:03Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
-          ],
-          [
-            "1790708165000000000",
-            "2026-09-29T18:56:05Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
-          ],
-          [
-            "1790708166000000000",
-            "2026-09-29T18:56:06Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=11"
           ]
         ]
       },
@@ -112,62 +80,6 @@
           [
             "1790707824000000000",
             "2026-09-29T18:50:24Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
-          ],
-          [
-            "1790708121000000000",
-            "2026-09-29T18:55:21Z | ERROR | feed unreachable: feed slow: 2111.30 ms"
-          ],
-          [
-            "1790708125000000000",
-            "2026-09-29T18:55:25Z | ERROR | feed unreachable: feed slow: 2050.54 ms"
-          ],
-          [
-            "1790708130000000000",
-            "2026-09-29T18:55:30Z | ERROR | feed unreachable: feed slow: 2133.05 ms"
-          ],
-          [
-            "1790708134000000000",
-            "2026-09-29T18:55:34Z | ERROR | feed unreachable: feed slow: 2050.39 ms"
-          ],
-          [
-            "1790708138000000000",
-            "2026-09-29T18:55:38Z | ERROR | feed unreachable: feed slow: 2025.62 ms"
-          ],
-          [
-            "1790708142000000000",
-            "2026-09-29T18:55:42Z | ERROR | feed unreachable: feed slow: 2046.33 ms"
-          ],
-          [
-            "1790708146000000000",
-            "2026-09-29T18:55:46Z | ERROR | feed unreachable: feed slow: 2123.41 ms"
-          ],
-          [
-            "1790708150000000000",
-            "2026-09-29T18:55:50Z | ERROR | feed unreachable: feed slow: 2075.30 ms"
-          ],
-          [
-            "1790708154000000000",
-            "2026-09-29T18:55:54Z | ERROR | feed unreachable: feed slow: 2133.29 ms"
-          ],
-          [
-            "1790708158000000000",
-            "2026-09-29T18:55:58Z | ERROR | feed unreachable: feed slow: 2061.26 ms"
-          ],
-          [
-            "1790708162000000000",
-            "2026-09-29T18:56:02Z | ERROR | feed unreachable: feed slow: 2036.93 ms"
-          ],
-          [
-            "1790708166000000000",
-            "2026-09-29T18:56:06Z | ERROR | feed unreachable: feed slow: 2104.87 ms"
-          ],
-          [
-            "1790708171000000000",
-            "2026-09-29T18:56:11Z | ERROR | feed unreachable: feed slow: 2076.65 ms"
-          ],
-          [
-            "1790708175000000000",
-            "2026-09-29T18:56:15Z | ERROR | feed unreachable: feed slow: 2118.80 ms"
           ]
         ]
       },
@@ -230,18 +142,18 @@
     ],
     "stats": {
       "summary": {
-        "bytesProcessedPerSecond": 722381,
-        "linesProcessedPerSecond": 7860,
-        "totalBytesProcessed": 3768,
-        "totalLinesProcessed": 41,
-        "execTime": 0.005216,
-        "queueTime": 2.9e-05,
+        "bytesProcessedPerSecond": 7887768,
+        "linesProcessedPerSecond": 55437,
+        "totalBytesProcessed": 12094,
+        "totalLinesProcessed": 85,
+        "execTime": 0.001533,
+        "queueTime": 0.000135,
         "subqueries": 0,
-        "totalEntriesReturned": 41,
+        "totalEntriesReturned": 22,
         "splits": 0,
         "shards": 1,
-        "totalPostFilterLines": 41,
-        "totalStructuredMetadataBytesProcessed": 328
+        "totalPostFilterLines": 85,
+        "totalStructuredMetadataBytesProcessed": 2550
       },
       "querier": {
         "store": {
@@ -280,31 +192,31 @@
             "totalPageDownloadTime": 0
           }
         },
-        "querierExecTime": 0.005916
+        "querierExecTime": 0.002082
       },
       "ingester": {
         "totalReached": 1,
-        "totalChunksMatched": 5,
+        "totalChunksMatched": 0,
         "totalBatches": 2,
-        "totalLinesSent": 41,
+        "totalLinesSent": 22,
         "store": {
-          "totalChunksRef": 0,
-          "totalChunksDownloaded": 0,
-          "chunksDownloadTime": 0,
+          "totalChunksRef": 5,
+          "totalChunksDownloaded": 5,
+          "chunksDownloadTime": 78361,
           "queryReferencedStructuredMetadata": false,
           "queryUsedV2Engine": false,
           "chunk": {
-            "headChunkBytes": 3768,
-            "headChunkLines": 41,
-            "decompressedBytes": 0,
-            "decompressedLines": 0,
-            "compressedBytes": 0,
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 12094,
+            "decompressedLines": 85,
+            "compressedBytes": 2272,
             "totalDuplicates": 0,
-            "postFilterLines": 41,
-            "headChunkStructuredMetadataBytes": 328,
-            "decompressedStructuredMetadataBytes": 0
+            "postFilterLines": 85,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 2550
           },
-          "chunkRefsFetchTime": 108334,
+          "chunkRefsFetchTime": 129101,
           "congestionControlLatency": 0,
           "pipelineWrapperFilteredLines": 0,
           "dataobj": {
@@ -323,7 +235,7 @@
             "totalPageDownloadTime": 0
           }
         },
-        "recvWaitTime": 0.002013
+        "recvWaitTime": 0.000629
       },
       "cache": {
         "chunk": {
@@ -357,14 +269,14 @@
           "queryLengthServed": 0
         },
         "statsResult": {
-          "entriesFound": 0,
-          "entriesRequested": 0,
+          "entriesFound": 1,
+          "entriesRequested": 1,
           "entriesStored": 0,
-          "bytesReceived": 0,
+          "bytesReceived": 241,
           "bytesSent": 0,
-          "requests": 0,
-          "downloadTime": 0,
-          "queryLengthServed": 0
+          "requests": 1,
+          "downloadTime": 2124,
+          "queryLengthServed": 408000000000
         },
         "volumeResult": {
           "entriesFound": 0,
