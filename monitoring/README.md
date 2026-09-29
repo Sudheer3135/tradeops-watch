@@ -77,3 +77,38 @@ Alertmanager uses a local UI-only receiver until Telegram routing in Step 4.
 Image versions were selected from the projects' official GitHub release pages
 on 2026-09-29 and are pinned explicitly in Compose. Actual pulled image digests
 are recorded in the Phase 2 evidence; no service uses a `latest` tag.
+
+## Step 2 metrics
+
+The application installer creates `/opt/tradeops/venv` and installs
+`prometheus-client==0.26.0`. systemd uses that interpreter. The existing
+`/health`, `/prices`, response fields, fake order rule, retries, and log format
+are preserved; `/metrics` is an additional route on each existing port.
+
+| Metric | Meaning |
+|---|---|
+| `tradeops_prices_published_total{symbol}` | Increases once per symbol each second |
+| `tradeops_last_price{symbol}` | Latest positive synthetic price |
+| `tradeops_feed_up` | Publisher has started updating prices |
+| `tradeops_orders_total{side}` | Number of fake BUY or SELL orders placed |
+| `tradeops_order_latency_seconds` | Histogram of each order-cycle feed fetch, including slow/failed attempts |
+| `tradeops_feed_errors_total` | Failed or too-slow feed fetches |
+| `tradeops_last_successful_price_fetch_timestamp` | Unix timestamp of last accepted fetch |
+
+One cycle normally places five orders, but records one fetch-latency observation.
+Histogram buckets span 1 ms–2 s (plus the automatic infinity bucket). Failed
+cycles are included so a degraded dependency does not disappear from latency
+monitoring. Orders still reject fetches slower than 400 ms, just as in Phase 1.
+A healthy-but-slow 300–400 ms fetch can therefore trigger latency monitoring
+without changing the health API policy. Counters reset when a process restarts;
+Prometheus `rate()` handles those resets.
+
+```bash
+curl -fsS http://127.0.0.1:9001/metrics
+curl -fsS http://127.0.0.1:9002/metrics
+sudo /opt/tradeops/venv/bin/python ../scripts/verify_metrics.py
+```
+
+The last command deliberately stops the feed for three seconds and restores it
+in a `finally` block. It verifies HTTP 503 during dependency failure while the
+order service's metrics endpoint remains accessible.

@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=tradeops
 Group=tradeops
-ExecStart=/usr/bin/python3 /opt/tradeops/services/market_feed.py
+ExecStart=/opt/tradeops/venv/bin/python /opt/tradeops/services/market_feed.py
 Restart=on-failure
 RestartSec=5
 NoNewPrivileges=true

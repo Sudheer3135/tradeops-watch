@@ -3,10 +3,13 @@ set -euo pipefail
 [[ $(uname -s) == Linux && $(hostname) == tradeops && $EUID == 0 ]] || { echo 'Run as root inside the tradeops Ubuntu VM'; exit 1; }
 root=$(cd "$(dirname "$0")/.." && pwd)
 apt-get update -qq
-apt-get install -y -qq python3 curl cron logrotate iproute2 iptables util-linux
+apt-get install -y -qq python3 python3-venv curl cron logrotate iproute2 iptables util-linux
 id tradeops >/dev/null 2>&1 || useradd --system --no-create-home --shell /usr/sbin/nologin tradeops
 install -d /opt/tradeops/services /opt/tradeops/scripts /opt/tradeops/runbooks /etc/tradeops /var/lib/tradeops
 install -d -o tradeops -g tradeops /var/log/tradeops
+python3 -m venv /opt/tradeops/venv
+install -m 644 "$root"/requirements.txt /opt/tradeops/requirements.txt
+/opt/tradeops/venv/bin/python -m pip install --disable-pip-version-check -r /opt/tradeops/requirements.txt
 install -m 644 "$root"/services/*.py /opt/tradeops/services/
 install -m 755 "$root"/scripts/*.sh "$root"/scripts/*.py /opt/tradeops/scripts/
 install -m 644 "$root"/runbooks/*.md /opt/tradeops/runbooks/

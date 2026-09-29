@@ -1,0 +1,155 @@
+MONITOR CHECKS 2026-09-29T11:37:41Z
+2026-09-29T11:37:42Z | healthcheck exit=0 CPU=1% memory=21% disk=67% errors=2
+EXPECTED=0 ACTUAL=0
+Threshold override validates memory detection without exhausting the VM
+2026-09-29T11:37:43Z | P2 | memory | Memory 21% >= 0% | runbooks/high-cpu.md
+2026-09-29T11:37:43Z | healthcheck exit=1 CPU=3% memory=21% disk=67% errors=2
+EXPECTED=1 ACTUAL=1
+2026-09-29T11:37:44Z | healthcheck exit=1 CPU=1% memory=21% disk=67% errors=2
+EXPECTED=1 ACTUAL=1
+DEDUP PASS memory notification count unchanged: 2 -> 2
+2026-09-29T11:37:45Z | healthcheck exit=0 CPU=1% memory=21% disk=67% errors=2
+EXPECTED=0 ACTUAL=0
+2026-09-29T11:37:33Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+2026-09-29T11:37:35Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>
+     10 feed unreachable: <urlopen error [Errno 111] Connection refused>
+      1 feed unreachable: feed slow: 2174.66 ms
+      1 feed unreachable: feed slow: 2090.21 ms
+      1 feed unreachable: feed slow: 2088.12 ms
+      1 feed unreachable: feed slow: 2060.29 ms
+orders=2965 average_ms=4.79 max_ms=204.41
+2026-09-29T11:17:24Z | P1 | service-feed | service inactive | runbooks/service-down.md
+2026-09-29T11:17:24Z | P1 | port-9001 | port not listening | runbooks/port-blocked.md
+2026-09-29T11:17:24Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:17:35Z | P2 | restart-feed | automatic restarts increased 0 -> 1 | runbooks/service-down.md
+2026-09-29T11:17:57Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:18:10Z | P2 | disk | Disk 88% >= 85% | runbooks/disk-full.md
+2026-09-29T11:18:21Z | P2 | cpu | CPU 100% >= 85% | runbooks/high-cpu.md
+2026-09-29T11:18:32Z | P2 | error-rate | 8 errors in last 5 minutes > 5 | runbooks/service-down.md
+2026-09-29T11:23:45Z | P2 | memory | Memory 14% >= 0% | runbooks/high-cpu.md
+2026-09-29T11:37:01Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:37:01Z | P1 | port-9002 | port not listening | runbooks/port-blocked.md
+2026-09-29T11:37:01Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:37:43Z | P2 | memory | Memory 21% >= 0% | runbooks/high-cpu.md
+# TradeOps shift handover
+
+Window (UTC): 2026-09-29T03:37:45.604660+00:00 to 2026-09-29T11:37:45.604660+00:00
+
+## Services now
+- tradeops-feed: active
+- tradeops-orders: active
+
+## Alerts by severity
+- P1: 7 notifications; service-feed (1), port-9001 (1), http-9001 (2), http-9002 (2), port-9002 (1)
+- P2: 6 notifications; restart-feed (1), disk (1), cpu (1), error-rate (1), memory (2)
+- P3: 0 notifications; none
+
+## Open issues (latest health check)
+- None in latest snapshot.
+
+## Resolved issues
+- cpu: absent from latest check
+- disk: absent from latest check
+- error-rate: absent from latest check
+- http-9001: absent from latest check
+- http-9002: absent from latest check
+- memory: absent from latest check
+- port-9001: absent from latest check
+- port-9002: absent from latest check
+- restart-feed: absent from latest check
+- service-feed: absent from latest check
+
+## Top errors
+- 10 × feed unreachable: <urlopen error [Errno 111] Connection refused>
+- 1 × feed unreachable: feed slow: 2174.66 ms
+- 1 × feed unreachable: feed slow: 2060.29 ms
+- 1 × feed unreachable: feed slow: 2090.21 ms
+- 1 × feed unreachable: feed slow: 2088.12 ms
+
+## Notes for next shift
+- Confirm both HTTP health endpoints and review active alerts.
+- An error-rate alert may persist for 5 minutes after recovery.
+- Read incidents/ and record owner, next action, and escalation for any unresolved issue.
+
+Saved: /var/log/tradeops/handover-20260929-1137.md
+warning: logrotate in debug mode does nothing except printing debug messages!  Consider using verbose mode (-v) instead if this is not what you want.
+
+reading config file /etc/logrotate.d/tradeops
+Reading state from file: /var/lib/logrotate/status
+state file /var/lib/logrotate/status does not exist
+Allocating hash table for state file, size 64 entries
+
+Handling 1 logs
+
+rotating pattern: /var/log/tradeops/alerts.log /var/log/tradeops/cron.log  after 1 days (7 rotations)
+empty log files are not rotated, old logs are removed
+switching euid from 0 to 999 and egid from 0 to 988 (pid 6244)
+considering log /var/log/tradeops/alerts.log
+Creating new state
+  Now: 2026-09-29 17:07
+  Last rotated at 2026-09-29 17:00
+  log does not need rotating (log has already been rotated)
+considering log /var/log/tradeops/cron.log
+Creating new state
+  Now: 2026-09-29 17:07
+  Last rotated at 2026-09-29 17:00
+  log does not need rotating (log has already been rotated)
+switching euid from 999 to 0 and egid from 988 to 0 (pid 6244)
+enabled
+enabled
+enabled
+active
+active
+active
+Restart=on-failure
+RestartUSec=5s
+User=tradeops
+
+Restart=on-failure
+RestartUSec=5s
+User=tradeops
+Netid State  Recv-Q Send-Q      Local Address:Port  Peer Address:PortProcess                                                
+udp   UNCONN 0      0              127.0.0.54:53         0.0.0.0:*    users:(("systemd-resolve",pid=490,fd=16))             
+udp   UNCONN 0      0           127.0.0.53%lo:53         0.0.0.0:*    users:(("systemd-resolve",pid=490,fd=14))             
+udp   UNCONN 0      0      192.168.2.2%enp0s1:68         0.0.0.0:*    users:(("systemd-network",pid=618,fd=21))             
+tcp   LISTEN 0      4096        127.0.0.53%lo:53         0.0.0.0:*    users:(("systemd-resolve",pid=490,fd=15))             
+tcp   LISTEN 0      4096            127.0.0.1:12345      0.0.0.0:*    users:(("alloy",pid=3633,fd=4))                       
+tcp   LISTEN 0      4096              0.0.0.0:22         0.0.0.0:*    users:(("sshd",pid=870,fd=3),("systemd",pid=1,fd=179))
+tcp   LISTEN 0      4096           127.0.0.54:53         0.0.0.0:*    users:(("systemd-resolve",pid=490,fd=17))             
+tcp   LISTEN 0      4096            127.0.0.1:9115       0.0.0.0:*    users:(("blackbox_export",pid=3682,fd=3))             
+tcp   LISTEN 0      4096            127.0.0.1:9095       0.0.0.0:*    users:(("loki",pid=3582,fd=7))                        
+tcp   LISTEN 0      4096            127.0.0.1:9100       0.0.0.0:*    users:(("node_exporter",pid=3378,fd=4))               
+tcp   LISTEN 0      5               127.0.0.1:9002       0.0.0.0:*    users:(("python",pid=5676,fd=4))                      
+tcp   LISTEN 0      5               127.0.0.1:9001       0.0.0.0:*    users:(("python",pid=6005,fd=4))                      
+tcp   LISTEN 0      4096                    *:3100             *:*    users:(("loki",pid=3582,fd=4))                        
+tcp   LISTEN 0      4096                    *:3000             *:*    users:(("grafana",pid=3427,fd=72))                    
+tcp   LISTEN 0      4096                    *:9090             *:*    users:(("prometheus",pid=5847,fd=7))                  
+tcp   LISTEN 0      4096                    *:9093             *:*    users:(("alertmanager",pid=3526,fd=4))                
+tcp   LISTEN 0      4096                 [::]:22            [::]:*    users:(("sshd",pid=870,fd=4),("systemd",pid=1,fd=180))
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+* * * * * root /opt/tradeops/scripts/healthcheck.sh >> /var/log/tradeops/cron.log 2>&1
+2026-09-29T11:17:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=0
+2026-09-29T11:18:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=5
+2026-09-29T11:19:02Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+2026-09-29T11:20:02Z | healthcheck exit=1 CPU=0% memory=14% disk=24% errors=8
+2026-09-29T11:21:03Z | healthcheck exit=1 CPU=1% memory=14% disk=24% errors=8
+2026-09-29T11:22:02Z | healthcheck exit=1 CPU=12% memory=15% disk=24% errors=8
+2026-09-29T11:23:06Z | healthcheck exit=2 CPU=0% memory=14% disk=24% errors=5
+2026-09-29T11:24:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=4
+2026-09-29T11:25:02Z | healthcheck exit=1 CPU=100% memory=14% disk=24% errors=4
+2026-09-29T11:26:03Z | healthcheck exit=1 CPU=100% memory=14% disk=24% errors=4
+2026-09-29T11:27:02Z | healthcheck exit=0 CPU=0% memory=13% disk=24% errors=4
+2026-09-29T11:28:02Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=3
+2026-09-29T11:29:02Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=0
+2026-09-29T11:31:02Z | healthcheck exit=0 CPU=0% memory=8% disk=24% errors=0
+2026-09-29T11:32:03Z | healthcheck exit=0 CPU=0% memory=8% disk=24% errors=0
+2026-09-29T11:33:02Z | healthcheck exit=0 CPU=0% memory=10% disk=29% errors=0
+2026-09-29T11:34:02Z | healthcheck exit=0 CPU=17% memory=13% disk=38% errors=0
+2026-09-29T11:35:04Z | healthcheck exit=0 CPU=55% memory=13% disk=60% errors=0
+2026-09-29T11:36:02Z | healthcheck exit=0 CPU=6% memory=22% disk=66% errors=0
+2026-09-29T11:37:01Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:37:01Z | P1 | port-9002 | port not listening | runbooks/port-blocked.md
+2026-09-29T11:37:01Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T11:37:02Z | healthcheck exit=2 CPU=4% memory=22% disk=67% errors=0
+PASS monitor checks

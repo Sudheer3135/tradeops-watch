@@ -20,3 +20,11 @@ both TCP probes and all seven initial scrape targets passed. The VM reports
 about 858 MiB used RAM of 3901 MiB at this sample; root disk is 66% used.
 See `evidence/phase2/step1-readiness.txt` and `step1-resources-images.txt`.
 Alloy's pipeline, the full dashboard, and Telegram remain for Steps 5, 6 and 4.
+
+## Step 2: verified
+Both services now expose the requested metrics using prometheus-client 0.26.0
+in `/opt/tradeops/venv`. The installer passed twice. Real regression checks
+confirmed increasing counters, histogram observations, original JSON fields,
+HTTP 404 behavior, HTTP 503 during a brief feed outage, and automatic retries.
+The unchanged Phase 1 monitoring/log/handover checks passed. Prometheus now
+scrapes all nine configured targets successfully. Evidence: `step2-*.txt`.
