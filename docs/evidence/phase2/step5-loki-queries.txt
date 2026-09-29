@@ -1,0 +1,38 @@
+PASS real feed and order logs ingested with service labels
+PASS ERROR level parsed from real order-service errors
+{
+  "stream": {
+    "detected_level": "error",
+    "filename": "/var/log/tradeops/order_service.log",
+    "job": "tradeops",
+    "level": "ERROR",
+    "service": "orders",
+    "service_name": "orders"
+  },
+  "values": [
+    [
+      "1790697272000000000",
+      "2026-09-29T15:54:32Z | ERROR | feed unreachable: feed slow: 497.49 ms"
+    ]
+  ]
+}
+PASS Errors in the last 15 minutes result type= streams series= 0
+QUERY {job="tradeops",level="ERROR"}
+PASS Error count per service result type= matrix series= 1
+QUERY sum by (service) (count_over_time({job="tradeops",level="ERROR"}[15m]))
+SAMPLE {"metric": {"service": "orders"}, "values": [[1790697510, "1"]]}
+PASS Feed dependency errors result type= streams series= 0
+QUERY {job="tradeops"} |= "feed unreachable"
+PASS Five most common error messages result type= matrix series= 1
+QUERY topk(5, sum by (message) (count_over_time({job="tradeops",level="ERROR"} | pattern `<timestamp> | <_> | <message>` [15m])))
+SAMPLE {"metric": {"message": "feed unreachable: feed slow: 497.49 ms"}, "values": [[1790697510, "1"]]}
+PASS Orders taking more than 100 ms result type= streams series= 0
+QUERY {job="tradeops",service="orders"} |= "latency_ms=" | regexp `latency_ms=(?P<latency_ms>[0-9.]+)` | latency_ms > 100 | __error__=""
+PASS Fake BUY orders result type= streams series= 1
+QUERY {job="tradeops",service="orders"} |= "side=BUY"
+SAMPLE {"stream": {"detected_level": "info", "filename": "/var/log/tradeops/order_service.log", "job": "tradeops", "level": "INFO", "service": "orders", "service_name": "orders"}, "values": [["1790698409000000004", "2026-09-29T16:13:29Z | INFO | order side=BUY symbol=INFY price=2109.71 latency_ms=5.83"]]}
+PASS Warnings and errors together result type= streams series= 0
+QUERY {job="tradeops",level=~"ERROR|WARN"}
+PASS Log lines per second by service result type= matrix series= 3
+QUERY sum by (service) (rate({job="tradeops"}[1m]))
+SAMPLE {"metric": {"service": "cron"}, "values": [[1790697510, "0.016666666666666666"]]}

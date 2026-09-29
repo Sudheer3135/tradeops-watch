@@ -257,3 +257,63 @@ questions, spoken demo, and evidence-backed resume bullets.
 The original Phase 1 evidence remains in `docs/evidence/`. New evidence is in
 `docs/evidence/phase2/`; synthetic rule fixtures are explicitly identified and
 are not represented as real incidents.
+
+
+## Eight useful LogQL queries
+
+In Grafana Explore select **Loki** and set the time picker to **Last 15 minutes**.
+The time picker limits log searches; `[15m]` in a metric query is its counting
+window. Empty results can be correct when no matching event occurred.
+
+1. Errors in the last 15 minutes:
+
+```logql
+{job="tradeops",level="ERROR"}
+```
+
+2. Error count per service:
+
+```logql
+sum by (service) (count_over_time({job="tradeops",level="ERROR"}[15m]))
+```
+
+3. Feed dependency errors:
+
+```logql
+{job="tradeops"} |= "feed unreachable"
+```
+
+4. Five most common error messages:
+
+```logql
+topk(5, sum by (message) (count_over_time({job="tradeops",level="ERROR"} | pattern `<timestamp> | <_> | <message>` [15m])))
+```
+
+5. Orders taking more than 100 ms:
+
+```logql
+{job="tradeops",service="orders"} |= "latency_ms=" | regexp `latency_ms=(?P<latency_ms>[0-9.]+)` | latency_ms > 100 | __error__=""
+```
+
+6. Fake BUY orders:
+
+```logql
+{job="tradeops",service="orders"} |= "side=BUY"
+```
+
+7. Warnings and errors together:
+
+```logql
+{job="tradeops",level=~"ERROR|WARN"}
+```
+
+8. Log lines per second by service:
+
+```logql
+sum by (service) (rate({job="tradeops"}[1m]))
+```
+
+Only job, service and level are intentionally indexed here; message text is parsed
+at query time. Do not make every order ID or error message an ingestion label.
+Alloy also preserves the original file timestamp and maps P1/P2/P3 alert lines
+to ERROR/WARN/INFO; unfamiliar formats are labelled UNKNOWN.

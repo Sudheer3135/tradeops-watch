@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Errors in the last 15 minutes",
+    "query": "{job=\"tradeops\",level=\"ERROR\"}"
+  },
+  {
+    "name": "Error count per service",
+    "query": "sum by (service) (count_over_time({job=\"tradeops\",level=\"ERROR\"}[15m]))"
+  },
+  {
+    "name": "Feed dependency errors",
+    "query": "{job=\"tradeops\"} |= \"feed unreachable\""
+  },
+  {
+    "name": "Five most common error messages",
+    "query": "topk(5, sum by (message) (count_over_time({job=\"tradeops\",level=\"ERROR\"} | pattern `<timestamp> | <_> | <message>` [15m])))"
+  },
+  {
+    "name": "Orders taking more than 100 ms",
+    "query": "{job=\"tradeops\",service=\"orders\"} |= \"latency_ms=\" | regexp `latency_ms=(?P<latency_ms>[0-9.]+)` | latency_ms > 100 | __error__=\"\""
+  },
+  {
+    "name": "Fake BUY orders",
+    "query": "{job=\"tradeops\",service=\"orders\"} |= \"side=BUY\""
+  },
+  {
+    "name": "Warnings and errors together",
+    "query": "{job=\"tradeops\",level=~\"ERROR|WARN\"}"
+  },
+  {
+    "name": "Log lines per second by service",
+    "query": "sum by (service) (rate({job=\"tradeops\"}[1m]))"
+  }
+]

@@ -46,3 +46,10 @@ inhibition and confirmed a different service remains active; test alerts were
 then resolved. The optional token-file receiver configuration passed amtool in
 a network-disabled container. Actual Telegram delivery remains untested because
 no bot credentials were provided. See `step4-*` evidence and `telegram-setup.md`.
+
+## Step 5: verified
+Alloy validates and tails the actual `.log` files. Loki queries confirmed feed
+and orders labels and parsed ERROR levels from real existing logs. All eight
+LogQL examples executed successfully; empty results are recorded honestly when
+no matching event occurred in the chosen window. No synthetic log entries were
+inserted. See `step5-*` evidence; examples are in README and LEARNING.

@@ -1,6 +1,68 @@
-// Step 1 starts Alloy with durable storage and read-only access to service logs.
-// The labelled log-shipping pipeline will be added and tested in Step 5.
 logging {
   level = "info"
   format = "logfmt"
+}
+
+local.file_match "tradeops" {
+  path_targets = [{"__path__" = "/var/log/tradeops/*.log", "job" = "tradeops"}]
+  sync_period = "5s"
+}
+
+discovery.relabel "tradeops" {
+  targets = local.file_match.tradeops.targets
+  rule {
+    source_labels = ["__path__"]
+    regex = "/var/log/tradeops/(.+)\\.log"
+    target_label = "service"
+    replacement = "$1"
+  }
+  rule {
+    source_labels = ["service"]
+    regex = "market_feed"
+    target_label = "service"
+    replacement = "feed"
+  }
+  rule {
+    source_labels = ["service"]
+    regex = "order_service"
+    target_label = "service"
+    replacement = "orders"
+  }
+}
+
+loki.source.file "tradeops" {
+  targets = discovery.relabel.tradeops.output
+  forward_to = [loki.process.tradeops.receiver]
+  tail_from_end = false
+}
+
+loki.process "tradeops" {
+  stage.regex {
+    expression = "^(?P<timestamp>[0-9]{4}-[^ ]+)"
+  }
+  stage.regex {
+    expression = "^[^ ]+ \\| (?P<level>INFO|WARN|WARNING|ERROR|P1|P2|P3) \\|"
+  }
+  stage.regex {
+    expression = "healthcheck exit=(?P<exit_code>[012])"
+  }
+  stage.template {
+    source = "level"
+    template = "{{ if eq .Value \"P1\" }}ERROR{{ else if eq .Value \"P2\" }}WARN{{ else if eq .Value \"P3\" }}INFO{{ else if eq .Value \"WARNING\" }}WARN{{ else if .Value }}{{ .Value }}{{ else if eq .exit_code \"2\" }}ERROR{{ else if eq .exit_code \"1\" }}WARN{{ else if eq .exit_code \"0\" }}INFO{{ else }}UNKNOWN{{ end }}"
+  }
+  stage.labels {
+    values = {"level" = ""}
+  }
+  stage.timestamp {
+    source = "timestamp"
+    format = "RFC3339Nano"
+    action_on_failure = "skip"
+  }
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://127.0.0.1:3100/loki/api/v1/push"
+  }
 }

@@ -1,0 +1,2 @@
+ Container tradeops-monitoring-alloy-1 Restarting 
+ Container tradeops-monitoring-alloy-1 Started 

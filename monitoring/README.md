@@ -161,3 +161,13 @@ Severity routing and service-scoped inhibition are now configured. Follow
 Until then, alerts are routed to receivers without outgoing integrations and
 remain visible in the UI. Configuration and inhibition are verified; Telegram
 delivery is not claimed as tested.
+
+## Step 5: logs
+
+Alloy now tails `/var/log/tradeops/*.log`, derives the service from the filename,
+extracts the timestamp and severity, and sends logs to Loki. Application names
+are normalized to `feed` and `orders`. Alert severities P1/P2/P3 become
+ERROR/WARN/INFO; cron exit 2/1/0 maps the same way. Unrecognized lines use UNKNOWN.
+The raw line stays intact. File read positions use the Alloy named volume.
+See the eight tested LogQL examples in [README](../README.md) and
+[LEARNING](../LEARNING.md). Their machine-readable source is `logql-examples.json`.
