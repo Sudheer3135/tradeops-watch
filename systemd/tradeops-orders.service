@@ -1,0 +1,18 @@
+[Unit]
+Description=TradeOps fake order service
+After=network.target tradeops-feed.service
+Wants=tradeops-feed.service
+
+[Service]
+User=tradeops
+Group=tradeops
+ExecStart=/usr/bin/python3 /opt/tradeops/services/order_service.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/tradeops
+
+[Install]
+WantedBy=multi-user.target
