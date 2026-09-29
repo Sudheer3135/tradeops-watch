@@ -53,3 +53,10 @@ and orders labels and parsed ERROR levels from real existing logs. All eight
 LogQL examples executed successfully; empty results are recorded honestly when
 no matching event occurred in the chosen window. No synthetic log entries were
 inserted. See `step5-*` evidence; examples are in README and LEARNING.
+
+## Step 6: verified
+TradeOps Overview is automatically provisioned with all five required rows.
+Grafana reports both data sources healthy, and all 19 panel queries execute
+successfully through Grafana's own data-source proxies. The alerts panel was
+empty because no alerts were firing at that sample. Verification is API-based;
+no screenshot or visual rendering review is claimed. See `step6-*` evidence.

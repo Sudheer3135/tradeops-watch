@@ -1,0 +1,23 @@
+PASS dashboard provisioned automatically; all five rows exist
+PASS Grafana datasource prometheus OK
+PASS Grafana datasource loki OK
+PASS Application scrape health A series= 2
+PASS HTTP and TCP probes A series= 4
+PASS Observed restarts in 10 minutes A series= 2
+PASS Prices published per second by symbol A series= 5
+PASS Orders per minute by side A series= 2
+PASS Order-cycle latency p50 / p95 / p99 A series= 1
+PASS Order-cycle latency p50 / p95 / p99 B series= 1
+PASS Order-cycle latency p50 / p95 / p99 C series= 1
+PASS Feed errors per minute A series= 1
+PASS VM CPU usage A series= 1
+PASS VM memory usage A series= 1
+PASS Root disk usage A series= 1
+PASS VM load average A series= 1
+PASS VM load average B series= 1
+PASS VM load average C series= 1
+PASS Network received bytes/sec A series= 2
+PASS Network transmitted bytes/sec A series= 2
+PASS Currently firing Prometheus alerts A series= 0
+PASS TradeOps ERROR and WARN logs A series= 1
+PASS all 19 live panel queries through Grafana; no screenshots taken

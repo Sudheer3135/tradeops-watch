@@ -171,3 +171,16 @@ ERROR/WARN/INFO; cron exit 2/1/0 maps the same way. Unrecognized lines use UNKNO
 The raw line stays intact. File read positions use the Alloy named volume.
 See the eight tested LogQL examples in [README](../README.md) and
 [LEARNING](../LEARNING.md). Their machine-readable source is `logql-examples.json`.
+
+## Step 6: TradeOps Overview
+
+Open http://192.168.2.2:3000/d/tradeops-overview (login: `admin`, password in
+VM `monitoring/.env`). The dashboard loads from the version-controlled JSON;
+no manual data-source or panel setup is needed. It includes five rows: service
+health, trading, system, current alerts, and WARN/ERROR logs. Times are UTC.
+
+Set **Last 30 minutes**, refresh **15s**. An empty alerts table means no current
+firing alerts; an empty logs panel means no matching lines in that time range.
+The current dashboard's links use this VM IP; update them if Multipass assigns
+a different address. `scripts/verify_dashboard.py` checks provisioning and runs
+all 19 queries through Grafana; screenshots remain a manual Step 9 task.
