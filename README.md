@@ -7,18 +7,22 @@ No real trading or broker connections. Phase 1 used only the Python standard
 library and Bash; the current Phase 2 checkpoint adds Docker monitoring and
 a Python metrics dependency while preserving the Phase 1 operations tools.
 
-**Phase 2 checkpoint: Steps 0–3.** See [monitoring setup and URLs](monitoring/README.md)
-and [progress/evidence](docs/phase2-progress.md). Later steps require the requested review.
+**Phase 2 checkpoint: Steps 0–7.** See [monitoring setup and URLs](monitoring/README.md)
+and [progress/evidence](docs/phase2-progress.md). Paused at the requested Step 7 review; Steps 8–10 remain.
 
 ```text
-MacBook M2 -> Multipass Ubuntu 24.04 (tradeops)
-                 systemd -> feed :9001 <- orders :9002
-                                |             |
-                                +---- logs ---+
-                 cron -> healthcheck -> alerts + active state
-                          |                  |
-                       runbooks        handover report
-                 chaos -> diagnose -> fix -> verify -> incident
+MacBook M2 -> Multipass Ubuntu (4 GB RAM)
+  systemd -> current release -> feed :9001 <- orders :9002
+                                 | metrics       | logs
+  node_exporter + blackbox ------+               v
+                                 v             Alloy -> Loki
+                            Prometheus            |      |
+                                 |                +------v
+                            Alertmanager              Grafana
+                                 |
+                         optional Telegram
+  cron -> original healthcheck -> alerts / runbooks / handover
+  deploy -> health gate -> automatic rollback if unhealthy
 ```
 
 [Architecture details](docs/architecture.md) · [Interview guide](LEARNING.md)
@@ -241,22 +245,25 @@ Window (UTC): 2026-09-29T03:23:34.074921+00:00 to 2026-09-29T11:23:34.074921+00:
 
 ## Phase 2 checkpoint and remaining work
 
-Steps 0–3: Phase 1 reviewed; Docker stack runs in the 4 GB Ubuntu VM; both
-services expose metrics; ten Prometheus rules have validation and unit tests.
-The existing APIs and Phase 1 monitoring scripts have real regression evidence.
+Steps 0–7 are implemented and verified in the VM: the Docker stack, application
+metrics, ten alert rules, severity routing/inhibition, Alloy/Loki logs,
+provisioned Grafana dashboard, and code deployment with automatic/manual rollback.
+Telegram config validates, but real delivery is untested without credentials.
 
-Open [monitoring/README.md](monitoring/README.md) for setup, credentials handling,
-metric definitions, alert thresholds and review commands. The live stack uses
-Grafana Alloy, not Promtail. Alloy log shipping is pending Step 5.
+- [Monitoring setup, credentials and URLs](monitoring/README.md)
+- [Optional Telegram setup](docs/telegram-setup.md)
+- [Deployment and rollback practice](docs/deployments.md)
+- [Per-step progress and evidence](docs/phase2-progress.md)
+- [Live Grafana dashboard](http://192.168.2.2:3000/d/tradeops-overview)
 
-Remaining after review: Telegram severity routing and inhibition; Alloy log
-parsing; TradeOps dashboard; deployment/automatic rollback; GitHub Actions and
-unit tests; seven complete chaos runs; screenshots checklist; updated interview
-questions, spoken demo, and evidence-backed resume bullets.
+**Paused at the requested Step 7 review.** Remaining: Step 8 GitHub Actions,
+lint fixes and pytest tests; Step 9 slow-feed plus all seven full chaos runs,
+new incident reports and screenshot checklist; Step 10 the next 25 interview
+questions, spoken demo, tested resume bullets and final documentation.
 
-The original Phase 1 evidence remains in `docs/evidence/`. New evidence is in
-`docs/evidence/phase2/`; synthetic rule fixtures are explicitly identified and
-are not represented as real incidents.
+Original Phase 1 evidence remains in `docs/evidence/`. New evidence is in
+`docs/evidence/phase2/`. Synthetic rule and inhibition tests are explicitly
+identified and are not represented as real incidents.
 
 
 ## Eight useful LogQL queries

@@ -1,0 +1,58 @@
+2026-09-29T16:22:09Z
+2026-09-29T16:22:10Z | healthcheck exit=0 CPU=2% memory=21% disk=67% errors=0
+● tradeops-feed.service - TradeOps synthetic market feed
+     Loaded: loaded (/etc/systemd/system/tradeops-feed.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 21:52:06 IST; 4s ago
+   Main PID: 16706 (python)
+      Tasks: 2 (limit: 4595)
+     Memory: 13.2M (peak: 13.7M)
+        CPU: 59ms
+     CGroup: /system.slice/tradeops-feed.service
+             └─16706 /opt/tradeops/venv/bin/python /opt/tradeops/current/services/market_feed.py
+
+Sep 29 21:52:06 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+
+● tradeops-orders.service - TradeOps fake order service
+     Loaded: loaded (/etc/systemd/system/tradeops-orders.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 21:52:06 IST; 4s ago
+   Main PID: 16707 (python)
+      Tasks: 2 (limit: 4595)
+     Memory: 14.2M (peak: 14.8M)
+        CPU: 69ms
+     CGroup: /system.slice/tradeops-orders.service
+             └─16707 /opt/tradeops/venv/bin/python /opt/tradeops/current/services/order_service.py
+
+Sep 29 21:52:06 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+/opt/tradeops/releases/retained-b-20260929T162014
+/opt/tradeops/releases/retained-a-20260929T162014
+/opt/tradeops/releases/retained-a-20260929T162014
+/opt/tradeops/releases/broken-20260929T162014
+/opt/tradeops/releases/retained-b-20260929T162014
+warning: logrotate in debug mode does nothing except printing debug messages!  Consider using verbose mode (-v) instead if this is not what you want.
+
+reading config file /etc/logrotate.d/tradeops
+Reading state from file: /var/lib/logrotate/status
+state file /var/lib/logrotate/status does not exist
+Allocating hash table for state file, size 64 entries
+
+Handling 1 logs
+
+rotating pattern: /var/log/tradeops/alerts.log /var/log/tradeops/cron.log /var/log/tradeops/deploy.log  after 1 days (7 rotations)
+empty log files are not rotated, old logs are removed
+switching euid from 0 to 999 and egid from 0 to 988 (pid 16763)
+considering log /var/log/tradeops/alerts.log
+Creating new state
+  Now: 2026-09-29 21:52
+  Last rotated at 2026-09-29 21:00
+  log does not need rotating (log has already been rotated)
+considering log /var/log/tradeops/cron.log
+Creating new state
+  Now: 2026-09-29 21:52
+  Last rotated at 2026-09-29 21:00
+  log does not need rotating (log has already been rotated)
+considering log /var/log/tradeops/deploy.log
+Creating new state
+  Now: 2026-09-29 21:52
+  Last rotated at 2026-09-29 21:00
+  log does not need rotating (log has already been rotated)
+switching euid from 999 to 0 and egid from 988 to 0 (pid 16763)

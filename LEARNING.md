@@ -236,3 +236,34 @@ Only job, service and level are intentionally indexed here; message text is pars
 at query time. Do not make every order ID or error message an ingestion label.
 Alloy also preserves the original file timestamp and maps P1/P2/P3 alert lines
 to ERROR/WARN/INFO; unfamiliar formats are labelled UNKNOWN.
+
+
+## Phase 2 Steps 4–7: what to explain
+
+- `configure_telegram.py` reads ignored secret files and validates a private
+  generated receiver config before enabling it. The token stays in a file.
+  Without credentials, Alertmanager still shows alerts but sends no messages.
+- Alertmanager groups related alerts so one incident does not generate a message
+  for every sample. Inhibition suppresses notifications for dependent symptoms;
+  it does not delete metrics or remove the problem from Prometheus.
+- Alloy reads existing log files and remembers its position in a named volume.
+  Loki stores logs; Grafana queries them. Labels narrow a search before LogQL
+  filters or parses the message text.
+- Grafana provisioning creates data sources and the dashboard from Git-tracked
+  files. `verify_dashboard.py` tests the dashboard through Grafana's API and
+  data-source proxies; this is not a screenshot or visual layout review.
+- `deploy.sh` copies service code into an immutable release directory, changes
+  a symlink, restarts the services and runs the original health gate. A failed
+  deployment returns nonzero even when automatic recovery succeeds.
+- `rollback.sh` selects the previous healthy release. `deploy_common.sh` supplies
+  the lock, atomic symlink change, health polling, logging and retention helpers.
+  Current and previous releases are protected while keeping three managed copies.
+- `verify_deploy.sh` uses a temporary broken source fixture, never corrupts the
+  repository services, and proves good deploy, rejection, automatic rollback,
+  explicit rollback and retention with real running processes.
+- A symlink rollback restores code quickly but does not undo a database schema
+  change or a shared Python dependency update. This lab pins shared dependencies
+  and rejects deploys with a changed requirements file.
+- Blue-green would run two environments and switch traffic between them. This
+  lab restarts a single environment, so it has brief downtime and makes no
+  zero-downtime claim.

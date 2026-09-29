@@ -60,3 +60,22 @@ Grafana reports both data sources healthy, and all 19 panel queries execute
 successfully through Grafana's own data-source proxies. The alerts panel was
 empty because no alerts were firing at that sample. Verification is API-based;
 no screenshot or visual rendering review is claimed. See `step6-*` evidence.
+
+## Step 7: verified; paused for the requested review
+The installer migrated services to `/opt/tradeops/current` and passed another
+rerun without creating a duplicate release. Real tests passed: good deployment,
+a deliberately broken order service, health-gate rejection, automatic rollback,
+manual rollback, and retention of three managed releases while protecting the
+active/previous targets. The final Phase 1 healthcheck returned 0 and all nine
+Prometheus targets were up. The real ServiceDown P1 fired during the failed
+deployment and cleared after recovery; only expected recent-start P3 remained.
+Loki contains the real ERROR deployment/rollback log records.
+
+Evidence: `step7-deploy-rollback.txt`, `step7-final-health.txt`,
+`step7-final-stack.txt`, both during/after alert API snapshots, and
+`step7-loki-deployment-errors.json`. The broken code was confined to a temporary
+fixture; the source repository's application code was not damaged.
+
+Paused here as requested. Steps 8–10 (CI/pytest, slow-feed and full chaos evidence,
+new incident reports, screenshots checklist and final interview/demo/resume
+materials) are not complete and await this review. No screenshots were taken.

@@ -1,0 +1,26 @@
+Requirement already satisfied: prometheus-client==0.26.0 in /opt/tradeops/venv/lib/python3.12/site-packages (from -r /opt/tradeops/requirements.txt (line 1)) (0.26.0)
+Synchronizing state of cron.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable cron
+● tradeops-feed.service - TradeOps synthetic market feed
+     Loaded: loaded (/etc/systemd/system/tradeops-feed.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 21:49:21 IST; 3s ago
+   Main PID: 14145 (python)
+      Tasks: 2 (limit: 4595)
+     Memory: 13.2M (peak: 13.7M)
+        CPU: 94ms
+     CGroup: /system.slice/tradeops-feed.service
+             └─14145 /opt/tradeops/venv/bin/python /opt/tradeops/current/services/market_feed.py
+
+Sep 29 21:49:21 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+
+● tradeops-orders.service - TradeOps fake order service
+     Loaded: loaded (/etc/systemd/system/tradeops-orders.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 21:49:21 IST; 3s ago
+   Main PID: 14147 (python)
+      Tasks: 2 (limit: 4595)
+     Memory: 14.2M (peak: 14.5M)
+        CPU: 110ms
+     CGroup: /system.slice/tradeops-orders.service
+             └─14147 /opt/tradeops/venv/bin/python /opt/tradeops/current/services/order_service.py
+
+Sep 29 21:49:21 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.

@@ -1,0 +1,143 @@
+START deploy test 2026-09-29T16:20:14Z
+2026-09-29T16:20:15Z | healthcheck exit=0 CPU=4% memory=21% disk=67% errors=1
+2026-09-29T16:20:15Z | INFO | Deploy verified-20260929T162014 from /home/ubuntu/tradeops-watch; previous=bootstrap-20260929T161921
+2026-09-29T16:20:20Z | healthcheck exit=0 CPU=3% memory=21% disk=67% errors=1
+2026-09-29T16:20:20Z | INFO | Deploy verified-20260929T162014 passed healthcheck; current=/opt/tradeops/releases/verified-20260929T162014
+PASS good version deployed
+2026-09-29T16:20:20Z | INFO | Deploy broken-20260929T162014 from /tmp/tradeops-release-test.Z6zFEk; previous=verified-20260929T162014
+2026-09-29T16:20:24Z | P1 | service-orders | service inactive | runbooks/service-down.md
+2026-09-29T16:20:24Z | P1 | port-9002 | port not listening | runbooks/port-blocked.md
+2026-09-29T16:20:24Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md
+2026-09-29T16:20:25Z | healthcheck exit=2 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:20:28Z | P2 | restart-orders | automatic restarts increased 0 -> 1 | runbooks/service-down.md
+2026-09-29T16:20:29Z | healthcheck exit=2 CPU=3% memory=21% disk=67% errors=1
+2026-09-29T16:20:34Z | healthcheck exit=2 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:20:38Z | healthcheck exit=2 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:20:42Z | healthcheck exit=2 CPU=4% memory=21% disk=67% errors=1
+2026-09-29T16:20:46Z | healthcheck exit=2 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:20:50Z | healthcheck exit=2 CPU=3% memory=21% disk=67% errors=1
+2026-09-29T16:20:54Z | healthcheck exit=2 CPU=6% memory=21% disk=67% errors=1
+2026-09-29T16:20:58Z | healthcheck exit=2 CPU=4% memory=21% disk=67% errors=1
+2026-09-29T16:21:03Z | healthcheck exit=2 CPU=1% memory=21% disk=67% errors=1
+2026-09-29T16:21:07Z | healthcheck exit=2 CPU=3% memory=21% disk=67% errors=1
+2026-09-29T16:21:07Z | ERROR | Health gate failed after 45s; healthcheck exit=2
+2026-09-29T16:21:07Z | ERROR | Rejecting broken-20260929T162014: service/resource health gate did not pass
+2026-09-29T16:21:07Z | ERROR | Deploy broken-20260929T162014 failed or was interrupted (exit=1); automatic rollback to verified-20260929T162014
+2026-09-29T16:21:12Z | healthcheck exit=1 CPU=4% memory=21% disk=67% errors=1
+2026-09-29T16:21:16Z | healthcheck exit=0 CPU=3% memory=21% disk=67% errors=1
+2026-09-29T16:21:16Z | INFO | Automatic rollback recovered verified-20260929T162014
+2026-09-29T16:21:17Z | healthcheck exit=0 CPU=4% memory=21% disk=67% errors=1
+PASS broken version rejected (exit=1) and automatic rollback restored verified-20260929T162014
+Sep 29 21:49:21 tradeops systemd[1]: Stopping tradeops-orders.service - TradeOps fake order service...
+Sep 29 21:49:21 tradeops systemd[1]: tradeops-orders.service: Deactivated successfully.
+Sep 29 21:49:21 tradeops systemd[1]: Stopped tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:49:21 tradeops systemd[1]: tradeops-orders.service: Consumed 16.009s CPU time, 16.7M memory peak, 0B memory swap peak.
+Sep 29 21:49:21 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:15 tradeops systemd[1]: Stopping tradeops-orders.service - TradeOps fake order service...
+Sep 29 21:50:15 tradeops systemd[1]: tradeops-orders.service: Deactivated successfully.
+Sep 29 21:50:15 tradeops systemd[1]: Stopped tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:15 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:20 tradeops systemd[1]: Stopping tradeops-orders.service - TradeOps fake order service...
+Sep 29 21:50:20 tradeops systemd[1]: tradeops-orders.service: Deactivated successfully.
+Sep 29 21:50:20 tradeops systemd[1]: Stopped tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:20 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:20 tradeops python[15007]: Traceback (most recent call last):
+Sep 29 21:50:20 tradeops python[15007]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:20 tradeops python[15007]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:20 tradeops python[15007]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:20 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:20 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:25 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 1.
+Sep 29 21:50:25 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:25 tradeops python[15050]: Traceback (most recent call last):
+Sep 29 21:50:25 tradeops python[15050]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:25 tradeops python[15050]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:25 tradeops python[15050]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:25 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:25 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:31 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 2.
+Sep 29 21:50:31 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:31 tradeops python[15096]: Traceback (most recent call last):
+Sep 29 21:50:31 tradeops python[15096]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:31 tradeops python[15096]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:31 tradeops python[15096]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:31 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:31 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:36 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 3.
+Sep 29 21:50:36 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:36 tradeops python[15135]: Traceback (most recent call last):
+Sep 29 21:50:36 tradeops python[15135]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:36 tradeops python[15135]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:36 tradeops python[15135]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:36 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:36 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:41 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 4.
+Sep 29 21:50:41 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:41 tradeops python[15192]: Traceback (most recent call last):
+Sep 29 21:50:41 tradeops python[15192]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:41 tradeops python[15192]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:41 tradeops python[15192]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:41 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:41 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:46 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 5.
+Sep 29 21:50:46 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:46 tradeops python[15246]: Traceback (most recent call last):
+Sep 29 21:50:46 tradeops python[15246]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:46 tradeops python[15246]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:46 tradeops python[15246]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:46 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:46 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:52 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 6.
+Sep 29 21:50:52 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:52 tradeops python[15284]: Traceback (most recent call last):
+Sep 29 21:50:52 tradeops python[15284]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:52 tradeops python[15284]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:52 tradeops python[15284]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:52 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:52 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:50:57 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 7.
+Sep 29 21:50:57 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:50:57 tradeops python[15419]: Traceback (most recent call last):
+Sep 29 21:50:57 tradeops python[15419]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:50:57 tradeops python[15419]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:50:57 tradeops python[15419]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:50:57 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:50:57 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:51:02 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 8.
+Sep 29 21:51:02 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:51:02 tradeops python[15506]: Traceback (most recent call last):
+Sep 29 21:51:02 tradeops python[15506]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:51:02 tradeops python[15506]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:51:02 tradeops python[15506]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:51:02 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:51:02 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:51:07 tradeops systemd[1]: tradeops-orders.service: Scheduled restart job, restart counter is at 9.
+Sep 29 21:51:07 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:51:07 tradeops python[15554]: Traceback (most recent call last):
+Sep 29 21:51:07 tradeops python[15554]:   File "/opt/tradeops/current/services/order_service.py", line 1, in <module>
+Sep 29 21:51:07 tradeops python[15554]:     raise RuntimeError("Intentional broken-release test: order service cannot start")
+Sep 29 21:51:07 tradeops python[15554]: RuntimeError: Intentional broken-release test: order service cannot start
+Sep 29 21:51:07 tradeops systemd[1]: tradeops-orders.service: Main process exited, code=exited, status=1/FAILURE
+Sep 29 21:51:07 tradeops systemd[1]: tradeops-orders.service: Failed with result 'exit-code'.
+Sep 29 21:51:07 tradeops systemd[1]: Stopped tradeops-orders.service - TradeOps fake order service.
+Sep 29 21:51:07 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+2026-09-29T16:21:18Z | INFO | Manual rollback verified-20260929T162014 -> bootstrap-20260929T161921
+2026-09-29T16:21:23Z | healthcheck exit=0 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:21:23Z | INFO | Manual rollback passed; current=bootstrap-20260929T161921
+PASS explicit rollback to previous healthy release
+2026-09-29T16:21:23Z | INFO | Deploy retained-a-20260929T162014 from /home/ubuntu/tradeops-watch; previous=bootstrap-20260929T161921
+2026-09-29T16:21:28Z | healthcheck exit=0 CPU=4% memory=21% disk=67% errors=1
+2026-09-29T16:21:28Z | INFO | Deploy retained-a-20260929T162014 passed healthcheck; current=/opt/tradeops/releases/retained-a-20260929T162014
+Pruned old managed release: verified-20260929T162014
+2026-09-29T16:21:28Z | INFO | Deploy retained-b-20260929T162014 from /home/ubuntu/tradeops-watch; previous=retained-a-20260929T162014
+2026-09-29T16:21:33Z | healthcheck exit=0 CPU=2% memory=21% disk=67% errors=1
+2026-09-29T16:21:33Z | INFO | Deploy retained-b-20260929T162014 passed healthcheck; current=/opt/tradeops/releases/retained-b-20260929T162014
+Pruned old managed release: bootstrap-20260929T161921
+current=/opt/tradeops/releases/retained-b-20260929T162014
+previous=/opt/tradeops/releases/retained-a-20260929T162014
+2026-09-29T16:21:34Z | healthcheck exit=0 CPU=3% memory=21% disk=67% errors=1
+{"feed_status": "ok", "orders_placed": 20, "last_success": 1790698894.4573448}
+/opt/tradeops/releases/broken-20260929T162014
+/opt/tradeops/releases/retained-a-20260929T162014
+/opt/tradeops/releases/retained-b-20260929T162014
+PASS only last three managed releases retained; active and previous are healthy 2026-09-29T16:21:34Z

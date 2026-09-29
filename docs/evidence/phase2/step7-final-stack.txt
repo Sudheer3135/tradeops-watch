@@ -1,0 +1,22 @@
+PASS prometheus ready: http://127.0.0.1:9090/-/ready
+PASS alertmanager ready: http://127.0.0.1:9093/-/ready
+PASS grafana ready: http://127.0.0.1:3000/api/health
+PASS loki ready: http://127.0.0.1:3100/ready
+PASS alloy ready: http://127.0.0.1:12345/-/ready
+PASS node_exporter ready: http://127.0.0.1:9100/metrics
+PASS blackbox_exporter ready: http://127.0.0.1:9115/metrics
+PASS feed http_2xx probe_success=1
+PASS feed tcp_connect probe_success=1
+PASS orders http_2xx probe_success=1
+PASS orders tcp_connect probe_success=1
+PASS host memory and filesystem metrics exist
+{'instance': '127.0.0.1:9115', 'job': 'blackbox-exporter', 'service': 'blackbox'} up 
+{'instance': 'http://127.0.0.1:9001/health', 'job': 'blackbox-http', 'service': 'feed'} up 
+{'instance': 'http://127.0.0.1:9002/health', 'job': 'blackbox-http', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9002', 'job': 'blackbox-tcp', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9001', 'job': 'blackbox-tcp', 'service': 'feed'} up 
+{'instance': '127.0.0.1:9100', 'job': 'node', 'service': 'host'} up 
+{'instance': '127.0.0.1:9090', 'job': 'prometheus', 'service': 'prometheus'} up 
+{'instance': '127.0.0.1:9002', 'job': 'tradeops', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9001', 'job': 'tradeops', 'service': 'feed'} up 
+PASS all configured Prometheus scrape targets up

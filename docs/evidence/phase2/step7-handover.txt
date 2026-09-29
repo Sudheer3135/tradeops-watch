@@ -1,0 +1,43 @@
+# TradeOps shift handover
+
+Window (UTC): 2026-09-29T08:23:21.002364+00:00 to 2026-09-29T16:23:21.002364+00:00
+
+## Services now
+- tradeops-feed: active
+- tradeops-orders: active
+
+## Alerts by severity
+- P1: 10 notifications; service-feed (1), port-9001 (1), http-9001 (2), http-9002 (3), port-9002 (2), service-orders (1)
+- P2: 7 notifications; restart-feed (1), disk (1), cpu (1), error-rate (1), memory (2), restart-orders (1)
+- P3: 0 notifications; none
+
+## Open issues (latest health check)
+- None in latest snapshot.
+
+## Resolved issues
+- cpu: absent from latest check
+- disk: absent from latest check
+- error-rate: absent from latest check
+- http-9001: absent from latest check
+- http-9002: absent from latest check
+- memory: absent from latest check
+- port-9001: absent from latest check
+- port-9002: absent from latest check
+- restart-feed: absent from latest check
+- restart-orders: absent from latest check
+- service-feed: absent from latest check
+- service-orders: absent from latest check
+
+## Top errors
+- 10 × feed unreachable: <urlopen error [Errno 111] Connection refused>
+- 1 × feed unreachable: feed slow: 497.49 ms
+- 1 × feed unreachable: feed slow: 676.54 ms
+- 1 × feed unreachable: feed slow: 2174.66 ms
+- 1 × feed unreachable: feed slow: 2060.29 ms
+
+## Notes for next shift
+- Confirm both HTTP health endpoints and review active alerts.
+- An error-rate alert may persist for 5 minutes after recovery.
+- Read incidents/ and record owner, next action, and escalation for any unresolved issue.
+
+Saved: /var/log/tradeops/handover-20260929-1623.md

@@ -1,4 +1,4 @@
-# Monitoring stack: first checkpoint
+# TradeOps monitoring stack
 
 Run commands inside `multipass shell tradeops`, from:
 
@@ -61,10 +61,10 @@ Each container has a memory ceiling and bounded Docker logs. Limits are guardrai
 not preallocated RAM. `docker compose down` preserves volumes; do not add `-v`
 unless you deliberately want to erase the monitoring history.
 
-At Step 1, the seven components run and HTTP/TCP probes monitor Phase 1.
-Alloy's shipping/parsing pipeline is deliberately pending Step 5, and the full
-TradeOps dashboard is pending Step 6. Grafana's two data sources are provisioned.
-Alertmanager uses a local UI-only receiver until Telegram routing in Step 4.
+All seven components run and HTTP/TCP probes monitor the original services.
+Alloy ships labelled logs, Grafana provisions both data sources and the full
+TradeOps dashboard, and Alertmanager supports severity routing and inhibition.
+Outgoing Telegram delivery is optional; see its setup section below.
 
 ## Source documentation
 
@@ -150,9 +150,9 @@ It covers all ten rules, pending periods, disk severity boundaries, expiry of
 the recent-start window, and a short scrape failure that must not fire.
 The real live APIs are captured separately under `docs/evidence/phase2/`.
 
-Stop here for the requested review. Telegram routing/inhibition (Step 4), Alloy
-log shipping (Step 5), the full dashboard (Step 6), and deployments (Step 7)
-are still pending. Full chaos alert/resolution runs belong to Step 9.
+The user approved the Step 3 review gate. Steps 4–7 below are now implemented.
+The next required review is after Step 7. Full chaos alert/resolution runs
+remain Step 9; existing unit fixtures are not substitutes for those runs.
 
 ## Step 4: optional Telegram and inhibition
 
@@ -184,3 +184,10 @@ firing alerts; an empty logs panel means no matching lines in that time range.
 The current dashboard's links use this VM IP; update them if Multipass assigns
 a different address. `scripts/verify_dashboard.py` checks provisioning and runs
 all 19 queries through Grafana; screenshots remain a manual Step 9 task.
+
+## Step 7: releases
+
+See [deployment and rollback instructions](../docs/deployments.md). systemd now
+runs application code through `/opt/tradeops/current`; stable monitoring and
+recovery tools remain in `/opt/tradeops/scripts`. Deployment logs are included
+in Alloy's existing `*.log` discovery and appear with service label `deploy`.

@@ -1,4 +1,4 @@
-# Architecture
+# Original Phase 1 architecture
 
 ```text
 MacBook M2: source code + Multipass
@@ -31,3 +31,22 @@ and manual checks from changing it at the same time. Alert cooldown is per
 check; active issues are refreshed even when notifications are suppressed.
 Service files rotate at 2 MB with three backups each; logrotate manages the
 Bash alert/cron logs separately to avoid two rotators on one file.
+
+
+## Current Phase 2 additions through Step 7
+
+The VM now has 4 GB RAM. systemd starts the two services through the current
+release symlink with the shared pinned Python virtualenv. Their extra /metrics
+routes, node_exporter host metrics and blackbox HTTP/TCP probes feed Prometheus.
+Prometheus evaluates ten rules and sends alerts to Alertmanager, which routes
+by severity, inhibits related symptoms and optionally sends Telegram messages.
+
+Alloy tails the original .log files read-only, parses service/level/timestamp,
+and sends logs to Loki. Grafana's provisioned dashboard queries Prometheus and
+Loki. Docker containers use the VM host network to preserve loopback application
+bindings. Named volumes hold monitoring state; two-day retention and container
+memory ceilings keep the stack suitable for the 4 GB lab.
+
+Deployment transactions atomically switch /opt/tradeops/current, restart the
+services, and roll back automatically if the unchanged healthcheck cannot pass.
+Stable operational scripts remain outside the application release pointer.
