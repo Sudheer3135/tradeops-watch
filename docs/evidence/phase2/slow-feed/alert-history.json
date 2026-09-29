@@ -1,0 +1,80 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HighOrderLatency",
+          "alertstate": "firing",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790701315.781,
+            "1"
+          ],
+          [
+            1790701330.781,
+            "1"
+          ],
+          [
+            1790701345.781,
+            "1"
+          ],
+          [
+            1790701360.781,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HighOrderLatency",
+          "alertstate": "pending",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790701195.781,
+            "1"
+          ],
+          [
+            1790701210.781,
+            "1"
+          ],
+          [
+            1790701225.781,
+            "1"
+          ],
+          [
+            1790701240.781,
+            "1"
+          ],
+          [
+            1790701255.781,
+            "1"
+          ],
+          [
+            1790701270.781,
+            "1"
+          ],
+          [
+            1790701285.781,
+            "1"
+          ],
+          [
+            1790701300.781,
+            "1"
+          ]
+        ]
+      }
+    ]
+  }
+}

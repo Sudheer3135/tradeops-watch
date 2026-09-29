@@ -1,0 +1,61 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:44:03.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "FeedErrorsHigh",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "More than six feed errors per minute, averaged over two minutes, sustained for 30 seconds.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "orders feed fetch errors are elevated"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:44:18.889371656Z",
+        "value": "3.6184962291460354e-01"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed process started recently"
+        },
+        "state": "pending",
+        "activeAt": "2026-09-29T18:45:03.889371656Z",
+        "value": "7.688999891281128e+00"
+      }
+    ]
+  }
+}

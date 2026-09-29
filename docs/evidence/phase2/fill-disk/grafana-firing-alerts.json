@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceRestartedRecently",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701029.876,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceRestartedRecently",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701029.876,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "DiskAlmostFull",
+          "alertstate": "firing",
+          "device": "/dev/sda1",
+          "fstype": "ext4",
+          "instance": "127.0.0.1:9100",
+          "job": "node",
+          "mountpoint": "/",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701029.876,
+          "1"
+        ]
+      }
+    ]
+  }
+}

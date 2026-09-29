@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HighOrderLatency",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders p95 order-cycle latency is high"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:59:48.889371656Z",
+        "value": "1.025e+00"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "orders process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "5.231589999198914e+02"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "5.231589999198914e+02"
+      }
+    ]
+  }
+}

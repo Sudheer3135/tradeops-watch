@@ -1,0 +1,34 @@
+[
+  {
+    "annotations": {
+      "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+      "runbook": "runbooks/service-down.md",
+      "summary": "feed process started recently"
+    },
+    "endsAt": "2026-09-29T18:53:18.889Z",
+    "fingerprint": "2e4c10894ba2573f",
+    "receivers": [
+      {
+        "name": "p3"
+      }
+    ],
+    "startsAt": "2026-09-29T18:45:33.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T18:49:21.482Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3C+600%29+and+%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3E%3D+0%29&g0.tab=1",
+    "labels": {
+      "alertname": "ServiceRestartedRecently",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9001",
+      "job": "tradeops",
+      "service": "feed",
+      "severity": "P3",
+      "team": "tradeops"
+    }
+  }
+]

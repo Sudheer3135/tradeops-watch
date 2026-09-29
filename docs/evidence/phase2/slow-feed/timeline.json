@@ -1,0 +1,69 @@
+{
+  "scenario": "slow-feed",
+  "expected_alert": "HighOrderLatency",
+  "service": "orders",
+  "baseline_started_at": "2026-09-29T16:59:25.764218Z",
+  "fault_started_at": "2026-09-29T16:59:25.780550Z",
+  "firing": {
+    "observed_at": "2026-09-29T17:01:53.066472Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "HighOrderLatency",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders p95 order-cycle latency is high"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:59:48.889371656Z",
+        "value": "1.025e+00"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders p95 order-cycle latency is high"
+        },
+        "endsAt": "2026-09-29T17:05:48.889Z",
+        "fingerprint": "69377786abc7228b",
+        "receivers": [
+          {
+            "name": "p2"
+          }
+        ],
+        "startsAt": "2026-09-29T17:01:48.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T17:01:51.478Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=histogram_quantile%280.95%2C+sum+by+%28le%2C+service%29+%28rate%28tradeops_order_latency_seconds_bucket%7Bjob%3D%22tradeops%22%7D%5B1m%5D%29%29%29+%3E+0.3&g0.tab=1",
+        "labels": {
+          "alertname": "HighOrderLatency",
+          "environment": "tradeops-lab",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "fix_started_at": "2026-09-29T17:01:54.325808Z",
+  "resolved": {
+    "observed_at": "2026-09-29T17:02:54.966701Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T17:02:56.093191Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T17:02:56.131212Z"
+}

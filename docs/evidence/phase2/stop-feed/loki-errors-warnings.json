@@ -1,0 +1,529 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/alerts.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "alerts",
+          "service_name": "alerts"
+        },
+        "values": [
+          [
+            "1790707441000000000",
+            "2026-09-29T18:44:01Z | P1 | service-feed | service inactive | runbooks/service-down.md"
+          ],
+          [
+            "1790707441000000001",
+            "2026-09-29T18:44:01Z | P1 | port-9001 | port not listening | runbooks/port-blocked.md"
+          ],
+          [
+            "1790707441000000002",
+            "2026-09-29T18:44:01Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790707441000000003",
+            "2026-09-29T18:44:01Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/cron.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "cron",
+          "service_name": "cron"
+        },
+        "values": [
+          [
+            "1790707441000000000",
+            "2026-09-29T18:44:01Z | P1 | service-feed | service inactive | runbooks/service-down.md"
+          ],
+          [
+            "1790707441000000001",
+            "2026-09-29T18:44:01Z | P1 | port-9001 | port not listening | runbooks/port-blocked.md"
+          ],
+          [
+            "1790707441000000002",
+            "2026-09-29T18:44:01Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790707441000000003",
+            "2026-09-29T18:44:01Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790707442000000000",
+            "2026-09-29T18:44:02Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=11"
+          ],
+          [
+            "1790707802000000000",
+            "2026-09-29T18:50:02Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=1"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/order_service.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "orders",
+          "service_name": "orders"
+        },
+        "values": [
+          [
+            "1790707421000000000",
+            "2026-09-29T18:43:41Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707423000000000",
+            "2026-09-29T18:43:43Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707425000000000",
+            "2026-09-29T18:43:45Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707427000000000",
+            "2026-09-29T18:43:47Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707429000000000",
+            "2026-09-29T18:43:49Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707431000000000",
+            "2026-09-29T18:43:51Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707433000000000",
+            "2026-09-29T18:43:53Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707435000000000",
+            "2026-09-29T18:43:55Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707437000000000",
+            "2026-09-29T18:43:57Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707439000000000",
+            "2026-09-29T18:43:59Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707441000000000",
+            "2026-09-29T18:44:01Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707443000000000",
+            "2026-09-29T18:44:03Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707445000000000",
+            "2026-09-29T18:44:05Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707447000000000",
+            "2026-09-29T18:44:07Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707449000000000",
+            "2026-09-29T18:44:09Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707451000000000",
+            "2026-09-29T18:44:11Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707453000000000",
+            "2026-09-29T18:44:13Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707455000000000",
+            "2026-09-29T18:44:15Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707457000000000",
+            "2026-09-29T18:44:17Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707459000000000",
+            "2026-09-29T18:44:19Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707461000000000",
+            "2026-09-29T18:44:21Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707463000000000",
+            "2026-09-29T18:44:23Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707466000000000",
+            "2026-09-29T18:44:26Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707468000000000",
+            "2026-09-29T18:44:28Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707470000000000",
+            "2026-09-29T18:44:30Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707472000000000",
+            "2026-09-29T18:44:32Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707474000000000",
+            "2026-09-29T18:44:34Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707476000000000",
+            "2026-09-29T18:44:36Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707478000000000",
+            "2026-09-29T18:44:38Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707480000000000",
+            "2026-09-29T18:44:40Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707482000000000",
+            "2026-09-29T18:44:42Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707484000000000",
+            "2026-09-29T18:44:44Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707486000000000",
+            "2026-09-29T18:44:46Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707488000000000",
+            "2026-09-29T18:44:48Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707490000000000",
+            "2026-09-29T18:44:50Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707492000000000",
+            "2026-09-29T18:44:52Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707494000000000",
+            "2026-09-29T18:44:54Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707496000000000",
+            "2026-09-29T18:44:56Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707800000000000",
+            "2026-09-29T18:50:00Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707802000000000",
+            "2026-09-29T18:50:02Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707804000000000",
+            "2026-09-29T18:50:04Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707806000000000",
+            "2026-09-29T18:50:06Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707808000000000",
+            "2026-09-29T18:50:08Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707810000000000",
+            "2026-09-29T18:50:10Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707812000000000",
+            "2026-09-29T18:50:12Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707814000000000",
+            "2026-09-29T18:50:14Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707816000000000",
+            "2026-09-29T18:50:16Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707818000000000",
+            "2026-09-29T18:50:18Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707820000000000",
+            "2026-09-29T18:50:20Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707822000000000",
+            "2026-09-29T18:50:22Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ],
+          [
+            "1790707824000000000",
+            "2026-09-29T18:50:24Z | ERROR | feed unreachable: <urlopen error [Errno 111] Connection refused>"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "warn",
+          "filename": "/var/log/tradeops/alerts.log",
+          "job": "tradeops",
+          "level": "WARN",
+          "service": "alerts",
+          "service_name": "alerts"
+        },
+        "values": [
+          [
+            "1790707442000000000",
+            "2026-09-29T18:44:02Z | P2 | error-rate | 11 errors in last 5 minutes > 5 | runbooks/service-down.md"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "warn",
+          "filename": "/var/log/tradeops/cron.log",
+          "job": "tradeops",
+          "level": "WARN",
+          "service": "cron",
+          "service_name": "cron"
+        },
+        "values": [
+          [
+            "1790707442000000000",
+            "2026-09-29T18:44:02Z | P2 | error-rate | 11 errors in last 5 minutes > 5 | runbooks/service-down.md"
+          ],
+          [
+            "1790707502000000000",
+            "2026-09-29T18:45:02Z | healthcheck exit=1 CPU=4% memory=23% disk=69% errors=38"
+          ],
+          [
+            "1790707563000000000",
+            "2026-09-29T18:46:03Z | healthcheck exit=1 CPU=3% memory=23% disk=69% errors=38"
+          ],
+          [
+            "1790707622000000000",
+            "2026-09-29T18:47:02Z | healthcheck exit=1 CPU=3% memory=23% disk=69% errors=38"
+          ],
+          [
+            "1790707682000000000",
+            "2026-09-29T18:48:02Z | healthcheck exit=1 CPU=3% memory=22% disk=69% errors=38"
+          ],
+          [
+            "1790707743000000000",
+            "2026-09-29T18:49:03Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=27"
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 631188,
+        "linesProcessedPerSecond": 6240,
+        "totalBytesProcessed": 6878,
+        "totalLinesProcessed": 68,
+        "execTime": 0.010897,
+        "queueTime": 0.002823,
+        "subqueries": 0,
+        "totalEntriesReturned": 68,
+        "splits": 2,
+        "shards": 2,
+        "totalPostFilterLines": 68,
+        "totalStructuredMetadataBytesProcessed": 544
+      },
+      "querier": {
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 0,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 0,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "querierExecTime": 0.010802
+      },
+      "ingester": {
+        "totalReached": 2,
+        "totalChunksMatched": 10,
+        "totalBatches": 4,
+        "totalLinesSent": 68,
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 6878,
+            "headChunkLines": 68,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 68,
+            "headChunkStructuredMetadataBytes": 544,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 261875,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "recvWaitTime": 0.001679
+      },
+      "cache": {
+        "chunk": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "index": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "result": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "statsResult": {
+          "entriesFound": 2,
+          "entriesRequested": 2,
+          "entriesStored": 2,
+          "bytesReceived": 790,
+          "bytesSent": 0,
+          "requests": 4,
+          "downloadTime": 5625,
+          "queryLengthServed": 180000000000
+        },
+        "volumeResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "seriesResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "labelResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "instantMetricResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        }
+      },
+      "index": {
+        "totalChunks": 0,
+        "postFilterChunks": 0,
+        "shardsDuration": 0,
+        "usedBloomFilters": false,
+        "totalStreams": 0,
+        "chunkRefsLookupTime": 0,
+        "bloomFilterTime": 0
+      }
+    }
+  }
+}

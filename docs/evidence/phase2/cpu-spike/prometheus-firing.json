@@ -1,0 +1,60 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HighCPU",
+          "instance": "127.0.0.1:9100",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window.",
+          "runbook": "runbooks/high-cpu.md",
+          "summary": "host CPU exceeds 85 percent"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:58:18.889371656Z",
+        "value": "1e+02"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "orders process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "3.4315899991989136e+02"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "3.4315899991989136e+02"
+      }
+    ]
+  }
+}

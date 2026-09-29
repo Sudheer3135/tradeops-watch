@@ -1,0 +1,14 @@
+2026-09-29T16:59:25.785533Z $ sudo /opt/tradeops/scripts/chaos.sh slow-feed
+Added 350ms delay to price requests. Undo: fix-slow-feed
+exit=0
+2026-09-29T17:01:54.325764Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T17:01:54Z | healthcheck exit=0 CPU=1% memory=23% disk=69% errors=5
+exit=0
+2026-09-29T17:01:54.334765Z $ sudo /opt/tradeops/scripts/chaos.sh fix-slow-feed
+exit=0
+2026-09-29T17:02:56.092776Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T17:02:56Z | healthcheck exit=0 CPU=3% memory=23% disk=69% errors=5
+exit=0
+2026-09-29T17:02:56.131171Z $ sudo /opt/tradeops/scripts/chaos.sh cleanup
+All TradeOps chaos changes removed
+exit=0

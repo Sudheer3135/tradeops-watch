@@ -1,0 +1,621 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "detected_level": "info",
+          "filename": "/var/log/tradeops/market_feed.log",
+          "job": "tradeops",
+          "level": "INFO",
+          "service": "feed",
+          "service_name": "feed"
+        },
+        "values": [
+          [
+            "1790701131000000000",
+            "2026-09-29T16:58:51Z | INFO | prices={\"NIFTY\": 24339.46, \"BANKNIFTY\": 49605.5, \"RELIANCE\": 2895.49, \"TCS\": 4038.19, \"INFY\": 1865.03}"
+          ],
+          [
+            "1790701130000000000",
+            "2026-09-29T16:58:50Z | INFO | prices={\"NIFTY\": 24329.95, \"BANKNIFTY\": 49576.0, \"RELIANCE\": 2893.79, \"TCS\": 4040.69, \"INFY\": 1866.27}"
+          ],
+          [
+            "1790701129000000000",
+            "2026-09-29T16:58:49Z | INFO | prices={\"NIFTY\": 24334.58, \"BANKNIFTY\": 49624.05, \"RELIANCE\": 2893.11, \"TCS\": 4037.2, \"INFY\": 1867.17}"
+          ],
+          [
+            "1790701128000000000",
+            "2026-09-29T16:58:48Z | INFO | prices={\"NIFTY\": 24313.18, \"BANKNIFTY\": 49599.61, \"RELIANCE\": 2892.84, \"TCS\": 4036.39, \"INFY\": 1865.7}"
+          ],
+          [
+            "1790701127000000000",
+            "2026-09-29T16:58:47Z | INFO | prices={\"NIFTY\": 24305.19, \"BANKNIFTY\": 49585.87, \"RELIANCE\": 2890.28, \"TCS\": 4032.39, \"INFY\": 1865.72}"
+          ],
+          [
+            "1790701126000000000",
+            "2026-09-29T16:58:46Z | INFO | prices={\"NIFTY\": 24282.97, \"BANKNIFTY\": 49544.61, \"RELIANCE\": 2892.35, \"TCS\": 4032.52, \"INFY\": 1865.75}"
+          ],
+          [
+            "1790701125000000000",
+            "2026-09-29T16:58:45Z | INFO | prices={\"NIFTY\": 24290.54, \"BANKNIFTY\": 49495.65, \"RELIANCE\": 2892.74, \"TCS\": 4035.44, \"INFY\": 1866.81}"
+          ],
+          [
+            "1790701124000000000",
+            "2026-09-29T16:58:44Z | INFO | prices={\"NIFTY\": 24268.52, \"BANKNIFTY\": 49498.23, \"RELIANCE\": 2889.9, \"TCS\": 4038.24, \"INFY\": 1865.22}"
+          ],
+          [
+            "1790701123000000000",
+            "2026-09-29T16:58:43Z | INFO | prices={\"NIFTY\": 24280.01, \"BANKNIFTY\": 49487.36, \"RELIANCE\": 2891.9, \"TCS\": 4036.57, \"INFY\": 1866.38}"
+          ],
+          [
+            "1790701122000000000",
+            "2026-09-29T16:58:42Z | INFO | prices={\"NIFTY\": 24269.0, \"BANKNIFTY\": 49459.42, \"RELIANCE\": 2894.68, \"TCS\": 4039.41, \"INFY\": 1867.24}"
+          ],
+          [
+            "1790701121000000000",
+            "2026-09-29T16:58:41Z | INFO | prices={\"NIFTY\": 24261.86, \"BANKNIFTY\": 49417.85, \"RELIANCE\": 2891.91, \"TCS\": 4035.52, \"INFY\": 1865.71}"
+          ],
+          [
+            "1790701120000000000",
+            "2026-09-29T16:58:40Z | INFO | prices={\"NIFTY\": 24267.27, \"BANKNIFTY\": 49375.99, \"RELIANCE\": 2892.69, \"TCS\": 4032.26, \"INFY\": 1867.56}"
+          ],
+          [
+            "1790701119000000000",
+            "2026-09-29T16:58:39Z | INFO | prices={\"NIFTY\": 24252.01, \"BANKNIFTY\": 49409.3, \"RELIANCE\": 2892.08, \"TCS\": 4031.05, \"INFY\": 1866.84}"
+          ],
+          [
+            "1790701118000000000",
+            "2026-09-29T16:58:38Z | INFO | prices={\"NIFTY\": 24229.8, \"BANKNIFTY\": 49384.4, \"RELIANCE\": 2891.3, \"TCS\": 4031.12, \"INFY\": 1866.7}"
+          ],
+          [
+            "1790701117000000000",
+            "2026-09-29T16:58:37Z | INFO | prices={\"NIFTY\": 24205.74, \"BANKNIFTY\": 49344.87, \"RELIANCE\": 2889.21, \"TCS\": 4033.08, \"INFY\": 1868.48}"
+          ],
+          [
+            "1790701116000000000",
+            "2026-09-29T16:58:36Z | INFO | prices={\"NIFTY\": 24210.24, \"BANKNIFTY\": 49368.85, \"RELIANCE\": 2886.35, \"TCS\": 4032.81, \"INFY\": 1869.63}"
+          ],
+          [
+            "1790701115000000000",
+            "2026-09-29T16:58:35Z | INFO | prices={\"NIFTY\": 24197.29, \"BANKNIFTY\": 49392.96, \"RELIANCE\": 2886.49, \"TCS\": 4032.63, \"INFY\": 1868.51}"
+          ],
+          [
+            "1790701114000000000",
+            "2026-09-29T16:58:34Z | INFO | prices={\"NIFTY\": 24191.48, \"BANKNIFTY\": 49425.68, \"RELIANCE\": 2886.46, \"TCS\": 4031.16, \"INFY\": 1868.01}"
+          ],
+          [
+            "1790701113000000000",
+            "2026-09-29T16:58:33Z | INFO | prices={\"NIFTY\": 24168.9, \"BANKNIFTY\": 49431.69, \"RELIANCE\": 2888.18, \"TCS\": 4032.6, \"INFY\": 1869.25}"
+          ],
+          [
+            "1790701112000000000",
+            "2026-09-29T16:58:32Z | INFO | prices={\"NIFTY\": 24156.42, \"BANKNIFTY\": 49450.15, \"RELIANCE\": 2886.63, \"TCS\": 4028.87, \"INFY\": 1868.02}"
+          ],
+          [
+            "1790701111000000000",
+            "2026-09-29T16:58:31Z | INFO | prices={\"NIFTY\": 24151.91, \"BANKNIFTY\": 49460.84, \"RELIANCE\": 2885.28, \"TCS\": 4026.39, \"INFY\": 1867.46}"
+          ],
+          [
+            "1790701110000000000",
+            "2026-09-29T16:58:30Z | INFO | prices={\"NIFTY\": 24148.55, \"BANKNIFTY\": 49435.71, \"RELIANCE\": 2887.79, \"TCS\": 4028.85, \"INFY\": 1865.7}"
+          ],
+          [
+            "1790701109000000000",
+            "2026-09-29T16:58:29Z | INFO | prices={\"NIFTY\": 24160.34, \"BANKNIFTY\": 49445.48, \"RELIANCE\": 2889.82, \"TCS\": 4027.67, \"INFY\": 1866.02}"
+          ],
+          [
+            "1790701108000000000",
+            "2026-09-29T16:58:28Z | INFO | prices={\"NIFTY\": 24180.0, \"BANKNIFTY\": 49484.56, \"RELIANCE\": 2889.79, \"TCS\": 4024.9, \"INFY\": 1864.45}"
+          ],
+          [
+            "1790701107000000000",
+            "2026-09-29T16:58:27Z | INFO | prices={\"NIFTY\": 24178.32, \"BANKNIFTY\": 49440.54, \"RELIANCE\": 2889.35, \"TCS\": 4024.82, \"INFY\": 1865.58}"
+          ],
+          [
+            "1790701106000000000",
+            "2026-09-29T16:58:26Z | INFO | prices={\"NIFTY\": 24157.86, \"BANKNIFTY\": 49405.94, \"RELIANCE\": 2886.63, \"TCS\": 4024.87, \"INFY\": 1864.07}"
+          ],
+          [
+            "1790701105000000000",
+            "2026-09-29T16:58:25Z | INFO | prices={\"NIFTY\": 24179.27, \"BANKNIFTY\": 49443.64, \"RELIANCE\": 2887.42, \"TCS\": 4026.66, \"INFY\": 1864.87}"
+          ],
+          [
+            "1790701104000000000",
+            "2026-09-29T16:58:24Z | INFO | prices={\"NIFTY\": 24157.04, \"BANKNIFTY\": 49440.56, \"RELIANCE\": 2886.74, \"TCS\": 4027.08, \"INFY\": 1866.28}"
+          ],
+          [
+            "1790701103000000000",
+            "2026-09-29T16:58:23Z | INFO | prices={\"NIFTY\": 24158.79, \"BANKNIFTY\": 49443.2, \"RELIANCE\": 2887.34, \"TCS\": 4030.53, \"INFY\": 1867.97}"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "info",
+          "filename": "/var/log/tradeops/order_service.log",
+          "job": "tradeops",
+          "level": "INFO",
+          "service": "orders",
+          "service_name": "orders"
+        },
+        "values": [
+          [
+            "1790701130000000004",
+            "2026-09-29T16:58:50Z | INFO | order side=SELL symbol=INFY price=1866.27 latency_ms=2.67"
+          ],
+          [
+            "1790701130000000003",
+            "2026-09-29T16:58:50Z | INFO | order side=SELL symbol=TCS price=4040.69 latency_ms=2.67"
+          ],
+          [
+            "1790701130000000002",
+            "2026-09-29T16:58:50Z | INFO | order side=SELL symbol=RELIANCE price=2893.79 latency_ms=2.67"
+          ],
+          [
+            "1790701130000000001",
+            "2026-09-29T16:58:50Z | INFO | order side=BUY symbol=BANKNIFTY price=49576.00 latency_ms=2.67"
+          ],
+          [
+            "1790701130000000000",
+            "2026-09-29T16:58:50Z | INFO | order side=SELL symbol=NIFTY price=24329.95 latency_ms=2.67"
+          ],
+          [
+            "1790701128000000004",
+            "2026-09-29T16:58:48Z | INFO | order side=BUY symbol=INFY price=1865.70 latency_ms=1.64"
+          ],
+          [
+            "1790701128000000003",
+            "2026-09-29T16:58:48Z | INFO | order side=SELL symbol=TCS price=4036.39 latency_ms=1.64"
+          ],
+          [
+            "1790701128000000002",
+            "2026-09-29T16:58:48Z | INFO | order side=SELL symbol=RELIANCE price=2892.84 latency_ms=1.64"
+          ],
+          [
+            "1790701128000000001",
+            "2026-09-29T16:58:48Z | INFO | order side=SELL symbol=BANKNIFTY price=49599.61 latency_ms=1.64"
+          ],
+          [
+            "1790701128000000000",
+            "2026-09-29T16:58:48Z | INFO | order side=SELL symbol=NIFTY price=24313.18 latency_ms=1.64"
+          ],
+          [
+            "1790701126000000004",
+            "2026-09-29T16:58:46Z | INFO | order side=SELL symbol=INFY price=1865.75 latency_ms=2.85"
+          ],
+          [
+            "1790701126000000003",
+            "2026-09-29T16:58:46Z | INFO | order side=BUY symbol=TCS price=4032.52 latency_ms=2.85"
+          ],
+          [
+            "1790701126000000002",
+            "2026-09-29T16:58:46Z | INFO | order side=SELL symbol=RELIANCE price=2892.35 latency_ms=2.85"
+          ],
+          [
+            "1790701126000000001",
+            "2026-09-29T16:58:46Z | INFO | order side=SELL symbol=BANKNIFTY price=49544.61 latency_ms=2.85"
+          ],
+          [
+            "1790701126000000000",
+            "2026-09-29T16:58:46Z | INFO | order side=SELL symbol=NIFTY price=24282.97 latency_ms=2.85"
+          ],
+          [
+            "1790701124000000004",
+            "2026-09-29T16:58:44Z | INFO | order side=BUY symbol=INFY price=1865.22 latency_ms=2.73"
+          ],
+          [
+            "1790701124000000003",
+            "2026-09-29T16:58:44Z | INFO | order side=BUY symbol=TCS price=4038.24 latency_ms=2.73"
+          ],
+          [
+            "1790701124000000002",
+            "2026-09-29T16:58:44Z | INFO | order side=BUY symbol=RELIANCE price=2889.90 latency_ms=2.73"
+          ],
+          [
+            "1790701124000000001",
+            "2026-09-29T16:58:44Z | INFO | order side=SELL symbol=BANKNIFTY price=49498.23 latency_ms=2.73"
+          ],
+          [
+            "1790701124000000000",
+            "2026-09-29T16:58:44Z | INFO | order side=BUY symbol=NIFTY price=24268.52 latency_ms=2.73"
+          ],
+          [
+            "1790701122000000004",
+            "2026-09-29T16:58:42Z | INFO | order side=BUY symbol=INFY price=1867.24 latency_ms=4.55"
+          ],
+          [
+            "1790701122000000003",
+            "2026-09-29T16:58:42Z | INFO | order side=SELL symbol=TCS price=4039.41 latency_ms=4.55"
+          ],
+          [
+            "1790701122000000002",
+            "2026-09-29T16:58:42Z | INFO | order side=SELL symbol=RELIANCE price=2894.68 latency_ms=4.55"
+          ],
+          [
+            "1790701122000000001",
+            "2026-09-29T16:58:42Z | INFO | order side=SELL symbol=BANKNIFTY price=49459.42 latency_ms=4.55"
+          ],
+          [
+            "1790701122000000000",
+            "2026-09-29T16:58:42Z | INFO | order side=SELL symbol=NIFTY price=24269.00 latency_ms=4.55"
+          ],
+          [
+            "1790701120000000004",
+            "2026-09-29T16:58:40Z | INFO | order side=SELL symbol=INFY price=1867.56 latency_ms=1.85"
+          ],
+          [
+            "1790701120000000003",
+            "2026-09-29T16:58:40Z | INFO | order side=SELL symbol=TCS price=4032.26 latency_ms=1.85"
+          ],
+          [
+            "1790701120000000002",
+            "2026-09-29T16:58:40Z | INFO | order side=SELL symbol=RELIANCE price=2892.69 latency_ms=1.85"
+          ],
+          [
+            "1790701120000000001",
+            "2026-09-29T16:58:40Z | INFO | order side=BUY symbol=BANKNIFTY price=49375.99 latency_ms=1.85"
+          ],
+          [
+            "1790701120000000000",
+            "2026-09-29T16:58:40Z | INFO | order side=SELL symbol=NIFTY price=24267.27 latency_ms=1.85"
+          ],
+          [
+            "1790701118000000004",
+            "2026-09-29T16:58:38Z | INFO | order side=BUY symbol=INFY price=1866.70 latency_ms=0.86"
+          ],
+          [
+            "1790701118000000003",
+            "2026-09-29T16:58:38Z | INFO | order side=BUY symbol=TCS price=4031.12 latency_ms=0.86"
+          ],
+          [
+            "1790701118000000002",
+            "2026-09-29T16:58:38Z | INFO | order side=SELL symbol=RELIANCE price=2891.30 latency_ms=0.86"
+          ],
+          [
+            "1790701118000000001",
+            "2026-09-29T16:58:38Z | INFO | order side=SELL symbol=BANKNIFTY price=49384.40 latency_ms=0.86"
+          ],
+          [
+            "1790701118000000000",
+            "2026-09-29T16:58:38Z | INFO | order side=SELL symbol=NIFTY price=24229.80 latency_ms=0.86"
+          ],
+          [
+            "1790701116000000004",
+            "2026-09-29T16:58:36Z | INFO | order side=SELL symbol=INFY price=1869.63 latency_ms=1.37"
+          ],
+          [
+            "1790701116000000003",
+            "2026-09-29T16:58:36Z | INFO | order side=SELL symbol=TCS price=4032.81 latency_ms=1.37"
+          ],
+          [
+            "1790701116000000002",
+            "2026-09-29T16:58:36Z | INFO | order side=BUY symbol=RELIANCE price=2886.35 latency_ms=1.37"
+          ],
+          [
+            "1790701116000000001",
+            "2026-09-29T16:58:36Z | INFO | order side=BUY symbol=BANKNIFTY price=49368.85 latency_ms=1.37"
+          ],
+          [
+            "1790701116000000000",
+            "2026-09-29T16:58:36Z | INFO | order side=SELL symbol=NIFTY price=24210.24 latency_ms=1.37"
+          ],
+          [
+            "1790701114000000004",
+            "2026-09-29T16:58:34Z | INFO | order side=BUY symbol=INFY price=1868.01 latency_ms=2.48"
+          ],
+          [
+            "1790701114000000003",
+            "2026-09-29T16:58:34Z | INFO | order side=SELL symbol=TCS price=4031.16 latency_ms=2.48"
+          ],
+          [
+            "1790701114000000002",
+            "2026-09-29T16:58:34Z | INFO | order side=BUY symbol=RELIANCE price=2886.46 latency_ms=2.48"
+          ],
+          [
+            "1790701114000000001",
+            "2026-09-29T16:58:34Z | INFO | order side=BUY symbol=BANKNIFTY price=49425.68 latency_ms=2.48"
+          ],
+          [
+            "1790701114000000000",
+            "2026-09-29T16:58:34Z | INFO | order side=SELL symbol=NIFTY price=24191.48 latency_ms=2.48"
+          ],
+          [
+            "1790701112000000004",
+            "2026-09-29T16:58:32Z | INFO | order side=SELL symbol=INFY price=1868.02 latency_ms=9.52"
+          ],
+          [
+            "1790701112000000003",
+            "2026-09-29T16:58:32Z | INFO | order side=SELL symbol=TCS price=4028.87 latency_ms=9.52"
+          ],
+          [
+            "1790701112000000002",
+            "2026-09-29T16:58:32Z | INFO | order side=BUY symbol=RELIANCE price=2886.63 latency_ms=9.52"
+          ],
+          [
+            "1790701112000000001",
+            "2026-09-29T16:58:32Z | INFO | order side=SELL symbol=BANKNIFTY price=49450.15 latency_ms=9.52"
+          ],
+          [
+            "1790701112000000000",
+            "2026-09-29T16:58:32Z | INFO | order side=SELL symbol=NIFTY price=24156.42 latency_ms=9.52"
+          ],
+          [
+            "1790701110000000004",
+            "2026-09-29T16:58:30Z | INFO | order side=SELL symbol=INFY price=1865.70 latency_ms=0.96"
+          ],
+          [
+            "1790701110000000003",
+            "2026-09-29T16:58:30Z | INFO | order side=SELL symbol=TCS price=4028.85 latency_ms=0.96"
+          ],
+          [
+            "1790701110000000002",
+            "2026-09-29T16:58:30Z | INFO | order side=BUY symbol=RELIANCE price=2887.79 latency_ms=0.96"
+          ],
+          [
+            "1790701110000000001",
+            "2026-09-29T16:58:30Z | INFO | order side=BUY symbol=BANKNIFTY price=49435.71 latency_ms=0.96"
+          ],
+          [
+            "1790701110000000000",
+            "2026-09-29T16:58:30Z | INFO | order side=BUY symbol=NIFTY price=24148.55 latency_ms=0.96"
+          ],
+          [
+            "1790701108000000004",
+            "2026-09-29T16:58:28Z | INFO | order side=SELL symbol=INFY price=1864.45 latency_ms=2.37"
+          ],
+          [
+            "1790701108000000003",
+            "2026-09-29T16:58:28Z | INFO | order side=SELL symbol=TCS price=4024.90 latency_ms=2.37"
+          ],
+          [
+            "1790701108000000002",
+            "2026-09-29T16:58:28Z | INFO | order side=SELL symbol=RELIANCE price=2889.79 latency_ms=2.37"
+          ],
+          [
+            "1790701108000000001",
+            "2026-09-29T16:58:28Z | INFO | order side=SELL symbol=BANKNIFTY price=49484.56 latency_ms=2.37"
+          ],
+          [
+            "1790701108000000000",
+            "2026-09-29T16:58:28Z | INFO | order side=SELL symbol=NIFTY price=24180.00 latency_ms=2.37"
+          ],
+          [
+            "1790701106000000004",
+            "2026-09-29T16:58:26Z | INFO | order side=BUY symbol=INFY price=1864.07 latency_ms=6.22"
+          ],
+          [
+            "1790701106000000003",
+            "2026-09-29T16:58:26Z | INFO | order side=BUY symbol=TCS price=4024.87 latency_ms=6.22"
+          ],
+          [
+            "1790701106000000002",
+            "2026-09-29T16:58:26Z | INFO | order side=BUY symbol=RELIANCE price=2886.63 latency_ms=6.22"
+          ],
+          [
+            "1790701106000000001",
+            "2026-09-29T16:58:26Z | INFO | order side=BUY symbol=BANKNIFTY price=49405.94 latency_ms=6.22"
+          ],
+          [
+            "1790701106000000000",
+            "2026-09-29T16:58:26Z | INFO | order side=SELL symbol=NIFTY price=24157.86 latency_ms=6.22"
+          ],
+          [
+            "1790701104000000004",
+            "2026-09-29T16:58:24Z | INFO | order side=BUY symbol=INFY price=1866.28 latency_ms=4.96"
+          ],
+          [
+            "1790701104000000003",
+            "2026-09-29T16:58:24Z | INFO | order side=BUY symbol=TCS price=4027.08 latency_ms=4.96"
+          ],
+          [
+            "1790701104000000002",
+            "2026-09-29T16:58:24Z | INFO | order side=SELL symbol=RELIANCE price=2886.74 latency_ms=4.96"
+          ],
+          [
+            "1790701104000000001",
+            "2026-09-29T16:58:24Z | INFO | order side=SELL symbol=BANKNIFTY price=49440.56 latency_ms=4.96"
+          ],
+          [
+            "1790701104000000000",
+            "2026-09-29T16:58:24Z | INFO | order side=SELL symbol=NIFTY price=24157.04 latency_ms=4.96"
+          ],
+          [
+            "1790701102000000004",
+            "2026-09-29T16:58:22Z | INFO | order side=SELL symbol=INFY price=1868.12 latency_ms=2.12"
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 5330381,
+        "linesProcessedPerSecond": 48966,
+        "totalBytesProcessed": 55409,
+        "totalLinesProcessed": 509,
+        "execTime": 0.010395,
+        "queueTime": 0.000176,
+        "subqueries": 0,
+        "totalEntriesReturned": 100,
+        "splits": 0,
+        "shards": 1,
+        "totalPostFilterLines": 509,
+        "totalStructuredMetadataBytesProcessed": 4072
+      },
+      "querier": {
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 0,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 0,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "querierExecTime": 0.009227
+      },
+      "ingester": {
+        "totalReached": 1,
+        "totalChunksMatched": 4,
+        "totalBatches": 1,
+        "totalLinesSent": 100,
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 55409,
+            "headChunkLines": 509,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 509,
+            "headChunkStructuredMetadataBytes": 4072,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 202459,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "recvWaitTime": 0.003458
+      },
+      "cache": {
+        "chunk": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "index": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "result": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "statsResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "volumeResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "seriesResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "labelResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "instantMetricResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        }
+      },
+      "index": {
+        "totalChunks": 0,
+        "postFilterChunks": 0,
+        "shardsDuration": 0,
+        "usedBloomFilters": false,
+        "totalStreams": 0,
+        "chunkRefsLookupTime": 0,
+        "bloomFilterTime": 0
+      }
+    }
+  }
+}

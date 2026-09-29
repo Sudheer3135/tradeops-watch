@@ -1,0 +1,74 @@
+{
+  "scenario": "stop-feed",
+  "expected_alert": "ServiceDown",
+  "service": "feed",
+  "baseline_started_at": "2026-09-29T18:43:40.349131Z",
+  "fault_started_at": "2026-09-29T18:43:40.359166Z",
+  "firing": {
+    "observed_at": "2026-09-29T18:44:10.705809Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "ServiceDown",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Prometheus cannot scrape 127.0.0.1:9001. Check the service, listener and firewall.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed scrape target is down"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:43:48.889371656Z",
+        "value": "0e+00"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "Prometheus cannot scrape 127.0.0.1:9001. Check the service, listener and firewall.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed scrape target is down"
+        },
+        "endsAt": "2026-09-29T18:48:03.889Z",
+        "fingerprint": "a4f0a178044237ff",
+        "receivers": [
+          {
+            "name": "p1"
+          }
+        ],
+        "startsAt": "2026-09-29T18:44:03.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T18:44:06.472Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+        "labels": {
+          "alertname": "ServiceDown",
+          "environment": "tradeops-lab",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "inhibition": "2026-09-29T18:44:55.896530Z",
+  "fix_started_at": "2026-09-29T18:44:57.139263Z",
+  "resolved": {
+    "observed_at": "2026-09-29T18:45:07.297754Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T18:49:59.797602Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T18:49:59.823748Z"
+}

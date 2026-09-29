@@ -1,0 +1,64 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "DiskAlmostFull",
+          "device": "/dev/sda1",
+          "fstype": "ext4",
+          "instance": "127.0.0.1:9100",
+          "job": "node",
+          "mountpoint": "/",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Root usage is at least 85 percent but below 95 percent for 30 seconds. Inspect growth before deleting files.",
+          "runbook": "runbooks/disk-full.md",
+          "summary": "host root disk is almost full"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:56:33.889371656Z",
+        "value": "8.718154166001166e+01"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "orders process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "2.3815899991989136e+02"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceRestartedRecently",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed process started recently"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:53:18.889371656Z",
+        "value": "2.3815899991989136e+02"
+      }
+    ]
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707829.835,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790708159.835,
+            "1"
+          ],
+          [
+            1790708174.835,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707844.835,
+            "1"
+          ],
+          [
+            1790708159.835,
+            "1"
+          ],
+          [
+            1790708174.835,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "pending",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707814.835,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "pending",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707829.835,
+            "1"
+          ],
+          [
+            1790708144.835,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "pending",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707829.835,
+            "1"
+          ],
+          [
+            1790708144.835,
+            "1"
+          ]
+        ]
+      }
+    ]
+  }
+}

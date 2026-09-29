@@ -1,0 +1,88 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "value": [
+          1790707495.96,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceDown",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "value": [
+          1790707495.96,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "value": [
+          1790707495.96,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "value": [
+          1790707495.96,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "FeedErrorsHigh",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "value": [
+          1790707495.96,
+          "1"
+        ]
+      }
+    ]
+  }
+}

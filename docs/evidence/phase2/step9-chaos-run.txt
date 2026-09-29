@@ -11,3 +11,21 @@
 2026-09-29T17:01:53.067282Z slow-feed confirmed in Prometheus and Alertmanager
 2026-09-29T17:02:56.101048Z slow-feed PASS resolved and Phase 1 healthy
 2026-09-29T17:02:56.133645Z kill-feed waiting for clean alert baseline
+2026-09-29T18:33:14.931248Z NOTE previous run aborted: kill-feed was injected at 2026-09-29T17:03:26Z, then the verifier exited with BrokenPipeError when its terminal output closed; cleanup ran. Evidence kept in kill-feed-aborted-20260929/. Resuming remaining scenarios with the fixed verifier.
+2026-09-29T18:33:21.821116Z kill-feed waiting for clean alert baseline
+2026-09-29T18:33:21.896745Z kill-feed fault injected
+2026-09-29T18:34:07.449728Z kill-feed confirmed in Prometheus and Alertmanager
+2026-09-29T18:43:40.335636Z kill-feed PASS resolved and Phase 1 healthy
+2026-09-29T18:43:40.349149Z stop-feed waiting for clean alert baseline
+2026-09-29T18:43:40.372309Z stop-feed fault injected
+2026-09-29T18:44:10.705916Z stop-feed confirmed in Prometheus and Alertmanager
+2026-09-29T18:44:55.899871Z stop-feed inhibition confirmed: feed probe muted, orders errors active
+2026-09-29T18:49:59.807348Z stop-feed PASS resolved and Phase 1 healthy
+2026-09-29T18:49:59.824246Z block-port waiting for clean alert baseline
+2026-09-29T18:49:59.842694Z block-port fault injected
+2026-09-29T18:50:25.092620Z block-port confirmed in Prometheus and Alertmanager
+2026-09-29T18:55:18.072698Z block-port PASS resolved and Phase 1 healthy
+2026-09-29T18:55:18.085875Z net-delay waiting for clean alert baseline
+2026-09-29T18:55:18.139532Z net-delay fault injected
+2026-09-29T18:56:03.153621Z net-delay confirmed in Prometheus and Alertmanager
+2026-09-29T19:01:30.304772Z net-delay PASS resolved and Phase 1 healthy

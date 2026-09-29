@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9001/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HighOrderLatency",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders p95 order-cycle latency is high"
+        },
+        "state": "pending",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "2e+00"
+      }
+    ]
+  }
+}

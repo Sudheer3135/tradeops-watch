@@ -1,0 +1,123 @@
+{
+  "scenario": "net-delay",
+  "expected_alert": "HealthProbeFailed",
+  "service": null,
+  "baseline_started_at": "2026-09-29T18:55:18.085856Z",
+  "fault_started_at": "2026-09-29T18:55:18.095635Z",
+  "firing": {
+    "observed_at": "2026-09-29T18:56:03.153368Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9001/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "0e+00"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders health probe failed"
+        },
+        "endsAt": "2026-09-29T18:59:48.889Z",
+        "fingerprint": "0d5fb8b842f19ec5",
+        "receivers": [
+          {
+            "name": "p1"
+          }
+        ],
+        "startsAt": "2026-09-29T18:55:48.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T18:55:52.070Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "environment": "tradeops-lab",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        }
+      },
+      {
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9001/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "endsAt": "2026-09-29T18:59:48.889Z",
+        "fingerprint": "e8ec944c2bd8f585",
+        "receivers": [
+          {
+            "name": "p1"
+          }
+        ],
+        "startsAt": "2026-09-29T18:55:48.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T18:55:52.070Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "environment": "tradeops-lab",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "fix_started_at": "2026-09-29T18:56:33.498951Z",
+  "resolved": {
+    "observed_at": "2026-09-29T18:56:53.776155Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T19:01:30.282058Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T19:01:30.330408Z"
+}

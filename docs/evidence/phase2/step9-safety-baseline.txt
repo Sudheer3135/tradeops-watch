@@ -1,0 +1,41 @@
+2026-09-29T18:31:14Z
+$ chaos.sh cleanup
+All TradeOps chaos changes removed
+absent /var/lib/tradeops/disk-fill
+absent /var/lib/tradeops/slow-feed
+absent /var/lib/tradeops/net-delay
+tradeops-chaos iptables rules: 0
+qdisc noqueue 0: root refcnt 2 
+2026-09-29T18:31:15Z | healthcheck exit=0 CPU=3% memory=22% disk=69% errors=0
+healthcheck exit=0
+PASS prometheus ready: http://127.0.0.1:9090/-/ready
+PASS alertmanager ready: http://127.0.0.1:9093/-/ready
+PASS grafana ready: http://127.0.0.1:3000/api/health
+PASS loki ready: http://127.0.0.1:3100/ready
+PASS alloy ready: http://127.0.0.1:12345/-/ready
+PASS node_exporter ready: http://127.0.0.1:9100/metrics
+PASS blackbox_exporter ready: http://127.0.0.1:9115/metrics
+PASS feed http_2xx probe_success=1
+PASS feed tcp_connect probe_success=1
+PASS orders http_2xx probe_success=1
+PASS orders tcp_connect probe_success=1
+PASS host memory and filesystem metrics exist
+{'instance': '127.0.0.1:9115', 'job': 'blackbox-exporter', 'service': 'blackbox'} up 
+{'instance': 'http://127.0.0.1:9001/health', 'job': 'blackbox-http', 'service': 'feed'} up 
+{'instance': 'http://127.0.0.1:9002/health', 'job': 'blackbox-http', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9002', 'job': 'blackbox-tcp', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9001', 'job': 'blackbox-tcp', 'service': 'feed'} up 
+{'instance': '127.0.0.1:9100', 'job': 'node', 'service': 'host'} up 
+{'instance': '127.0.0.1:9090', 'job': 'prometheus', 'service': 'prometheus'} up 
+{'instance': '127.0.0.1:9002', 'job': 'tradeops', 'service': 'orders'} up 
+{'instance': '127.0.0.1:9001', 'job': 'tradeops', 'service': 'feed'} up 
+PASS all configured Prometheus scrape targets up
+alertmanager prom/alertmanager:v0.34.1 Up 2 hours
+alloy grafana/alloy:v1.20.1 Up 2 hours
+blackbox_exporter prom/blackbox-exporter:v0.28.0 Up 4 hours
+grafana grafana/grafana:13.2.3 Up 2 hours
+loki grafana/loki:3.7.8 Up 4 hours
+node_exporter prom/node-exporter:v1.12.1 Up 4 hours
+prometheus prom/prometheus:v3.15.0 Up 4 hours
+Prometheus: {"status":"success","data":{"alerts":[]}}
+Alertmanager: []

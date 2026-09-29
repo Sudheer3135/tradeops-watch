@@ -1,0 +1,79 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "ServiceDown",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Prometheus cannot scrape 127.0.0.1:9001. Check the service, listener and firewall.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "feed scrape target is down"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:43:48.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for 127.0.0.1:9001 has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:43:48.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9001/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:43:48.889371656Z",
+        "value": "0e+00"
+      },
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders health probe failed"
+        },
+        "state": "pending",
+        "activeAt": "2026-09-29T18:44:03.889371656Z",
+        "value": "0e+00"
+      }
+    ]
+  }
+}

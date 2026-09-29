@@ -1,0 +1,41 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "FeedErrorsHigh",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "More than six feed errors per minute, averaged over two minutes, sustained for 30 seconds.",
+          "runbook": "runbooks/service-down.md",
+          "summary": "orders feed fetch errors are elevated"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:56:18.889371656Z",
+        "value": "1.7142693879105914e-01"
+      },
+      {
+        "labels": {
+          "alertname": "HighOrderLatency",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The p95 feed-fetch latency exceeds 300 ms for two minutes. Failed and slow attempts are included.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "orders p95 order-cycle latency is high"
+        },
+        "state": "pending",
+        "activeAt": "2026-09-29T18:55:33.889371656Z",
+        "value": "2e+00"
+      }
+    ]
+  }
+}

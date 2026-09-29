@@ -1,0 +1,14 @@
+2026-09-29T18:33:21.896688Z $ sudo /opt/tradeops/scripts/chaos.sh kill-feed
+Killed feed; systemd restarts after 5s. Undo: fix-feed
+exit=0
+2026-09-29T18:34:08.848201Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:34:08Z | healthcheck exit=0 CPU=7% memory=22% disk=69% errors=3
+exit=0
+2026-09-29T18:34:08.873628Z $ sudo /opt/tradeops/scripts/chaos.sh fix-feed
+exit=0
+2026-09-29T18:43:40.328514Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:43:40Z | healthcheck exit=0 CPU=2% memory=23% disk=69% errors=0
+exit=0
+2026-09-29T18:43:40.348863Z $ sudo /opt/tradeops/scripts/chaos.sh cleanup
+All TradeOps chaos changes removed
+exit=0

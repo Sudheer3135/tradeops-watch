@@ -1,0 +1,100 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790708163.096,
+            "1"
+          ],
+          [
+            1790708178.096,
+            "1"
+          ],
+          [
+            1790708193.096,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "firing",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790708163.096,
+            "1"
+          ],
+          [
+            1790708178.096,
+            "1"
+          ],
+          [
+            1790708193.096,
+            "1"
+          ],
+          [
+            1790708208.096,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "pending",
+          "instance": "http://127.0.0.1:9001/health",
+          "job": "blackbox-http",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790708148.096,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HealthProbeFailed",
+          "alertstate": "pending",
+          "instance": "http://127.0.0.1:9002/health",
+          "job": "blackbox-http",
+          "service": "orders",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790708148.096,
+            "1"
+          ]
+        ]
+      }
+    ]
+  }
+}

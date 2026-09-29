@@ -1,0 +1,71 @@
+{
+  "scenario": "cpu-spike",
+  "expected_alert": "HighCPU",
+  "service": "host",
+  "baseline_started_at": "2026-09-29T16:57:27.520008Z",
+  "fault_started_at": "2026-09-29T16:57:27.545944Z",
+  "firing": {
+    "observed_at": "2026-09-29T16:58:53.093282Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "HighCPU",
+          "instance": "127.0.0.1:9100",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window.",
+          "runbook": "runbooks/high-cpu.md",
+          "summary": "host CPU exceeds 85 percent"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:58:18.889371656Z",
+        "value": "1e+02"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window.",
+          "runbook": "runbooks/high-cpu.md",
+          "summary": "host CPU exceeds 85 percent"
+        },
+        "endsAt": "2026-09-29T17:02:48.889Z",
+        "fingerprint": "8b395f9d1c77e9e8",
+        "receivers": [
+          {
+            "name": "p2"
+          }
+        ],
+        "startsAt": "2026-09-29T16:58:48.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T16:58:51.475Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=100+%2A+%281+-+avg+by+%28instance%2C+service%29+%28rate%28node_cpu_seconds_total%7Bjob%3D%22node%22%2Cmode%3D%22idle%22%7D%5B1m%5D%29%29%29+%3E+85&g0.tab=1",
+        "labels": {
+          "alertname": "HighCPU",
+          "environment": "tradeops-lab",
+          "instance": "127.0.0.1:9100",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "fix_started_at": "2026-09-29T16:58:54.365219Z",
+  "resolved": {
+    "observed_at": "2026-09-29T16:59:24.629441Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T16:59:25.740688Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T16:59:25.763854Z"
+}

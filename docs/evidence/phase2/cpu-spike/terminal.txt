@@ -1,0 +1,15 @@
+2026-09-29T16:57:27.577647Z $ sudo /opt/tradeops/scripts/chaos.sh cpu-spike
+Running as unit: tradeops-chaos-cpu.service; invocation ID: 6044576d2f5c418b9f3edb0ddc1c64c8
+CPU workers run for 120s, systemd also enforces 125s limit. Undo: fix-cpu
+exit=0
+2026-09-29T16:58:54.365141Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T16:58:54Z | healthcheck exit=1 CPU=100% memory=23% disk=69% errors=0
+exit=1
+2026-09-29T16:58:54.388946Z $ sudo /opt/tradeops/scripts/chaos.sh fix-cpu
+exit=0
+2026-09-29T16:59:25.740617Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T16:59:25Z | healthcheck exit=0 CPU=2% memory=23% disk=69% errors=0
+exit=0
+2026-09-29T16:59:25.763827Z $ sudo /opt/tradeops/scripts/chaos.sh cleanup
+All TradeOps chaos changes removed
+exit=0

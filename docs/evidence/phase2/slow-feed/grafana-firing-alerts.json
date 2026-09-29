@@ -1,0 +1,54 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceRestartedRecently",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9002",
+          "job": "tradeops",
+          "service": "orders",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701313.13,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceRestartedRecently",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P3",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701313.13,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HighOrderLatency",
+          "alertstate": "firing",
+          "service": "orders",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "value": [
+          1790701313.13,
+          "1"
+        ]
+      }
+    ]
+  }
+}

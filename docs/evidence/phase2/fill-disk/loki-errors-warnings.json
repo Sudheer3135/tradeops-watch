@@ -1,0 +1,245 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "detected_level": "warn",
+          "filename": "/var/log/tradeops/alerts.log",
+          "job": "tradeops",
+          "level": "WARN",
+          "service": "alerts",
+          "service_name": "alerts"
+        },
+        "values": [
+          [
+            "1790701022000000000",
+            "2026-09-29T16:57:02Z | P2 | disk | Disk 88% >= 85% | runbooks/disk-full.md"
+          ],
+          [
+            "1790701082000000000",
+            "2026-09-29T16:58:02Z | P2 | cpu | CPU 100% >= 85% | runbooks/high-cpu.md"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "warn",
+          "filename": "/var/log/tradeops/cron.log",
+          "job": "tradeops",
+          "level": "WARN",
+          "service": "cron",
+          "service_name": "cron"
+        },
+        "values": [
+          [
+            "1790701022000000000",
+            "2026-09-29T16:57:02Z | P2 | disk | Disk 88% >= 85% | runbooks/disk-full.md"
+          ],
+          [
+            "1790701022000000001",
+            "2026-09-29T16:57:02Z | healthcheck exit=1 CPU=3% memory=23% disk=88% errors=0"
+          ],
+          [
+            "1790701082000000000",
+            "2026-09-29T16:58:02Z | P2 | cpu | CPU 100% >= 85% | runbooks/high-cpu.md"
+          ],
+          [
+            "1790701082000000001",
+            "2026-09-29T16:58:02Z | healthcheck exit=1 CPU=100% memory=23% disk=69% errors=0"
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 15341,
+        "linesProcessedPerSecond": 116,
+        "totalBytesProcessed": 1058,
+        "totalLinesProcessed": 8,
+        "execTime": 0.068965,
+        "queueTime": 0.000186,
+        "subqueries": 0,
+        "totalEntriesReturned": 6,
+        "splits": 0,
+        "shards": 1,
+        "totalPostFilterLines": 8,
+        "totalStructuredMetadataBytesProcessed": 240
+      },
+      "querier": {
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 0,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 0,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "querierExecTime": 0.073181
+      },
+      "ingester": {
+        "totalReached": 1,
+        "totalChunksMatched": 0,
+        "totalBatches": 2,
+        "totalLinesSent": 6,
+        "store": {
+          "totalChunksRef": 2,
+          "totalChunksDownloaded": 2,
+          "chunksDownloadTime": 10623203,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 1058,
+            "decompressedLines": 8,
+            "compressedBytes": 677,
+            "totalDuplicates": 0,
+            "postFilterLines": 8,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 240
+          },
+          "chunkRefsFetchTime": 1158583,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "recvWaitTime": 0.018458
+      },
+      "cache": {
+        "chunk": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "index": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "result": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "statsResult": {
+          "entriesFound": 0,
+          "entriesRequested": 1,
+          "entriesStored": 1,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 2,
+          "downloadTime": 50791,
+          "queryLengthServed": 0
+        },
+        "volumeResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "seriesResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "labelResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "instantMetricResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        }
+      },
+      "index": {
+        "totalChunks": 0,
+        "postFilterChunks": 0,
+        "shardsDuration": 0,
+        "usedBloomFilters": false,
+        "totalStreams": 0,
+        "chunkRefsLookupTime": 0,
+        "bloomFilterTime": 0
+      }
+    }
+  }
+}

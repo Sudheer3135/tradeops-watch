@@ -25,8 +25,22 @@ SCENARIOS = {
 }
 
 
+RUN_LOG = ROOT / "docs/evidence/phase2/step9-chaos-run.txt"
+
+
 def utc():
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def log(*parts):
+    """Append progress to the evidence log; a closed terminal must not abort a live fault."""
+    line = " ".join(str(part) for part in (utc(), *parts))
+    with RUN_LOG.open("a") as output:
+        output.write(line + "\n")
+    try:
+        print(line, flush=True)
+    except OSError:
+        pass
 
 
 def fetch(url, auth=None):
@@ -60,21 +74,97 @@ def snapshot(folder, stage):
     return prom["data"]["alerts"], am
 
 
-def wait_alert(folder, name, service, firing, timeout):
+def describe(alerts):
+    return ", ".join(
+        f"{a['labels'].get('alertname')}/{a['labels'].get('service')}/"
+        f"{a.get('state') or a.get('status', {}).get('state')}"
+        for a in alerts
+    )
+
+
+def wait_alert(folder, name, service, firing, timeout, stage):
+    """Firing needs the alert firing in both APIs; clear needs it absent in every state."""
     deadline = time.monotonic() + timeout
+    blocking = []
     while time.monotonic() < deadline:
         try:
             prom, am = snapshot(folder, "poll")
-            p = [a for a in prom if matches(a, name, service) and a["state"] == "firing"]
+            p = [a for a in prom if matches(a, name, service)]
             a = [a for a in am if matches(a, name, service)]
+            if firing:
+                p = [x for x in p if x["state"] == "firing"]
             if (p and a) if firing else (not p and not a):
-                stage = "firing" if firing else "resolved"
                 snapshot(folder, stage)
                 return {"observed_at": utc(), "prometheus": p, "alertmanager": a}
+            blocking = p + a
         except (OSError, ValueError) as error:
-            print(utc(), "API retry", str(error), flush=True)
+            log("API retry", error)
         time.sleep(5)
-    raise TimeoutError(f"{name} firing={firing} did not converge in {timeout}s")
+    wanted = "firing in Prometheus and Alertmanager" if firing else "absent from both APIs"
+    raise TimeoutError(
+        f"{name} (service={service}) was not {wanted} within {timeout}s; "
+        f"last matching alerts: {describe(blocking) or 'none'}"
+    )
+
+
+def wait_process_age(service, minimum, timeout):
+    query = urlencode(
+        {"query": f'time()-process_start_time_seconds{{job="tradeops",service="{service}"}}'}
+    )
+    deadline = time.monotonic() + timeout
+    age = None
+    while time.monotonic() < deadline:
+        result = fetch("http://127.0.0.1:9090/api/v1/query?" + query)["data"]["result"]
+        age = float(result[0]["value"][1]) if result else None
+        if age is not None and age >= minimum:
+            return
+        time.sleep(15)
+    raise TimeoutError(
+        f"{service} process age was {age} (None means not scraped); needed >= {minimum}s "
+        f"within {timeout}s. Check that the service is running."
+    )
+
+
+def wait_inhibition(folder, timeout):
+    """Real stop-feed proof: ServiceDown mutes same-service alerts, not other services."""
+    deadline = time.monotonic() + timeout
+    am = []
+    while time.monotonic() < deadline:
+        try:
+            am = fetch("http://127.0.0.1:9093/api/v2/alerts")
+        except (OSError, ValueError) as error:
+            log("API retry", error)
+            time.sleep(5)
+            continue
+        source = [a for a in am if matches(a, "ServiceDown", "feed")]
+        muted = [
+            a
+            for a in am
+            if matches(a, "HealthProbeFailed", "feed")
+            and a["status"]["state"] == "suppressed"
+            and set(a["status"]["inhibitedBy"]) & {s["fingerprint"] for s in source}
+        ]
+        other = [
+            a
+            for a in am
+            if matches(a, "FeedErrorsHigh", "orders")
+            and a["status"]["state"] == "active"
+            and not a["status"]["inhibitedBy"]
+        ]
+        if source and muted and other:
+            result = {
+                "observed_at": utc(),
+                "rule": "ServiceDown P1 inhibits same service/environment symptoms",
+                "source": source,
+                "inhibited_same_service": muted,
+                "active_other_service": other,
+            }
+            save(folder / "inhibition.json", result)
+            return result
+        time.sleep(5)
+    raise TimeoutError(
+        f"Inhibition not observed within {timeout}s; Alertmanager had: {describe(am) or 'none'}"
+    )
 
 
 def observe(folder, auth, start):
@@ -132,47 +222,47 @@ def main():
             "service": service,
             "baseline_started_at": utc(),
         }
-        log = folder / "terminal.txt"
+        terminal = folder / "terminal.txt"
         try:
-            print(utc(), scenario, "waiting for clean alert baseline", flush=True)
+            log(scenario, "waiting for clean alert baseline")
             if scenario == "kill-feed":
-                while True:
-                    age = fetch("http://127.0.0.1:9090/api/v1/query?" + urlencode({"query": 'time()-process_start_time_seconds{job="tradeops",service="feed"}'}))["data"]["result"]
-                    if age and float(age[0]["value"][1]) >= 610:
-                        break
-                    time.sleep(15)
-            wait_alert(folder, name, service, False, 900)
-            snapshot(folder, "baseline")
+                # A new restart is only provable once the previous recent-start P3 has expired.
+                wait_process_age("feed", 610, 900)
+            wait_alert(folder, name, service, False, 900, "baseline")
             timeline["fault_started_at"] = utc()
             start = time.time_ns() - 60 * 10**9
-            result = command(["sudo", CHAOS, scenario], log)
+            result = command(["sudo", CHAOS, scenario], terminal)
             result.check_returncode()
-            print(utc(), scenario, "fault injected", flush=True)
-            timeline["firing"] = wait_alert(folder, name, service, True, 480)
-            print(utc(), scenario, "confirmed in Prometheus and Alertmanager", flush=True)
+            log(scenario, "fault injected")
+            timeline["firing"] = wait_alert(folder, name, service, True, 480, "firing")
+            log(scenario, "confirmed in Prometheus and Alertmanager")
+            if scenario == "stop-feed":
+                timeline["inhibition"] = wait_inhibition(folder, 240)["observed_at"]
+                log(scenario, "inhibition confirmed: feed probe muted, orders errors active")
             observe(folder, auth, start)
-            command(["sudo", "/opt/tradeops/scripts/healthcheck.sh"], log)
+            command(["sudo", "/opt/tradeops/scripts/healthcheck.sh"], terminal)
             timeline["fix_started_at"] = utc()
-            command(["sudo", CHAOS, fix], log).check_returncode()
-            timeline["resolved"] = wait_alert(folder, name, service, False, 900)
+            command(["sudo", CHAOS, fix], terminal).check_returncode()
+            timeline["resolved"] = wait_alert(folder, name, service, False, 900, "resolved")
             deadline = time.monotonic() + 420
             while True:
-                result = command(["sudo", "/opt/tradeops/scripts/healthcheck.sh"], log)
+                result = command(["sudo", "/opt/tradeops/scripts/healthcheck.sh"], terminal)
                 if result.returncode == 0:
                     break
                 if time.monotonic() > deadline:
-                    raise TimeoutError("Phase 1 healthcheck did not return to healthy")
+                    raise TimeoutError("Phase 1 healthcheck did not return to healthy in 420s")
                 time.sleep(15)
             timeline["healthy_at"] = utc()
             timeline["status"] = "passed"
             snapshot(folder, "healthy")
-            print(utc(), scenario, "PASS resolved and Phase 1 healthy", flush=True)
+            log(scenario, "PASS resolved and Phase 1 healthy")
         except Exception as error:
             timeline["status"] = "failed"
             timeline["error"] = repr(error)
+            log(scenario, "FAILED", repr(error))
             raise
         finally:
-            command(["sudo", CHAOS, "cleanup"], log)
+            command(["sudo", CHAOS, "cleanup"], terminal)
             timeline["finished_at"] = utc()
             save(folder / "timeline.json", timeline)
 

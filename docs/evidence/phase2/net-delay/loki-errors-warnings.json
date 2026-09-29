@@ -1,0 +1,365 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/alerts.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "alerts",
+          "service_name": "alerts"
+        },
+        "values": [
+          [
+            "1790708163000000000",
+            "2026-09-29T18:56:03Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790708165000000000",
+            "2026-09-29T18:56:05Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/cron.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "cron",
+          "service_name": "cron"
+        },
+        "values": [
+          [
+            "1790708163000000000",
+            "2026-09-29T18:56:03Z | P1 | http-9001 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790708165000000000",
+            "2026-09-29T18:56:05Z | P1 | http-9002 | health endpoint failed or degraded | runbooks/port-blocked.md"
+          ],
+          [
+            "1790708166000000000",
+            "2026-09-29T18:56:06Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=11"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "error",
+          "filename": "/var/log/tradeops/order_service.log",
+          "job": "tradeops",
+          "level": "ERROR",
+          "service": "orders",
+          "service_name": "orders"
+        },
+        "values": [
+          [
+            "1790708121000000000",
+            "2026-09-29T18:55:21Z | ERROR | feed unreachable: feed slow: 2111.30 ms"
+          ],
+          [
+            "1790708125000000000",
+            "2026-09-29T18:55:25Z | ERROR | feed unreachable: feed slow: 2050.54 ms"
+          ],
+          [
+            "1790708130000000000",
+            "2026-09-29T18:55:30Z | ERROR | feed unreachable: feed slow: 2133.05 ms"
+          ],
+          [
+            "1790708134000000000",
+            "2026-09-29T18:55:34Z | ERROR | feed unreachable: feed slow: 2050.39 ms"
+          ],
+          [
+            "1790708138000000000",
+            "2026-09-29T18:55:38Z | ERROR | feed unreachable: feed slow: 2025.62 ms"
+          ],
+          [
+            "1790708142000000000",
+            "2026-09-29T18:55:42Z | ERROR | feed unreachable: feed slow: 2046.33 ms"
+          ],
+          [
+            "1790708146000000000",
+            "2026-09-29T18:55:46Z | ERROR | feed unreachable: feed slow: 2123.41 ms"
+          ],
+          [
+            "1790708150000000000",
+            "2026-09-29T18:55:50Z | ERROR | feed unreachable: feed slow: 2075.30 ms"
+          ],
+          [
+            "1790708154000000000",
+            "2026-09-29T18:55:54Z | ERROR | feed unreachable: feed slow: 2133.29 ms"
+          ],
+          [
+            "1790708158000000000",
+            "2026-09-29T18:55:58Z | ERROR | feed unreachable: feed slow: 2061.26 ms"
+          ],
+          [
+            "1790708162000000000",
+            "2026-09-29T18:56:02Z | ERROR | feed unreachable: feed slow: 2036.93 ms"
+          ],
+          [
+            "1790708166000000000",
+            "2026-09-29T18:56:06Z | ERROR | feed unreachable: feed slow: 2104.87 ms"
+          ],
+          [
+            "1790708171000000000",
+            "2026-09-29T18:56:11Z | ERROR | feed unreachable: feed slow: 2076.65 ms"
+          ],
+          [
+            "1790708175000000000",
+            "2026-09-29T18:56:15Z | ERROR | feed unreachable: feed slow: 2118.80 ms"
+          ],
+          [
+            "1790708179000000000",
+            "2026-09-29T18:56:19Z | ERROR | feed unreachable: feed slow: 2133.05 ms"
+          ],
+          [
+            "1790708183000000000",
+            "2026-09-29T18:56:23Z | ERROR | feed unreachable: feed slow: 2039.18 ms"
+          ],
+          [
+            "1790708187000000000",
+            "2026-09-29T18:56:27Z | ERROR | feed unreachable: feed slow: 2190.03 ms"
+          ],
+          [
+            "1790708191000000000",
+            "2026-09-29T18:56:31Z | ERROR | feed unreachable: feed slow: 2222.18 ms"
+          ],
+          [
+            "1790708412000000000",
+            "2026-09-29T19:00:12Z | ERROR | feed unreachable: feed slow: 437.21 ms"
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "detected_level": "warn",
+          "filename": "/var/log/tradeops/cron.log",
+          "job": "tradeops",
+          "level": "WARN",
+          "service": "cron",
+          "service_name": "cron"
+        },
+        "values": [
+          [
+            "1790708103000000000",
+            "2026-09-29T18:55:03Z | healthcheck exit=1 CPU=2% memory=23% disk=69% errors=11"
+          ],
+          [
+            "1790708222000000000",
+            "2026-09-29T18:57:02Z | healthcheck exit=1 CPU=1% memory=22% disk=69% errors=18"
+          ],
+          [
+            "1790708282000000000",
+            "2026-09-29T18:58:02Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=18"
+          ],
+          [
+            "1790708342000000000",
+            "2026-09-29T18:59:02Z | healthcheck exit=1 CPU=1% memory=22% disk=69% errors=18"
+          ],
+          [
+            "1790708403000000000",
+            "2026-09-29T19:00:03Z | healthcheck exit=1 CPU=2% memory=23% disk=69% errors=18"
+          ],
+          [
+            "1790708462000000000",
+            "2026-09-29T19:01:02Z | healthcheck exit=1 CPU=9% memory=23% disk=69% errors=9"
+          ]
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 749349,
+        "linesProcessedPerSecond": 8927,
+        "totalBytesProcessed": 2518,
+        "totalLinesProcessed": 30,
+        "execTime": 0.00336,
+        "queueTime": 0.000226,
+        "subqueries": 0,
+        "totalEntriesReturned": 30,
+        "splits": 2,
+        "shards": 2,
+        "totalPostFilterLines": 30,
+        "totalStructuredMetadataBytesProcessed": 240
+      },
+      "querier": {
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 0,
+            "headChunkLines": 0,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 0,
+            "headChunkStructuredMetadataBytes": 0,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 0,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "querierExecTime": 0.002281
+      },
+      "ingester": {
+        "totalReached": 2,
+        "totalChunksMatched": 6,
+        "totalBatches": 4,
+        "totalLinesSent": 30,
+        "store": {
+          "totalChunksRef": 0,
+          "totalChunksDownloaded": 0,
+          "chunksDownloadTime": 0,
+          "queryReferencedStructuredMetadata": false,
+          "queryUsedV2Engine": false,
+          "chunk": {
+            "headChunkBytes": 2518,
+            "headChunkLines": 30,
+            "decompressedBytes": 0,
+            "decompressedLines": 0,
+            "compressedBytes": 0,
+            "totalDuplicates": 0,
+            "postFilterLines": 30,
+            "headChunkStructuredMetadataBytes": 240,
+            "decompressedStructuredMetadataBytes": 0
+          },
+          "chunkRefsFetchTime": 100875,
+          "congestionControlLatency": 0,
+          "pipelineWrapperFilteredLines": 0,
+          "dataobj": {
+            "prePredicateDecompressedRows": 0,
+            "prePredicateDecompressedBytes": 0,
+            "prePredicateDecompressedStructuredMetadataBytes": 0,
+            "postPredicateRows": 0,
+            "postPredicateDecompressedBytes": 0,
+            "postPredicateStructuredMetadataBytes": 0,
+            "postFilterRows": 0,
+            "pagesScanned": 0,
+            "pagesDownloaded": 0,
+            "pagesDownloadedBytes": 0,
+            "pageBatches": 0,
+            "totalRowsAvailable": 0,
+            "totalPageDownloadTime": 0
+          }
+        },
+        "recvWaitTime": 0.000519
+      },
+      "cache": {
+        "chunk": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "index": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "result": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "statsResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "volumeResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "seriesResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "labelResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        },
+        "instantMetricResult": {
+          "entriesFound": 0,
+          "entriesRequested": 0,
+          "entriesStored": 0,
+          "bytesReceived": 0,
+          "bytesSent": 0,
+          "requests": 0,
+          "downloadTime": 0,
+          "queryLengthServed": 0
+        }
+      },
+      "index": {
+        "totalChunks": 0,
+        "postFilterChunks": 0,
+        "shardsDuration": 0,
+        "usedBloomFilters": false,
+        "totalStreams": 0,
+        "chunkRefsLookupTime": 0,
+        "bloomFilterTime": 0
+      }
+    }
+  }
+}

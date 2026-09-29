@@ -1,0 +1,75 @@
+{
+  "scenario": "block-port",
+  "expected_alert": "HealthProbeFailed",
+  "service": "feed",
+  "baseline_started_at": "2026-09-29T18:49:59.824228Z",
+  "fault_started_at": "2026-09-29T18:49:59.835288Z",
+  "firing": {
+    "observed_at": "2026-09-29T18:50:25.092545Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "The HTTP or TCP probe for 127.0.0.1:9001 has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T18:50:03.889371656Z",
+        "value": "0e+00"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "The HTTP or TCP probe for 127.0.0.1:9001 has failed for at least 15 seconds.",
+          "runbook": "runbooks/port-blocked.md",
+          "summary": "feed health probe failed"
+        },
+        "endsAt": "2026-09-29T18:54:18.889Z",
+        "fingerprint": "055d8c784d17af89",
+        "receivers": [
+          {
+            "name": "p1"
+          }
+        ],
+        "startsAt": "2026-09-29T18:50:18.889Z",
+        "status": {
+          "inhibitedBy": [
+            "a4f0a178044237ff"
+          ],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "suppressed"
+        },
+        "updatedAt": "2026-09-29T18:50:21.474Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+        "labels": {
+          "alertname": "HealthProbeFailed",
+          "environment": "tradeops-lab",
+          "instance": "127.0.0.1:9001",
+          "job": "blackbox-tcp",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "fix_started_at": "2026-09-29T18:50:26.291236Z",
+  "resolved": {
+    "observed_at": "2026-09-29T18:50:41.438333Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T18:55:18.063540Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T18:55:18.085473Z"
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "annotations": {
+      "description": "The HTTP or TCP probe for http://127.0.0.1:9002/health has failed for at least 15 seconds.",
+      "runbook": "runbooks/port-blocked.md",
+      "summary": "orders health probe failed"
+    },
+    "endsAt": "2026-09-29T18:48:18.889Z",
+    "fingerprint": "0d5fb8b842f19ec5",
+    "receivers": [
+      {
+        "name": "p1"
+      }
+    ],
+    "startsAt": "2026-09-29T18:44:18.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T18:44:21.487Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+    "labels": {
+      "alertname": "HealthProbeFailed",
+      "environment": "tradeops-lab",
+      "instance": "http://127.0.0.1:9002/health",
+      "job": "blackbox-http",
+      "service": "orders",
+      "severity": "P1",
+      "team": "tradeops"
+    }
+  },
+  {
+    "annotations": {
+      "description": "More than six feed errors per minute, averaged over two minutes, sustained for 30 seconds.",
+      "runbook": "runbooks/service-down.md",
+      "summary": "orders feed fetch errors are elevated"
+    },
+    "endsAt": "2026-09-29T18:48:48.889Z",
+    "fingerprint": "57efdac1a1ec732a",
+    "receivers": [
+      {
+        "name": "p2"
+      }
+    ],
+    "startsAt": "2026-09-29T18:44:48.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T18:44:51.489Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=rate%28tradeops_feed_errors_total%7Bjob%3D%22tradeops%22%7D%5B2m%5D%29+%3E+0.1&g0.tab=1",
+    "labels": {
+      "alertname": "FeedErrorsHigh",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9002",
+      "job": "tradeops",
+      "service": "orders",
+      "severity": "P2",
+      "team": "tradeops"
+    }
+  }
+]

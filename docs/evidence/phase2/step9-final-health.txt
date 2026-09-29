@@ -1,0 +1,12 @@
+2026-09-29T19:01:45Z
+All TradeOps chaos changes removed
+absent disk-fill
+absent slow-feed
+absent net-delay
+chaos iptables rules: 0
+qdisc noqueue 0: root refcnt 2 
+2026-09-29T19:01:46Z | healthcheck exit=0 CPU=3% memory=23% disk=69% errors=1
+healthcheck exit=0
+PASS all configured Prometheus scrape targets up
+Prometheus: {"status":"success","data":{"alerts":[]}}
+Alertmanager: []

@@ -1,0 +1,102 @@
+[
+  {
+    "annotations": {
+      "description": "The HTTP or TCP probe for 127.0.0.1:9001 has failed for at least 15 seconds.",
+      "runbook": "runbooks/port-blocked.md",
+      "summary": "feed health probe failed"
+    },
+    "endsAt": "2026-09-29T18:48:03.889Z",
+    "fingerprint": "055d8c784d17af89",
+    "receivers": [
+      {
+        "name": "p1"
+      }
+    ],
+    "startsAt": "2026-09-29T18:44:03.889Z",
+    "status": {
+      "inhibitedBy": [
+        "a4f0a178044237ff"
+      ],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "suppressed"
+    },
+    "updatedAt": "2026-09-29T18:44:06.475Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+    "labels": {
+      "alertname": "HealthProbeFailed",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9001",
+      "job": "blackbox-tcp",
+      "service": "feed",
+      "severity": "P1",
+      "team": "tradeops"
+    }
+  },
+  {
+    "annotations": {
+      "description": "Prometheus cannot scrape 127.0.0.1:9001. Check the service, listener and firewall.",
+      "runbook": "runbooks/service-down.md",
+      "summary": "feed scrape target is down"
+    },
+    "endsAt": "2026-09-29T18:48:03.889Z",
+    "fingerprint": "a4f0a178044237ff",
+    "receivers": [
+      {
+        "name": "p1"
+      }
+    ],
+    "startsAt": "2026-09-29T18:44:03.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T18:44:06.472Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "labels": {
+      "alertname": "ServiceDown",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9001",
+      "job": "tradeops",
+      "service": "feed",
+      "severity": "P1",
+      "team": "tradeops"
+    }
+  },
+  {
+    "annotations": {
+      "description": "The HTTP or TCP probe for http://127.0.0.1:9001/health has failed for at least 15 seconds.",
+      "runbook": "runbooks/port-blocked.md",
+      "summary": "feed health probe failed"
+    },
+    "endsAt": "2026-09-29T18:48:03.889Z",
+    "fingerprint": "e8ec944c2bd8f585",
+    "receivers": [
+      {
+        "name": "p1"
+      }
+    ],
+    "startsAt": "2026-09-29T18:44:03.889Z",
+    "status": {
+      "inhibitedBy": [
+        "a4f0a178044237ff"
+      ],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "suppressed"
+    },
+    "updatedAt": "2026-09-29T18:44:06.475Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=probe_success%7Bjob%3D~%22blackbox-http%7Cblackbox-tcp%22%7D+%3D%3D+0&g0.tab=1",
+    "labels": {
+      "alertname": "HealthProbeFailed",
+      "environment": "tradeops-lab",
+      "instance": "http://127.0.0.1:9001/health",
+      "job": "blackbox-http",
+      "service": "feed",
+      "severity": "P1",
+      "team": "tradeops"
+    }
+  }
+]

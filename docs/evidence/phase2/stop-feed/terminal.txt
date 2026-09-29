@@ -1,0 +1,68 @@
+2026-09-29T18:43:40.372274Z $ sudo /opt/tradeops/scripts/chaos.sh stop-feed
+Feed stopped. Undo: fix-feed
+exit=0
+2026-09-29T18:44:57.139183Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:44:57Z | healthcheck exit=2 CPU=2% memory=22% disk=69% errors=38
+exit=2
+2026-09-29T18:44:57.161135Z $ sudo /opt/tradeops/scripts/chaos.sh fix-feed
+exit=0
+2026-09-29T18:45:08.408788Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:45:08Z | healthcheck exit=1 CPU=3% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:45:24.611317Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:45:24Z | healthcheck exit=1 CPU=2% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:45:40.763921Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:45:40Z | healthcheck exit=1 CPU=3% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:45:57.004014Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:45:57Z | healthcheck exit=1 CPU=8% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:46:13.204478Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:46:13Z | healthcheck exit=1 CPU=4% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:46:29.349988Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:46:29Z | healthcheck exit=1 CPU=2% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:46:45.542431Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:46:45Z | healthcheck exit=1 CPU=4% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:47:01.714383Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:47:01Z | healthcheck exit=1 CPU=7% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:47:17.941505Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:47:17Z | healthcheck exit=1 CPU=4% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:47:34.245200Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:47:34Z | healthcheck exit=1 CPU=6% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:47:50.462550Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:47:50Z | healthcheck exit=1 CPU=3% memory=23% disk=69% errors=38
+exit=1
+2026-09-29T18:48:06.605528Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:48:06Z | healthcheck exit=1 CPU=4% memory=22% disk=69% errors=38
+exit=1
+2026-09-29T18:48:22.831858Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:48:22Z | healthcheck exit=1 CPU=3% memory=22% disk=69% errors=38
+exit=1
+2026-09-29T18:48:38.983240Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:48:38Z | healthcheck exit=1 CPU=3% memory=22% disk=69% errors=38
+exit=1
+2026-09-29T18:48:55.186048Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:48:55Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=31
+exit=1
+2026-09-29T18:49:11.343854Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:49:11Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=23
+exit=1
+2026-09-29T18:49:27.495965Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:49:27Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=15
+exit=1
+2026-09-29T18:49:43.657024Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:49:43Z | healthcheck exit=1 CPU=2% memory=22% disk=69% errors=7
+exit=1
+2026-09-29T18:49:59.797532Z $ sudo /opt/tradeops/scripts/healthcheck.sh
+2026-09-29T18:49:59Z | healthcheck exit=0 CPU=1% memory=22% disk=69% errors=0
+exit=0
+2026-09-29T18:49:59.823718Z $ sudo /opt/tradeops/scripts/chaos.sh cleanup
+All TradeOps chaos changes removed
+exit=0

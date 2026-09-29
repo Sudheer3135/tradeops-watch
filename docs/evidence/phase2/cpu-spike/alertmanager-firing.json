@@ -1,0 +1,97 @@
+[
+  {
+    "annotations": {
+      "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+      "runbook": "runbooks/service-down.md",
+      "summary": "feed process started recently"
+    },
+    "endsAt": "2026-09-29T17:02:48.889Z",
+    "fingerprint": "2e4c10894ba2573f",
+    "receivers": [
+      {
+        "name": "p3"
+      }
+    ],
+    "startsAt": "2026-09-29T16:53:48.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T16:58:51.478Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3C+600%29+and+%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3E%3D+0%29&g0.tab=1",
+    "labels": {
+      "alertname": "ServiceRestartedRecently",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9001",
+      "job": "tradeops",
+      "service": "feed",
+      "severity": "P3",
+      "team": "tradeops"
+    }
+  },
+  {
+    "annotations": {
+      "description": "Aggregate VM CPU has exceeded 85 percent for 30 seconds using a one-minute rate window.",
+      "runbook": "runbooks/high-cpu.md",
+      "summary": "host CPU exceeds 85 percent"
+    },
+    "endsAt": "2026-09-29T17:02:48.889Z",
+    "fingerprint": "8b395f9d1c77e9e8",
+    "receivers": [
+      {
+        "name": "p2"
+      }
+    ],
+    "startsAt": "2026-09-29T16:58:48.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T16:58:51.475Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=100+%2A+%281+-+avg+by+%28instance%2C+service%29+%28rate%28node_cpu_seconds_total%7Bjob%3D%22node%22%2Cmode%3D%22idle%22%7D%5B1m%5D%29%29%29+%3E+85&g0.tab=1",
+    "labels": {
+      "alertname": "HighCPU",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9100",
+      "service": "host",
+      "severity": "P2",
+      "team": "tradeops"
+    }
+  },
+  {
+    "annotations": {
+      "description": "This process started within the last ten minutes. Includes initial startup and intentional restarts; correlate with systemd and the journal.",
+      "runbook": "runbooks/service-down.md",
+      "summary": "orders process started recently"
+    },
+    "endsAt": "2026-09-29T17:02:48.889Z",
+    "fingerprint": "f3cfb6f38c45055f",
+    "receivers": [
+      {
+        "name": "p3"
+      }
+    ],
+    "startsAt": "2026-09-29T16:53:48.889Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T16:58:51.478Z",
+    "generatorURL": "http://tradeops:9090/graph?g0.expr=%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3C+600%29+and+%28time%28%29+-+process_start_time_seconds%7Bjob%3D%22tradeops%22%7D+%3E%3D+0%29&g0.tab=1",
+    "labels": {
+      "alertname": "ServiceRestartedRecently",
+      "environment": "tradeops-lab",
+      "instance": "127.0.0.1:9002",
+      "job": "tradeops",
+      "service": "orders",
+      "severity": "P3",
+      "team": "tradeops"
+    }
+  }
+]

@@ -1,0 +1,1070 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "canDelete": true,
+    "slug": "tradeops-overview",
+    "url": "/d/tradeops-overview/tradeops-overview",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2026-09-29T16:15:18Z",
+    "updated": "2026-09-29T16:15:18Z",
+    "updatedBy": "Anonymous",
+    "createdBy": "Anonymous",
+    "version": 1,
+    "hasAcl": false,
+    "isFolder": false,
+    "apiVersion": "v0alpha1",
+    "folderId": 0,
+    "folderUid": "",
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": true,
+    "provisionedExternalId": "tradeops-overview.json",
+    "annotationsPermissions": {
+      "dashboard": {
+        "canAdd": true,
+        "canEdit": true,
+        "canDelete": true
+      }
+    }
+  },
+  "dashboard": {
+    "annotations": {
+      "list": []
+    },
+    "editable": false,
+    "graphTooltip": 1,
+    "id": 1787242354421760,
+    "links": [
+      {
+        "targetBlank": true,
+        "title": "Prometheus alerts",
+        "type": "link",
+        "url": "http://192.168.2.2:9090/alerts"
+      },
+      {
+        "targetBlank": true,
+        "title": "Alertmanager",
+        "type": "link",
+        "url": "http://192.168.2.2:9093"
+      }
+    ],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "panels": [],
+        "title": "Service health",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "1 = metrics endpoint reachable; health probes independently check dependencies.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "text": "DOWN"
+                  },
+                  "1": {
+                    "color": "green",
+                    "text": "UP"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "up{job=\"tradeops\"}",
+            "instant": true,
+            "legendFormat": "{{service}}",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Application scrape health",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "text": "DOWN"
+                  },
+                  "1": {
+                    "color": "green",
+                    "text": "UP"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 8,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "probe_success{job=~\"blackbox-http|blackbox-tcp\"}",
+            "instant": true,
+            "legendFormat": "{{service}} {{job}}",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "HTTP and TCP probes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "Observed changes of process start timestamp; a fresh first sample is not a restart.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "changes(process_start_time_seconds{job=\"tradeops\"}[10m])",
+            "instant": false,
+            "legendFormat": "{{service}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Observed restarts in 10 minutes",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 6
+        },
+        "id": 5,
+        "panels": [],
+        "title": "Trading",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 7
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (symbol) (rate(tradeops_prices_published_total[1m]))",
+            "instant": false,
+            "legendFormat": "{{symbol}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Prices published per second by symbol",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 7
+        },
+        "id": 7,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum by (side) (rate(tradeops_orders_total[1m])) * 60",
+            "instant": false,
+            "legendFormat": "{{side}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Orders per minute by side",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "One observation per feed fetch cycle, including failures; p95 alert threshold = 300 ms.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0.3
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 12,
+          "y": 7
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "histogram_quantile(0.5, sum by (le) (rate(tradeops_order_latency_seconds_bucket[1m])))",
+            "instant": false,
+            "legendFormat": "p50",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "histogram_quantile(0.95, sum by (le) (rate(tradeops_order_latency_seconds_bucket[1m])))",
+            "instant": false,
+            "legendFormat": "p95",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "histogram_quantile(0.99, sum by (le) (rate(tradeops_order_latency_seconds_bucket[1m])))",
+            "instant": false,
+            "legendFormat": "p99",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Order-cycle latency p50 / p95 / p99",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 18,
+          "y": 7
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "sum(rate(tradeops_feed_errors_total[2m])) * 60",
+            "instant": false,
+            "legendFormat": "errors/min",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Feed errors per minute",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "id": 10,
+        "panels": [],
+        "title": "System",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 85
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 15
+        },
+        "id": 11,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{job=\"node\",mode=\"idle\"}[1m])))",
+            "instant": false,
+            "legendFormat": "CPU",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "VM CPU usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 85
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 15
+        },
+        "id": 12,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "100 * (1 - node_memory_MemAvailable_bytes{job=\"node\"} / node_memory_MemTotal_bytes{job=\"node\"})",
+            "instant": false,
+            "legendFormat": "memory",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "VM memory usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 85
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 12,
+          "y": 15
+        },
+        "id": 13,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "100 * (1 - node_filesystem_avail_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"} / node_filesystem_size_bytes{job=\"node\",mountpoint=\"/\",fstype!~\"tmpfs|overlay|squashfs\"})",
+            "instant": false,
+            "legendFormat": "root disk",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Root disk usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 18,
+          "y": 15
+        },
+        "id": 14,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "node_load1{job=\"node\"}",
+            "instant": false,
+            "legendFormat": "1 minute",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "node_load5{job=\"node\"}",
+            "instant": false,
+            "legendFormat": "5 minutes",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "node_load15{job=\"node\"}",
+            "instant": false,
+            "legendFormat": "15 minutes",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "VM load average",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 22
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "rate(node_network_receive_bytes_total{job=\"node\",device!=\"lo\"}[1m])",
+            "instant": false,
+            "legendFormat": "{{device}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network received bytes/sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 22
+        },
+        "id": 16,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "rate(node_network_transmit_bytes_total{job=\"node\",device!=\"lo\"}[1m])",
+            "instant": false,
+            "legendFormat": "{{device}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network transmitted bytes/sec",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 29
+        },
+        "id": 17,
+        "panels": [],
+        "title": "Alerts",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "Empty means no firing alerts. Inhibition affects notification delivery, not this Prometheus list.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 24,
+          "x": 0,
+          "y": 30
+        },
+        "id": 18,
+        "options": {
+          "cellHeight": "sm",
+          "showHeader": true
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "expr": "ALERTS{alertstate=\"firing\"}",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "{{alertname}} {{service}} {{severity}}",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Currently firing Prometheus alerts",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 19,
+        "panels": [],
+        "title": "Logs",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "description": "Raw file timestamps in UTC; widen the time range if the recent interval is quiet.",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 37
+        },
+        "id": 20,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "showCommonLabels": false,
+          "showLabels": true,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "loki"
+            },
+            "expr": "{job=\"tradeops\",level=~\"ERROR|WARN\"}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "TradeOps ERROR and WARN logs",
+        "type": "logs"
+      }
+    ],
+    "refresh": "15s",
+    "schemaVersion": 39,
+    "tags": [
+      "tradeops",
+      "devops",
+      "lab"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "timezone": "utc",
+    "title": "TradeOps Overview",
+    "uid": "tradeops-overview",
+    "version": 1
+  }
+}

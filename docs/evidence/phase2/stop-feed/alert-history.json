@@ -1,0 +1,64 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceDown",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707450.359,
+            "1"
+          ],
+          [
+            1790707465.359,
+            "1"
+          ],
+          [
+            1790707480.359,
+            "1"
+          ],
+          [
+            1790707495.359,
+            "1"
+          ],
+          [
+            1790707825.359,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "ServiceDown",
+          "alertstate": "pending",
+          "instance": "127.0.0.1:9001",
+          "job": "tradeops",
+          "service": "feed",
+          "severity": "P1",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790707435.359,
+            "1"
+          ],
+          [
+            1790707810.359,
+            "1"
+          ]
+        ]
+      }
+    ]
+  }
+}

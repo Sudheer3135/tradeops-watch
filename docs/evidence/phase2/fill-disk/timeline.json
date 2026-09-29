@@ -1,0 +1,79 @@
+{
+  "scenario": "fill-disk",
+  "expected_alert": "DiskAlmostFull",
+  "service": "host",
+  "baseline_started_at": "2026-09-29T16:56:19.267422Z",
+  "fault_started_at": "2026-09-29T16:56:19.291612Z",
+  "firing": {
+    "observed_at": "2026-09-29T16:57:09.833535Z",
+    "prometheus": [
+      {
+        "labels": {
+          "alertname": "DiskAlmostFull",
+          "device": "/dev/sda1",
+          "fstype": "ext4",
+          "instance": "127.0.0.1:9100",
+          "job": "node",
+          "mountpoint": "/",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "annotations": {
+          "description": "Root usage is at least 85 percent but below 95 percent for 30 seconds. Inspect growth before deleting files.",
+          "runbook": "runbooks/disk-full.md",
+          "summary": "host root disk is almost full"
+        },
+        "state": "firing",
+        "activeAt": "2026-09-29T16:56:33.889371656Z",
+        "value": "8.718154166001166e+01"
+      }
+    ],
+    "alertmanager": [
+      {
+        "annotations": {
+          "description": "Root usage is at least 85 percent but below 95 percent for 30 seconds. Inspect growth before deleting files.",
+          "runbook": "runbooks/disk-full.md",
+          "summary": "host root disk is almost full"
+        },
+        "endsAt": "2026-09-29T17:01:03.889Z",
+        "fingerprint": "67c152f233affdaf",
+        "receivers": [
+          {
+            "name": "p2"
+          }
+        ],
+        "startsAt": "2026-09-29T16:57:03.889Z",
+        "status": {
+          "inhibitedBy": [],
+          "mutedBy": [],
+          "silencedBy": [],
+          "state": "active"
+        },
+        "updatedAt": "2026-09-29T16:57:06.489Z",
+        "generatorURL": "http://tradeops:9090/graph?g0.expr=%28100+%2A+%281+-+node_filesystem_avail_bytes%7Bfstype%21~%22tmpfs%7Coverlay%7Csquashfs%22%2Cjob%3D%22node%22%2Cmountpoint%3D%22%2F%22%7D+%2F+node_filesystem_size_bytes%7Bfstype%21~%22tmpfs%7Coverlay%7Csquashfs%22%2Cjob%3D%22node%22%2Cmountpoint%3D%22%2F%22%7D%29+%3E%3D+85%29+and+%28100+%2A+%281+-+node_filesystem_avail_bytes%7Bfstype%21~%22tmpfs%7Coverlay%7Csquashfs%22%2Cjob%3D%22node%22%2Cmountpoint%3D%22%2F%22%7D+%2F+node_filesystem_size_bytes%7Bfstype%21~%22tmpfs%7Coverlay%7Csquashfs%22%2Cjob%3D%22node%22%2Cmountpoint%3D%22%2F%22%7D%29+%3C+95%29&g0.tab=1",
+        "labels": {
+          "alertname": "DiskAlmostFull",
+          "device": "/dev/sda1",
+          "environment": "tradeops-lab",
+          "fstype": "ext4",
+          "instance": "127.0.0.1:9100",
+          "job": "node",
+          "mountpoint": "/",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        }
+      }
+    ]
+  },
+  "fix_started_at": "2026-09-29T16:57:10.987092Z",
+  "resolved": {
+    "observed_at": "2026-09-29T16:57:26.228699Z",
+    "prometheus": [],
+    "alertmanager": []
+  },
+  "healthy_at": "2026-09-29T16:57:27.452638Z",
+  "status": "passed",
+  "finished_at": "2026-09-29T16:57:27.519395Z"
+}

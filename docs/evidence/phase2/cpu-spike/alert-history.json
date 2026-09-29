@@ -1,0 +1,50 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HighCPU",
+          "alertstate": "firing",
+          "instance": "127.0.0.1:9100",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790701137.546,
+            "1"
+          ],
+          [
+            1790701152.546,
+            "1"
+          ]
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "ALERTS",
+          "alertname": "HighCPU",
+          "alertstate": "pending",
+          "instance": "127.0.0.1:9100",
+          "service": "host",
+          "severity": "P2",
+          "team": "tradeops"
+        },
+        "values": [
+          [
+            1790701107.546,
+            "1"
+          ],
+          [
+            1790701122.546,
+            "1"
+          ]
+        ]
+      }
+    ]
+  }
+}
