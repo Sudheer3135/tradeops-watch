@@ -8,7 +8,7 @@ id tradeops >/dev/null 2>&1 || useradd --system --no-create-home --shell /usr/sb
 install -d /opt/tradeops/services /opt/tradeops/scripts /opt/tradeops/runbooks /etc/tradeops /var/lib/tradeops
 install -d -o tradeops -g tradeops /var/log/tradeops
 install -m 644 "$root"/services/*.py /opt/tradeops/services/
-install -m 755 "$root"/scripts/* /opt/tradeops/scripts/
+install -m 755 "$root"/scripts/*.sh "$root"/scripts/*.py /opt/tradeops/scripts/
 install -m 644 "$root"/runbooks/*.md /opt/tradeops/runbooks/
 install -m 644 "$root"/systemd/*.service /etc/systemd/system/
 install -m 644 "$root"/cron/tradeops-cron /etc/cron.d/tradeops

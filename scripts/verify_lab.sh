@@ -29,7 +29,7 @@ scenario() {
     local name=$1 fix=$2 rc=0
     echo "START $name $(date -u +%FT%TZ)"
     "$chaos" "$name"
-    if [[ $name == kill-feed ]]; then sleep 6; else sleep 5; fi
+    if [[ $name == kill-feed ]]; then sleep 1; else sleep 5; fi
     check || rc=$?
     (( rc > 0 )) || { echo 'FAIL: no fault detected'; return 1; }
     echo 'ACTIVE ALERTS'; cat /var/lib/tradeops/active-alerts
@@ -37,9 +37,15 @@ scenario() {
     case "$name" in
     kill-feed|stop-feed) systemctl --no-pager status tradeops-feed tradeops-orders || true; journalctl -u tradeops-feed -n 12 --no-pager ;;
     fill-disk) df -h /; du -sh /var/lib/tradeops /var/log/tradeops ;;
-    cpu-spike) ps -eo pid,user,stat,pcpu,pmem,args --sort=-pcpu | head -12; free -m ;;
+    cpu-spike) ps -eo pid,user,stat,pcpu,pmem,args --sort=-pcpu | head -12 || true; free -m ;;
     block-port|net-delay) ss -tulpn; iptables -L OUTPUT -n -v; tc qdisc show dev lo; /opt/tradeops/scripts/log_search.sh errors 5 ;;
     esac
+    if [[ $name == kill-feed ]]; then
+        sleep 6
+        systemctl is-active --quiet tradeops-feed
+        echo "AUTOMATIC RESTART VERIFIED (before manual fix)"
+        systemctl show tradeops-feed -p NRestarts
+    fi
     echo "FIX $fix $(date -u +%FT%TZ)"
     "$chaos" "$fix"
     sleep 4

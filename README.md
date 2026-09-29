@@ -41,6 +41,24 @@ multipass set local.privileged-mounts=true
 multipass mount "$PWD" tradeops:/home/ubuntu/tradeops-watch
 ```
 
+On this Mac, the mount was created but reads failed with `Operation not permitted`
+(macOS Desktop privacy protection). The tested fallback below copies the source
+without changing global privacy permissions:
+
+```bash
+multipass umount tradeops:/home/ubuntu/tradeops-watch
+COPYFILE_DISABLE=1 tar --exclude=.git --exclude=__pycache__ -czf /tmp/tradeops-watch-source.tar.gz .
+multipass transfer /tmp/tradeops-watch-source.tar.gz tradeops:/home/ubuntu/tradeops-watch-source.tar.gz
+multipass exec tradeops -- bash -lc 'mkdir -p /home/ubuntu/tradeops-watch && tar --no-same-owner -xzf /home/ubuntu/tradeops-watch-source.tar.gz -C /home/ubuntu/tradeops-watch'
+multipass exec tradeops -- sudo bash /home/ubuntu/tradeops-watch/scripts/install.sh
+```
+
+Repeat the archive/transfer/extract steps after editing source on the Mac, then
+rerun install. This is a copy, so VM evidence must also be copied back with
+`multipass transfer`. If you prefer a live mount, grant Multipass access in
+macOS System Settings → Privacy & Security → Full Disk Access, restart Multipass,
+and retry mounting; that broader permission was not changed for this project.
+
 Alternative: after publishing, clone the repository inside the VM at
 `/home/ubuntu/tradeops-watch`, then run the same installer. The installer is
 safe to rerun; it restarts both services to load changes. Service code lives in

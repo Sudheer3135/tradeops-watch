@@ -11,6 +11,7 @@
 - `scripts/log_search.sh`: filters recent errors, ranks error messages, calculates order latency, follows logs, and shows today's alerts.
 - `scripts/chaos.sh`: injects a failure only in the named Linux VM; each failure has a fix. Cleanup removes lab changes.
 - `scripts/handover_report.py`: summarizes one shift from timestamped logs and the latest monitoring snapshot; prints and saves Markdown.
+- `scripts/verify_monitor.sh`: checks threshold overrides, notification deduplication, cron output, log tools, service settings and report generation.
 - `scripts/verify_lab.sh`: runs real fault/recovery cycles and records exact output. It stops on a failed assertion and cleans up.
 - `cron/tradeops-cron`: schedules the health check every minute as root.
 - `runbooks/service-down.md`: how to investigate stopped or crashing services.
@@ -45,6 +46,7 @@ administrator rights. Paths beginning `/` start at the filesystem root.
 | chown | Change ownership | `sudo chown tradeops:tradeops /var/log/tradeops` |
 | chmod | Change permissions | `chmod +x scripts/healthcheck.sh` |
 | touch | Create empty file/update timestamp | `touch /tmp/example` |
+| tar | Archive/extract source for VM transfer | `tar -czf /tmp/source.tar.gz services scripts` |
 | cp | Copy a file | `cp README.md /tmp/readme-copy.md` |
 | mv | Rename/replace a file | `mv /tmp/report.tmp /tmp/report.md` |
 | rm | Remove only a known file | `sudo rm -f /var/lib/tradeops/disk-fill` |
