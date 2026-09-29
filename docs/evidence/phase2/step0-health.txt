@@ -1,0 +1,27 @@
+2026-09-29T11:29:43Z
+● tradeops-feed.service - TradeOps synthetic market feed
+     Loaded: loaded (/etc/systemd/system/tradeops-feed.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 16:47:58 IST; 11min ago
+   Main PID: 4549 (python3)
+      Tasks: 2 (limit: 2259)
+     Memory: 10.2M (peak: 10.8M)
+        CPU: 1.441s
+     CGroup: /system.slice/tradeops-feed.service
+             └─4549 /usr/bin/python3 /opt/tradeops/services/market_feed.py
+
+Sep 29 16:47:58 tradeops systemd[1]: Started tradeops-feed.service - TradeOps synthetic market feed.
+
+● tradeops-orders.service - TradeOps fake order service
+     Loaded: loaded (/etc/systemd/system/tradeops-orders.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-29 16:47:19 IST; 12min ago
+   Main PID: 4077 (python3)
+      Tasks: 2 (limit: 2259)
+     Memory: 11.9M (peak: 12.4M)
+        CPU: 1.310s
+     CGroup: /system.slice/tradeops-orders.service
+             └─4077 /usr/bin/python3 /opt/tradeops/services/order_service.py
+
+Sep 29 16:47:19 tradeops systemd[1]: Started tradeops-orders.service - TradeOps fake order service.
+2026-09-29T11:29:44Z | healthcheck exit=0 CPU=0% memory=14% disk=24% errors=0
+{"status": "ok"}
+{"feed_status": "ok", "orders_placed": 1755, "last_success": 1790681383.4748275}
