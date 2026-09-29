@@ -39,3 +39,10 @@ a Prometheus container restart. Phase 1 health remains good. See `step3-*` evide
 The user replied `continue` after the rule-validation update. This authorizes
 continuation beyond this checkpoint. The separate review gate after Step 7 remains.
 Synthetic rule tests are not real incident reports; full fault runs remain Step 9.
+
+## Step 4: verified, with Telegram delivery pending credentials
+Severity routes passed amtool checks. A synthetic API test verified same-service
+inhibition and confirmed a different service remains active; test alerts were
+then resolved. The optional token-file receiver configuration passed amtool in
+a network-disabled container. Actual Telegram delivery remains untested because
+no bot credentials were provided. See `step4-*` evidence and `telegram-setup.md`.

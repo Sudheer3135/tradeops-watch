@@ -1,0 +1,87 @@
+PASS synthetic inhibition: same-service P2 muted; different-service P2 remains active
+[
+  {
+    "annotations": {
+      "summary": "Synthetic Alertmanager configuration test, not a real incident"
+    },
+    "endsAt": "2026-09-29T16:11:42.827Z",
+    "fingerprint": "02fe71d1620cc54f",
+    "receivers": [
+      {
+        "name": "p2"
+      }
+    ],
+    "startsAt": "2026-09-29T16:08:42.827Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T16:09:42.851Z",
+    "labels": {
+      "alertname": "FeedErrorsHigh",
+      "environment": "synthetic-test",
+      "service": "validation-other",
+      "severity": "P2",
+      "test": "inhibition-validation"
+    }
+  },
+  {
+    "annotations": {
+      "summary": "Synthetic Alertmanager configuration test, not a real incident"
+    },
+    "endsAt": "2026-09-29T16:11:42.827Z",
+    "fingerprint": "5e3c231b3bcac438",
+    "receivers": [
+      {
+        "name": "p1"
+      }
+    ],
+    "startsAt": "2026-09-29T16:08:42.827Z",
+    "status": {
+      "inhibitedBy": [],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "active"
+    },
+    "updatedAt": "2026-09-29T16:09:42.851Z",
+    "labels": {
+      "alertname": "ServiceDown",
+      "environment": "synthetic-test",
+      "service": "validation-only",
+      "severity": "P1",
+      "test": "inhibition-validation"
+    }
+  },
+  {
+    "annotations": {
+      "summary": "Synthetic Alertmanager configuration test, not a real incident"
+    },
+    "endsAt": "2026-09-29T16:11:42.827Z",
+    "fingerprint": "b195c4f268bf2e77",
+    "receivers": [
+      {
+        "name": "p2"
+      }
+    ],
+    "startsAt": "2026-09-29T16:08:42.827Z",
+    "status": {
+      "inhibitedBy": [
+        "5e3c231b3bcac438"
+      ],
+      "mutedBy": [],
+      "silencedBy": [],
+      "state": "suppressed"
+    },
+    "updatedAt": "2026-09-29T16:09:42.851Z",
+    "labels": {
+      "alertname": "FeedErrorsHigh",
+      "environment": "synthetic-test",
+      "service": "validation-only",
+      "severity": "P2",
+      "test": "inhibition-validation"
+    }
+  }
+]
+Synthetic test alerts resolved; no Telegram receiver configured or message sent

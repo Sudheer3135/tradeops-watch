@@ -1,0 +1,17 @@
+ Container tradeops-monitoring-alertmanager-run-6adc734f9a6a Creating 
+ Container tradeops-monitoring-alertmanager-run-6adc734f9a6a Created 
+Checking '/etc/alertmanager/alertmanager.yml'  SUCCESS
+Found:
+ - global config
+ - route
+ - 2 inhibit rules
+ - 4 receivers
+ - 0 templates
+
+ Container tradeops-monitoring-alertmanager-1 Recreate 
+ Container tradeops-monitoring-alertmanager-1 Recreated 
+ Container tradeops-monitoring-alertmanager-1 Starting 
+ Container tradeops-monitoring-alertmanager-1 Started 
+p1
+p2
+p3

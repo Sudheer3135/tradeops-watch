@@ -153,3 +153,11 @@ The real live APIs are captured separately under `docs/evidence/phase2/`.
 Stop here for the requested review. Telegram routing/inhibition (Step 4), Alloy
 log shipping (Step 5), the full dashboard (Step 6), and deployments (Step 7)
 are still pending. Full chaos alert/resolution runs belong to Step 9.
+
+## Step 4: optional Telegram and inhibition
+
+Severity routing and service-scoped inhibition are now configured. Follow
+[the secret-file setup guide](../docs/telegram-setup.md) to enable Telegram.
+Until then, alerts are routed to receivers without outgoing integrations and
+remain visible in the UI. Configuration and inhibition are verified; Telegram
+delivery is not claimed as tested.

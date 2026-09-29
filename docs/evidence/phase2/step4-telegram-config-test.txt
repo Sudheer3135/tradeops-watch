@@ -1,0 +1,9 @@
+Synthetic Telegram receiver config only; validator will not send messages
+Checking '/etc/alertmanager-secrets/config.yml'  SUCCESS
+Found:
+ - global config
+ - route
+ - 2 inhibit rules
+ - 4 receivers
+ - 0 templates
+
