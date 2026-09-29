@@ -1,0 +1,6 @@
+// Step 1 starts Alloy with durable storage and read-only access to service logs.
+// The labelled log-shipping pipeline will be added and tested in Step 5.
+logging {
+  level = "info"
+  format = "logfmt"
+}

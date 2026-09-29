@@ -1,0 +1,79 @@
+# Monitoring stack: first checkpoint
+
+Run commands inside `multipass shell tradeops`, from:
+
+```bash
+cd /home/ubuntu/tradeops-watch/monitoring
+```
+
+The Ubuntu VM needs 4 GB RAM. On the Mac, resize it while stopped:
+
+```bash
+multipass stop tradeops
+multipass set local.tradeops.memory=4G
+multipass start tradeops
+```
+
+Install Docker inside the VM with `sudo bash ../scripts/install_docker.sh`.
+It uses Docker's official apt repository and adds `ubuntu` to the docker group.
+Open a fresh VM shell afterward so group membership takes effect.
+
+Create a private password file inside the VM (never commit it):
+
+```bash
+python3 - <<'PY'
+import os
+from pathlib import Path
+import secrets
+path = Path('.env')
+if not path.exists():
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, 'w') as output:
+        output.write('GRAFANA_ADMIN_PASSWORD=' + secrets.token_urlsafe(24) + '\n')
+PY
+docker compose config --quiet
+docker compose up -d
+docker compose ps
+```
+
+Grafana username is `admin`. View the locally generated password with `cat .env`
+in your VM shell. Grafana saves the initial password in its persistent database;
+editing the env file later does not reset an existing user's password.
+
+On the Mac, use `multipass info tradeops` to find the current IP. At setup:
+
+- Prometheus: http://192.168.2.2:9090
+- Alertmanager: http://192.168.2.2:9093
+- Grafana: http://192.168.2.2:3000
+- Loki readiness (an API, not a dashboard): http://192.168.2.2:3100/ready
+
+The UI/API ports are for the local VM lab; do not forward them to the Internet.
+Application ports stay bound to VM loopback. Every monitoring container uses
+Linux host networking, so `127.0.0.1` means the VM, not a separate container.
+There are no `ports:` mappings in host mode. Exporter/Alloy admin listeners
+bind to loopback (9100, 9115, 12345). Node exporter sees the host PID namespace
+and read-only copies of `/proc`, `/sys`, and `/` to report real VM metrics.
+
+Named volumes preserve metrics, alert state, Grafana settings, Loki chunks,
+and Alloy positions across container restarts. Prometheus retains at most two
+days/512 MB of blocks; Loki retention is 48 hours (deletion is asynchronous).
+Each container has a memory ceiling and bounded Docker logs. Limits are guardrails,
+not preallocated RAM. `docker compose down` preserves volumes; do not add `-v`
+unless you deliberately want to erase the monitoring history.
+
+At Step 1, the seven components run and HTTP/TCP probes monitor Phase 1.
+Alloy's shipping/parsing pipeline is deliberately pending Step 5, and the full
+TradeOps dashboard is pending Step 6. Grafana's two data sources are provisioned.
+Alertmanager uses a local UI-only receiver until Telegram routing in Step 4.
+
+## Source documentation
+
+- [Docker's Ubuntu apt installation](https://docs.docker.com/engine/install/ubuntu/)
+- [Node exporter host-container setup](https://github.com/prometheus/node_exporter#docker)
+- [Loki single-process filesystem configuration](https://grafana.com/docs/loki/latest/configure/examples/configuration-examples/)
+- [Prometheus alerting rules and pending duration](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
+- [Python histogram instrumentation](https://prometheus.github.io/client_python/instrumenting/histogram/)
+
+Image versions were selected from the projects' official GitHub release pages
+on 2026-09-29 and are pinned explicitly in Compose. Actual pulled image digests
+are recorded in the Phase 2 evidence; no service uses a `latest` tag.

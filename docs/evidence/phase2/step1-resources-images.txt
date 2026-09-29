@@ -1,0 +1,27 @@
+NAME                                      IMAGE                            COMMAND                  SERVICE             CREATED          STATUS          PORTS
+tradeops-monitoring-alertmanager-1        prom/alertmanager:v0.34.1        "/bin/alertmanager -…"   alertmanager        32 seconds ago   Up 31 seconds   
+tradeops-monitoring-alloy-1               grafana/alloy:v1.20.1            "/bin/alloy run --se…"   alloy               32 seconds ago   Up 30 seconds   
+tradeops-monitoring-blackbox_exporter-1   prom/blackbox-exporter:v0.28.0   "/bin/blackbox_expor…"   blackbox_exporter   32 seconds ago   Up 30 seconds   
+tradeops-monitoring-grafana-1             grafana/grafana:13.2.3           "/run.sh"                grafana             32 seconds ago   Up 31 seconds   
+tradeops-monitoring-loki-1                grafana/loki:3.7.8               "/usr/bin/loki -conf…"   loki                32 seconds ago   Up 30 seconds   
+tradeops-monitoring-node_exporter-1       prom/node-exporter:v1.12.1       "/bin/node_exporter …"   node_exporter       32 seconds ago   Up 31 seconds   
+tradeops-monitoring-prometheus-1          prom/prometheus:v3.15.0          "/bin/prometheus --c…"   prometheus          32 seconds ago   Up 31 seconds   
+tradeops-monitoring-loki-1 35.77MiB / 512MiB 0.98%
+tradeops-monitoring-prometheus-1 43.78MiB / 512MiB 0.86%
+tradeops-monitoring-alertmanager-1 14.89MiB / 128MiB 0.00%
+tradeops-monitoring-alloy-1 33.23MiB / 256MiB 0.18%
+tradeops-monitoring-grafana-1 328.7MiB / 512MiB 1.05%
+tradeops-monitoring-blackbox_exporter-1 6.797MiB / 128MiB 0.00%
+tradeops-monitoring-node_exporter-1 6.918MiB / 128MiB 0.00%
+["prom/node-exporter:v1.12.1"] ["prom/node-exporter@sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0"] arm64
+["prom/blackbox-exporter:v0.28.0"] ["prom/blackbox-exporter@sha256:e753ff9f3fc458d02cca5eddab5a77e1c175eee484a8925ac7d524f04366c2fc"] arm64
+["prom/prometheus:v3.15.0"] ["prom/prometheus@sha256:efd719c99d83b060d9daefdcf00360461adf279f45ef5391f8d111892118753e"] arm64
+["prom/alertmanager:v0.34.1"] ["prom/alertmanager@sha256:e9733bafb1bdef9b00e25a21f8f99dc26a22224bf16641ad754d1649f4c3357a"] arm64
+["grafana/grafana:13.2.3"] ["grafana/grafana@sha256:b28bae15e219c998fb0e0424ed724930cc61b1f61fb404d47c862f9a23f9e572"] arm64
+["grafana/loki:3.7.8"] ["grafana/loki@sha256:1107dd5274e0ada47e42472b7a7e71f3b2a2fe878878108f3e2f9e51528f0193"] arm64
+["grafana/alloy:v1.20.1"] ["grafana/alloy@sha256:2aa2099af76c0098d4af7a4d6e48f86cb66dc1a000222ad927a1c67c6542d13f"] arm64
+               total        used        free      shared  buff/cache   available
+Mem:            3901         858          82           1        3149        3042
+Swap:              0           0           0
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       8.7G  5.7G  3.0G  66% /

@@ -1,0 +1,98 @@
+name: tradeops-monitoring
+x-common: &common
+  restart: unless-stopped
+  network_mode: host
+  logging:
+    driver: json-file
+    options:
+      max-size: '5m'
+      max-file: '2'
+services:
+  prometheus:
+    <<: *common
+    image: prom/prometheus:v3.15.0
+    mem_limit: 512m
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=2d
+      - --storage.tsdb.retention.size=512MB
+      - --query.max-concurrency=4
+      - --web.listen-address=0.0.0.0:9090
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+  alertmanager:
+    <<: *common
+    image: prom/alertmanager:v0.34.1
+    mem_limit: 128m
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+      - --data.retention=48h
+      - --cluster.listen-address=
+      - --web.listen-address=0.0.0.0:9093
+    volumes:
+      - ./alertmanager:/etc/alertmanager:ro
+      - alertmanager-data:/alertmanager
+  grafana:
+    <<: *common
+    image: grafana/grafana:13.2.3
+    mem_limit: 512m
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Create monitoring/.env first}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_ANALYTICS_REPORTING_ENABLED: 'false'
+      GF_ANALYTICS_CHECK_FOR_UPDATES: 'false'
+      GF_PLUGINS_PREINSTALL_DISABLED: 'true'
+      GF_SERVER_HTTP_PORT: '3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+  loki:
+    <<: *common
+    image: grafana/loki:3.7.8
+    mem_limit: 512m
+    command: ['-config.file=/etc/loki/loki-config.yml']
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - loki-data:/loki
+  alloy:
+    <<: *common
+    image: grafana/alloy:v1.20.1
+    mem_limit: 256m
+    command: ['run', '--server.http.listen-addr=127.0.0.1:12345', '--storage.path=/var/lib/alloy', '/etc/alloy/config.alloy']
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/log/tradeops:/var/log/tradeops:ro
+      - alloy-data:/var/lib/alloy
+  node_exporter:
+    <<: *common
+    image: prom/node-exporter:v1.12.1
+    mem_limit: 128m
+    pid: host
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --path.rootfs=/host/root
+      - --web.listen-address=127.0.0.1:9100
+      - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|run|var/lib/docker|var/lib/containerd)($$|/)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/host/root:ro,rslave
+  blackbox_exporter:
+    <<: *common
+    image: prom/blackbox-exporter:v0.28.0
+    mem_limit: 128m
+    command: ['--config.file=/etc/blackbox/blackbox.yml', '--web.listen-address=127.0.0.1:9115']
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml:ro
+volumes:
+  prometheus-data:
+  alertmanager-data:
+  grafana-data:
+  loki-data:
+  alloy-data:

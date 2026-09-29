@@ -1,0 +1,55 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: tradeops-lab
+rule_files:
+  - /etc/prometheus/rules/*.yml
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['127.0.0.1:9093']
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['127.0.0.1:9090']
+        labels: {service: prometheus}
+  - job_name: node
+    static_configs:
+      - targets: ['127.0.0.1:9100']
+        labels: {service: host}
+  - job_name: blackbox-exporter
+    static_configs:
+      - targets: ['127.0.0.1:9115']
+        labels: {service: blackbox}
+  # Application /metrics targets are added in Step 2.
+  - job_name: blackbox-http
+    metrics_path: /probe
+    params: {module: [http_2xx]}
+    static_configs:
+      - targets: ['http://127.0.0.1:9001/health']
+        labels: {service: feed}
+      - targets: ['http://127.0.0.1:9002/health']
+        labels: {service: orders}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+  - job_name: blackbox-tcp
+    metrics_path: /probe
+    params: {module: [tcp_connect]}
+    static_configs:
+      - targets: ['127.0.0.1:9001']
+        labels: {service: feed}
+      - targets: ['127.0.0.1:9002']
+        labels: {service: orders}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115

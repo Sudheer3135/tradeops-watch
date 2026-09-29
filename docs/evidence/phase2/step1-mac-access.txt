@@ -1,0 +1,8 @@
+http://192.168.2.2:9090/-/ready 200 Prometheus Server is Ready.
+http://192.168.2.2:9093/-/ready 200 OK
+http://192.168.2.2:3000/api/health 200 {
+  "database": "ok",
+  "version": "13.2.3",
+  "commit": "90ffed056f0884267356c12a0eeb72a022af53f1"
+}
+http://192.168.2.2:3100/ready 200 ready

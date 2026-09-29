@@ -12,3 +12,11 @@ The Mac source is transferred into the VM because Desktop mounts were blocked.
 
 The requested review gates are after Step 3 and after Step 7. Later steps are
 not claimed complete until implemented and verified.
+
+## Step 1: verified
+Docker Engine 29.8.1 and Compose 5.5.1 are installed from the official arm64
+repository. All seven pinned images started; readiness, both HTTP probes,
+both TCP probes and all seven initial scrape targets passed. The VM reports
+about 858 MiB used RAM of 3901 MiB at this sample; root disk is 66% used.
+See `evidence/phase2/step1-readiness.txt` and `step1-resources-images.txt`.
+Alloy's pipeline, the full dashboard, and Telegram remain for Steps 5, 6 and 4.
