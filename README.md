@@ -1,22 +1,31 @@
 # TradeOps Watch — Linux Monitoring & Incident Response Lab
 
-An L1 DevOps / production support portfolio project: operate two synthetic
-trading services, detect failures, debug Linux, follow runbooks, record incidents,
-and hand over a shift. Built for an Apple Silicon Mac with Ubuntu in Multipass.
-No real trading or broker connections. Phase 1 used only the Python standard
-library and Bash; Phase 2 adds Docker monitoring, application metrics,
-versioned deployments with rollback, CI, and seven real chaos drills while
-keeping every Phase 1 operations tool.
-
-**Phase 2:** see [monitoring setup and URLs](monitoring/README.md),
-[progress and verification](docs/phase2-progress.md), and the
-[incident evidence index](docs/evidence/phase2/README.md).
-
 [![CI](https://github.com/Sudheer3135/tradeops-watch/actions/workflows/ci.yml/badge.svg)](https://github.com/Sudheer3135/tradeops-watch/actions/workflows/ci.yml)
 
-The badge shows the hosted GitHub Actions result once the repository is pushed.
-The same checks passed locally inside Ubuntu:
-[step9-ci.txt](docs/evidence/phase2/step9-ci.txt).
+A production-support lab: two synthetic trading services on an Ubuntu VM, monitored,
+broken on purpose, fixed from runbooks, and documented with real UTC evidence.
+
+**What this project shows**
+- **Monitoring:** Prometheus scrapes 9 targets; a provisioned Grafana dashboard and Loki logs via Alloy.
+- **Alerting:** 10 rules routed by severity (P1/P2/P3); ServiceDown inhibits same-service alerts.
+- **Chaos testing:** 7 fault drills, each seen firing and then cleared in Prometheus and Alertmanager.
+- **Incident response:** 4 runbooks, 13 incident reports with UTC timelines, shift-handover reports.
+- **Deploy/rollback:** versioned releases, health-gated deploys, automatic and manual rollback.
+
+**Tech stack:** Python, Bash, systemd, cron, Ubuntu 24.04, Docker Compose, Prometheus, Alertmanager, Grafana, Loki, Alloy, GitHub Actions.
+
+![Healthy TradeOps Overview dashboard](docs/screenshots/phase2-overview-healthy.png)
+
+![Alertmanager: feed probe alerts inhibited by ServiceDown](docs/screenshots/phase2-stop-feed-alertmanager.png)
+
+## Overview
+
+Built on an Apple Silicon Mac with Ubuntu 24.04 ARM64 in Multipass. No real
+trading or broker connections. Phase 1 uses only the Python standard library,
+Bash, systemd, cron and standard Linux tools (ss, tc, iptables, logrotate).
+Phase 2 adds pinned `prometheus-client`, seven pinned monitoring containers,
+versioned deployments with rollback, CI, and seven real chaos drills while
+keeping every Phase 1 tool. Both application HTTP listeners stay VM-local.
 
 ```text
 MacBook M2 -> Multipass Ubuntu VM (2 CPUs, 4 GB RAM)
@@ -32,57 +41,33 @@ MacBook M2 -> Multipass Ubuntu VM (2 CPUs, 4 GB RAM)
   deploy -> versioned code -> health gate -> rollback ---------- logs
 ```
 
-[Architecture details](docs/architecture.md) · [Interview guide](LEARNING.md)
+[Architecture details](docs/architecture.md) · [Interview guide](LEARNING.md) ·
+[Monitoring setup](monitoring/README.md) · [Phase 2 progress](docs/phase2-progress.md) ·
+[Phase 2 incident index](docs/evidence/phase2/README.md)
 
-## Tech used
+Hosted CI runs on every push; the same checks also passed locally inside Ubuntu
+([step9-ci.txt](docs/evidence/phase2/step9-ci.txt)).
 
-Python 3 standard library (`http.server`, `urllib`, `logging`, threads), Bash,
-Ubuntu 24.04 ARM64, systemd, cron, curl, iproute2/ss/tc, iptables, logrotate,
-and Git. Phase 2 adds pinned `prometheus-client` in a virtual environment and
-seven pinned monitoring containers. Both application HTTP listeners remain VM-local.
-
-## Start from scratch (Mac terminal)
+## Run it yourself
 
 ```bash
-cd '/Users/sudheer/Desktop/TradeOps Watch'
+git clone https://github.com/Sudheer3135/tradeops-watch.git
+cd tradeops-watch
 multipass launch 24.04 --name tradeops --cpus 2 --memory 4G --disk 10G
 multipass mount "$PWD" tradeops:/home/ubuntu/tradeops-watch
 multipass exec tradeops -- sudo bash /home/ubuntu/tradeops-watch/scripts/install.sh
 ```
 
 If the VM already exists, use `multipass start tradeops` instead of launch.
-If mounting reports privileged mounts are disabled:
+If the mount fails on macOS, use the tested workaround in
+[docs/setup.md](docs/setup.md), which also shows how to run CI locally. The
+monitoring stack is started separately: see [monitoring/README.md](monitoring/README.md).
 
-```bash
-multipass set local.privileged-mounts=true
-multipass mount "$PWD" tradeops:/home/ubuntu/tradeops-watch
-```
+The installer is safe to rerun; it restarts both services to load changes.
+Service code lives in `/opt/tradeops`, logs in `/var/log/tradeops`, monitor
+state in `/var/lib/tradeops`. Times in logs, alerts and reports are UTC.
 
-On this Mac, the mount was created but reads failed with `Operation not permitted`
-(macOS Desktop privacy protection). The tested fallback below copies the source
-without changing global privacy permissions:
-
-```bash
-multipass umount tradeops:/home/ubuntu/tradeops-watch
-COPYFILE_DISABLE=1 tar --exclude=.git --exclude=__pycache__ --exclude=.venv --exclude=.pytest_cache --exclude=.ruff_cache --exclude=.env --exclude=secrets --exclude=generated -czf /tmp/tradeops-watch-source.tar.gz .
-multipass transfer /tmp/tradeops-watch-source.tar.gz tradeops:/home/ubuntu/tradeops-watch-source.tar.gz
-multipass exec tradeops -- bash -lc 'mkdir -p /home/ubuntu/tradeops-watch && tar --no-same-owner -xzf /home/ubuntu/tradeops-watch-source.tar.gz -C /home/ubuntu/tradeops-watch'
-multipass exec tradeops -- sudo bash /home/ubuntu/tradeops-watch/scripts/install.sh
-```
-
-Repeat the archive/transfer/extract steps after editing source on the Mac, then
-rerun install. This is a copy, so VM evidence must also be copied back with
-`multipass transfer`. If you prefer a live mount, grant Multipass access in
-macOS System Settings → Privacy & Security → Full Disk Access, restart Multipass,
-and retry mounting; that broader permission was not changed for this project.
-
-Alternative: after publishing, clone the repository inside the VM at
-`/home/ubuntu/tradeops-watch`, then run the same installer. The installer is
-safe to rerun; it restarts both services to load changes. Service code lives in
-`/opt/tradeops`, logs in `/var/log/tradeops`, monitor state in `/var/lib/tradeops`.
-Times in application logs, alerts, and reports are UTC.
-
-## Quick demo (Mac terminal)
+## Quick demo: Phase 1 Bash monitor
 
 ```bash
 multipass exec tradeops -- systemctl --no-pager status tradeops-feed tradeops-orders
@@ -268,7 +253,7 @@ delivery is untested without credentials.
 - [Monitoring setup, credentials and URLs](monitoring/README.md)
 - [Optional Telegram setup](docs/telegram-setup.md)
 - [Deployment and rollback practice](docs/deployments.md)
-- [Live Grafana dashboard](http://192.168.2.2:3000/d/tradeops-overview) (VM must be running)
+- [Live Grafana dashboard](http://192.168.2.2:3000/d/tradeops-overview) (local only, works on the lab VM)
 
 Original Phase 1 evidence remains in `docs/evidence/`. Phase 2 evidence is in
 `docs/evidence/phase2/`. Synthetic rule and Alertmanager tests are labelled as
@@ -280,7 +265,7 @@ The eight tested LogQL queries (with how to read empty results) live in
 [LEARNING.md](LEARNING.md#eight-useful-logql-queries); their machine-readable
 copy is [monitoring/logql-examples.json](monitoring/logql-examples.json).
 
-## Phase 2 practice: one incident at a time
+## Phase 2 practice: Prometheus and Alertmanager, one incident at a time
 
 Read the relevant runbook, save the time, inject one fault, wait for the expected
 alert in **both** Prometheus and Alertmanager, check Grafana and Loki, apply the
@@ -319,23 +304,8 @@ Recent errors can keep the Bash check nonzero for five minutes after the
 service recovers. A recent-start P3 is expected after intentional restarts.
 See the [five-minute spoken demo](docs/demo-script.md),
 [real Phase 2 incidents](docs/evidence/phase2/README.md),
-[manual screenshot checklist](docs/screenshots/README.md), and
+[screenshot checklist](docs/screenshots/README.md), and
 [evidence-backed resume bullets](docs/resume-bullets.md).
-
-## Run CI locally inside the VM
-
-```bash
-cd /home/ubuntu/tradeops-watch
-sudo apt-get install -y shellcheck
-python3 -m venv .venv
-.venv/bin/pip install -r requirements-dev.txt
-PATH="$PWD/.venv/bin:$PATH" bash scripts/ci_check.sh
-```
-
-The workflow runs on pushes and pull requests. It validates shell/Python code,
-39 Python test cases, Compose, ten alert rules, eleven Prometheus rule cases,
-and Alertmanager configuration. Real chaos tests stay outside ordinary CI
-because they require this disposable VM and deliberately disrupt services.
 
 ## Screenshots
 
@@ -343,15 +313,10 @@ Captured with headless Chromium from the live VM; exact UTC windows and capture
 times are in the [screenshot checklist](docs/screenshots/README.md). Each drill
 window ends before the next drill's fault so no image mixes two scenarios.
 
-**Healthy dashboard after all drills** (last 15 minutes, no alerts firing)
-
-![Healthy TradeOps Overview](docs/screenshots/phase2-overview-healthy.png)
-
-**Live stop-feed drill:** Alertmanager marks both feed probe alerts *Inhibited*
-by ServiceDown, while the orders alerts stay active. Prometheus still shows all
-of them firing.
-
-![Alertmanager inhibition](docs/screenshots/phase2-stop-feed-alertmanager.png)
+The healthy dashboard (last 15 minutes after all drills) and the Alertmanager
+inhibition view are shown at the top. In that live stop-feed drill, Alertmanager
+marked both feed probe alerts *Inhibited* by ServiceDown while the orders alerts
+stayed active; Prometheus still shows all of them firing:
 
 ![Prometheus firing alerts](docs/screenshots/phase2-stop-feed-alerts.png)
 
@@ -381,19 +346,3 @@ Hosted CI: [Actions run](docs/screenshots/phase2-ci-success.png).
 
 Loki/Prometheus keep about two days of history; the saved evidence files and
 these images remain after live history expires.
-
-## Publish to GitHub
-
-Run on your Mac. This creates a **public** repository (use `--private` if you
-prefer) and pushes the current branch:
-
-```bash
-cd '/Users/sudheer/Desktop/TradeOps Watch'
-git status --short          # should print nothing
-gh repo create tradeops-watch --public --source=. --remote=origin --push
-gh run watch --exit-status  # waits for the first CI run and fails if it fails
-```
-
-If the repository already exists, check `git remote -v`, then `git push -u origin main`.
-Describe hosted CI as passing only after that run succeeds. Credentials live only
-in ignored files; never add `.env`, tokens or chat IDs.
